@@ -19,13 +19,30 @@
 
   --font-family: 'Lexend Exa', sans-serif;
 
+  --fs-h1: 2rem;
+  --fs-h2: 1.5rem;
+  --fs-p: 1rem;
+
   background-color: var(--c-bg);
   color: var(--c-ft-dark);
   font-family: var(--font-family);
+  font-size: 16px;
 
   font-optical-sizing: auto;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+p {
+  font-size: var(--fs-p);
 }
