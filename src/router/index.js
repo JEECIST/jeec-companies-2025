@@ -29,7 +29,7 @@ const router = createRouter({
 
 function setLanguage (to) {
   if(i18n.global.availableLocales.indexOf(to.params.lang) === -1)
-    return { path: "/en" }
+    return { path: "/" + i18n.global.locale.value }
 
   i18n.global.locale.value = to.params.lang;
   return

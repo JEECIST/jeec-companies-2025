@@ -1,3 +1,198 @@
 {
-  "test": "hi"
+  "test": "hi",
+  "nav-bar": {
+    "about": "About",
+    "offers": "Offers",
+    "partnership-levels": "Partnership Levels",
+    "deadlines": "Deadlines",
+    "conditions": "Conditions",
+    "faqs": "FAQs"
+  },
+  "landing-section": {
+    "hero-text": {
+      "a": "A 25ª edição das JEEC está a chegar e queremos que se juntem a nós no",
+      "b-bold": "Técnico Innovation Center",
+      "c": "!"
+    },
+    "hero-date": "5 a 9 de Maio",
+    "contacts-text": "Para mais informações, podem contactar-nos através de",
+    "buttons": {
+      "magazine": "Revista",
+      "website": "Website"
+    }
+  },
+  "about-section": {
+    "title": "Quem Somos?",
+    "text": "As JEEC (Jornadas de Engenharia Eletrotécnica e de Computadores) são um evento organizado por estudantes e para estudantes de diversos cursos do Instituto Superior Técnico, com maior foco nas áreas da Engenharia Eletrotécnica e de Computadores. O nosso principal objetivo é promover a aproximação do mundo académico com o mundo empresarial, proporcionando a toda a comunidade diversas atividades de forma gratuita."
+  },
+  "why-participate-section": {
+    "title": "Porquê particpar nas JEEC|25?",
+    "text": "PLACEHOLDER: Lorem ipsum odor amet, consectetuer adipiscing elit. Fringilla turpis rhoncus dictumst commodo felis diam? Netus libero convallis vehicula nostra tellus. Sodales viverra ullamcorper curae purus montes dictum. Platea vulputate aptent torquent luctus mus quisque consectetur convallis.",
+    "cards": {
+      "a": "Conversar com estudantes finalistas",
+      "b": "Promover a vossa empresa e oportunidades de trabalho",
+      "c": "Apresentar as vossas áreas de trabalho",
+      "d": "Organizado de estudantes para estudantes",
+      "e": "Mostrar as tuas capacidades a potenciais empregadores",
+      "f": "Conhecer as prinicipais empresas da área"
+    }
+  },
+  "offers-section": {
+    "job-fair": {
+      "title": "Feira de Emprego",
+      "text": "Inclui um stand no espaço principal do nosso evento, com a oportunidade de contacto direto entre o mundo empresarial e os estudantes."
+    },
+    "cv-platform": {
+      "title": "Plataforma de CV's",
+      "text": "Acesso exclusivo aos CVs submetidos pelos estudantes durante a semana do evento."
+    },
+    "eletrolink": {
+      "title": "EletroLink",
+      "text": "Acesso a espaço reservado para a realização de entrevistas/conversas com estudantes interessados, fazendo a gestão do vosso tempo durante o slot disponibilizado."
+    },
+    "15-15": {
+      "title": "15/15",
+      "text": "Atividade de caracter informativo e de tranferência de conhecimento, com a duração de 30 minutos, onde a empresa tem a oportunidade de apresentar um projeto ou tecnologia sua."
+    },
+    "inside-talks": {
+      "title": "Inside Talks",
+      "text": "A empresa poderá trazer um colaborador da área de Engenharia que dá a conhecer aos participantes a função desempenhada, desafios enfrentados e/ou projetos em que trabalha. Estarão várias empresas presentes na atividade e os participantes vão circulando pelas mesas redondas."
+    },
+    "workshops": {
+      "title": "Workshops",
+      "text": "Atividade com a duração aproximada de 1 hora e um número máximo de 30 participantes. Tem como objetivo a apresentação de um tema de carácter prático, com a qual a empresa se relacione. Aconselhamos e incentivamos o uso de estratégias para envolver os estudantes, tais como case studies ou a utilização de ferramentas (físicas ou de software)."
+    }
+  },
+  "partnership-levels": {
+    "text": "A participação da empresa no nosso evento garante a divulgação da mesma, em diferentes patamares, consoante o número de atividades adquiridas. O website oficial e as redes sociais das JEEC são atualizados recorrentemente com informação relativa ao evento, com especial foco nas semanas anteriores ao evento. O evento será ainda divulgado a todos os estudantes do Instituto Superior Técnico, através do website oficial da instituição e canais oficiais de comunicação da mesma.",
+    "bronze": {
+      "name": "BRONZE",
+      "requirement": "1 atividade",
+      "benefits": {
+        "a": "Divulgação nas redes sociais",
+        "b": "Divulgação no website"
+      }
+    },
+    "silver": {
+      "name": "SILVER",
+      "requirement": "2 a 3 atividades",
+      "benefits": {
+        "a": "Logotipo na lona*",
+        "b": "Logotipo nos cartazes*",
+        "c": "Divulgação Bronze"
+      }
+    },
+    "gold": {
+      "name": "GOLD",
+      "requirement": "4 atividades",
+      "benefits": {
+        "a": "Vídeo Exclusivo (no evento)",
+        "b": "Posts Exclusivos (redes sociais)",
+        "c": "Teaser (redes sociais)",
+        "d": "Divulgação Silver"
+      }
+    }
+  },
+  "deadlines": {
+    "first": {
+      "text": "1ª Fase de Pagamento",
+      "date": "Até 31 de Dezembro"
+    },
+    "second": {
+      "text": "2ª Fase de Pagamento",
+      "date": "Até 31 de Fevereiro"
+    },
+    "third": {
+      "text": "3ª Fase de Pagamento",
+      "date": "Até 4 de Março"
+    }
+  },
+  "conditions": {
+    "a": {
+      "title": "Reserva de Horários:",
+      "text": "a reserva dos dias e horários das atividades é feira por ordem de confirmação da participação no evento;"
+    },
+    "b": {
+      "title": "Plataforma de CVs e Eletrolink:",
+      "text": "a participação nestas atividades requer a participação noutra atividade do evento;"
+    },
+    "c": {
+      "title": "Estacionamento:",
+      "text": "acesso a estacionamento perto do local do evento para uma viatura por empresa;"
+    },
+    "d": {
+      "title": "Almoço:",
+      "text": "é fornecido almoço a todas as empresas participantes na feira de emprego, até 3 colaboradores;"
+    },
+    "e": {
+      "title": "Coffee Break:",
+      "text": "acesso a todos os coffee breaks do evento, durante os dias de presença no mesmo;"
+    },
+    "f": {
+      "title": "Wi-fi:",
+      "text": "acesso a wifi durante os dias de presença no evento;"
+    },
+    "g": {
+      "title": "Web-app:",
+      "text": "acesso à nossa Webapp durante o evento, para atribuição de pontos aos estudantes e fácil acesso a informação referente à vossa participação."
+    }
+  },
+  "faqs": {
+    "a": {
+      "question": "Quais são os preços para a nossa participação?",
+      "text": "Marquem uma reunião connosco enviando um e-mail para adicionar e-mail para que possamos apresentar-vos os preços."
+    },
+    "b": {
+      "question": "Apenas estudantes de Engenharia Eletrotécnica participam no evento?",
+      "text": {
+        "a": "Não!",
+        "b": "Apesar de o foco principal do evento ser, de facto, empresas interessantes para estudantes de Engenharia Eletrotécnica e de Computadores, o nosso evento acabar por atraído estudantes de outras áreas devido à abrangência das áreas de estudo do curso. Para além de estudantes de Engenharia Eletrotécnica e de Computadores, estudantes de Engenharia Informática, Engenharia Biomédica, Engenharia Mecânica, Engenharia Aeroespacial e muitas outras costumam marcar presença no nosso evento."
+      }
+    },
+    "c": {
+      "question": "O que é o Técnico Innovation Center?",
+      "text": "O Técnico Innovation Center (TIC) é um dos maiores espaços de estudo do país, sendo uma referência da inovação, com áreas de trabalho colaborativo, uma zona de exposições e uma área multiusos para acolhimento de eventos com mais de 300 pessoas, incluído o seu próprio espaço de restauração. Este edício situa-se na antiga Gare do Arco do Cego, em Lisboa, e é onde será realizado este evento."
+    },
+    "d": {
+      "question": "Quantas pessoas podemos levar?",
+      "text": "Cada empresa poderá ter presente no seu espaço até 3 colaboradores. Se necessário, poderão ter um sistema rotativo de colaboradores, mas apenas é garantido refeição para 3. Pedimos que nos enviem os nomes de todos os colaboradores que forem estar presentes no evento."
+    },
+    "e": {
+      "question": "Quais são os dados fiscais das JEEC?",
+      "text": {
+        "a": "Os dados de faturação das JEEC, cuja entidade fiscal é o NEEC, caso necessitem dos mesmos para a emissão da PO, são os seguintes:",
+        "list": {
+          "a": {
+            "item": "Nome de Identidade Fiscal:",
+            "value": "Nucleo de Estudantes de Electrotecnia e Computadores do Instituto Superior Tecnico"
+          },
+          "b": {
+            "item": "Número de Identificação Fiscal:",
+            "value": "PT514625627"
+          },
+          "c": {
+            "item": "Morada:",
+            "value": "Instituto Superior Técnico (Campus Alameda) - Avenida Rovisco Pais 1, Pavilhão de Electricidade, Piso 4, Sala 4i.13, 1049-001 Lisboa, Portugal"
+          },
+          "d": {
+            "item": "IBAN:",
+            "value": "PT50 0010 0000 3443 5540 0010 3"
+          },
+          "e": {
+            "item": "Número de Conta:",
+            "value": "9-3443554-000-001"
+          },
+          "f": {
+            "item": "SWIFT-Code:",
+            "value": "BBPIPTPL"
+          },
+          "g": {
+            "item": "Banco:",
+            "value": "BPI"
+          }
+        },
+        "b": "De acordo com o artigo 9º do CIVA, o NEEC encontra-se isento do IVA. Para mais informações relativamente ao processo de faturação, podem contactar tesouraria@neecist.org."
+      }
+    }
+  }
 }

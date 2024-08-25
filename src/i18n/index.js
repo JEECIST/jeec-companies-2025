@@ -14,10 +14,8 @@ function getLocale() {
 const options = {
   legacy: false,
   locale: getLocale(),
-  defaultLocale: getLocale(),
   fallbackLocale: ["en", "pt"],
   availableLocales: ["en", "pt"],
-  globalInjection: true,
   messages: { pt, en },
 };
 

@@ -10,5 +10,6 @@
 <style scoped>
 section {
   background-image: url(../../../assets/landing-bg.png);
+  height: 700px;
 }
 </style>
