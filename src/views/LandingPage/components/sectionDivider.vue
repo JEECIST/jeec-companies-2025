@@ -22,7 +22,6 @@ div {
   top: 1px;
   left: 0;
   width: 100%;
-  overflow: hidden;
   line-height: 0;
   transform: translateY(-100%);
 

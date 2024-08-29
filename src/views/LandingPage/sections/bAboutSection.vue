@@ -1,13 +1,13 @@
 <template>
   <section>
     <sectionDivider class="section-divider"></sectionDivider>
-    <h1>{{ $t("about-section.title") }}</h1>
+    <h2 id="about">{{ $t("about-section.title") }}</h2>
     <p>{{ $t("about-section.text") }}</p>
   </section>
 </template>
 
 <script setup>
-import sectionDivider from '@/components/sectionDivider.vue';
+import sectionDivider from '../components/sectionDivider.vue';
 </script>
 
 <style scoped>
