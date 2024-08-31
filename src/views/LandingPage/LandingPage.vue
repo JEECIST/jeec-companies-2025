@@ -28,8 +28,6 @@ import hFaqsSection from './sections/hFaqsSection.vue';
 
 const scrollStore = useScrollStore();
 
-const sections = ref([])
-
 const callback = (entries) => {
   entries.forEach(({ target, isIntersecting }) => {
     scrollStore.isSectionIntersecting[target.id] = isIntersecting;
@@ -38,7 +36,7 @@ const callback = (entries) => {
 
 const observer = new IntersectionObserver(callback, {
   root: null,
-  rootMargin: "-200px 0px",
+  rootMargin: "-30% 0px",
   threshold: 0,
 })
 

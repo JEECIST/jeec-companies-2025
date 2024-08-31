@@ -20,8 +20,7 @@
 
   --font-family: 'Lexend Exa', sans-serif;
 
-  --fs-h1: 2rem;
-  --fs-h2: 1.5rem;
+  --fs-h2: 2rem;
   --fs-p: 1rem;
 
   background-color: var(--c-bg);
@@ -36,12 +35,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
-  font-size: var(--fs-h1);
-}
-
 h2 {
   font-size: var(--fs-h2);
+  font-weight: 900;
 }
 
 p {

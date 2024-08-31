@@ -12,6 +12,10 @@ defineProps({
   flipped: {
     type: Boolean,
     default: false,
+  },
+  shadow: {
+    type: Boolean,
+    default: true,
   }
 })
 </script>

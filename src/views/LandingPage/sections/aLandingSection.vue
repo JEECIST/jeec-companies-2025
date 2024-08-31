@@ -2,7 +2,7 @@
   <section>
     <h1 class="hidden-header">JEEC</h1>
     <div class="hero-flex">
-      <img src="../../../assets/jeec-logo.png" alt="JEEC Logo">
+      <img src="/src/assets/jeec-logo.svg" alt="JEEC Logo">
       <div class="hero-text">
         <p>
           {{ $t("landing-section.hero-text.a") }}
@@ -13,7 +13,7 @@
     </div>
     <p class="contact-us">
       {{ $t("landing-section.contacts-text") }}
-      <a href="mailto:email-temporario@jeec.ist"><u>email-temporario@jeec.ist</u></a>
+      <a href="mailto:email-temporario@jeec.ist"><u>jeecist.business@gmail.com</u></a>
     </p>
     <div class="buttons">
       <a href="">{{ $t("landing-section.buttons.magazine") }}</a>
@@ -52,8 +52,8 @@ onUnmounted(() => {
 
 <style scoped>
 section {
-  background-image: url(../../../assets/landing-bg.png);
-  padding-bottom: calc(100px + 5rem);
+  background-image: url(/src/assets/landing-bg.png);
+  padding-bottom: calc(80px + 5rem);
   position: relative;
   height: 100%;
 }
@@ -76,7 +76,7 @@ section a, section p {
 
 .hero-flex {
   gap: 5ch;
-  padding: 7rem 5ch 0 5ch;
+  padding: 5rem 5ch 0 5ch;
   display: flex;
   align-items: center;
   width: 100%;
@@ -84,19 +84,20 @@ section a, section p {
 }
 
 .hero-flex > img {
-  max-width: 40ch;
+  max-width: 45ch;
   flex-grow: 1;
+  margin: -3%;
 }
 
 .hero-text {
   height: 100%;
-  max-width: 50ch;
+  max-width: 52ch;
   flex-grow: 1;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .hero-text > p:first-child {
@@ -110,7 +111,7 @@ section a, section p {
 }
 
 .contact-us {
-  padding-top: 3.5rem;
+  padding-top: 4rem;
   margin: 0 auto;
   max-width: 100ch;
   text-align: center;

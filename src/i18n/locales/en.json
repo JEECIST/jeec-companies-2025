@@ -10,168 +10,186 @@
   },
   "landing-section": {
     "hero-text": {
-      "a": "A 25ª edição das JEEC está a chegar e queremos que se juntem a nós no",
+      "a": "The 25th edition of the JEEC is approaching and we want you to join us at",
       "b-bold": "Técnico Innovation Center",
       "c": "!"
     },
-    "hero-date": "5 a 9 de Maio",
-    "contacts-text": "Para mais informações, podem contactar-nos através de",
+    "hero-date": "May 5th to 9th",
+    "contacts-text": "For further information, feel free to contact us at",
     "buttons": {
-      "magazine": "Revista",
+      "magazine": "Magazine",
       "website": "Website"
     }
   },
   "about-section": {
-    "title": "Quem Somos?",
-    "text": "As JEEC (Jornadas de Engenharia Eletrotécnica e de Computadores) são um evento organizado por estudantes e para estudantes de diversos cursos do Instituto Superior Técnico, com maior foco nas áreas da Engenharia Eletrotécnica e de Computadores. O nosso principal objetivo é promover a aproximação do mundo académico com o mundo empresarial, proporcionando a toda a comunidade diversas atividades de forma gratuita."
+    "title": "ABOUT US",
+    "text": "The JEEC is an event organized by students, for students, from various courses at Instituto Superior Técnico, with a primary focus on Electrical and Computer Engineering. Our main objective is to fill the gap between the academic and business worlds, offering a range of activities to the entire community free of charge."
   },
   "why-participate-section": {
-    "title": "Porquê particpar nas JEEC|25?",
-    "text": "PLACEHOLDER: Lorem ipsum odor amet, consectetuer adipiscing elit. Fringilla turpis rhoncus dictumst commodo felis diam? Netus libero convallis vehicula nostra tellus. Sodales viverra ullamcorper curae purus montes dictum. Platea vulputate aptent torquent luctus mus quisque consectetur convallis.",
+    "title": "WHY PARTICIPATE IN JEEC 25?",
+    "text": "Students participate in our event, organized by students for students, to connect with leading companies in the technology field and showcase their abilities to potential employers.",
     "cards": {
-      "a": "Conversar com estudantes finalistas",
-      "b": "Promover a vossa empresa e oportunidades de trabalho",
-      "c": "Apresentar as vossas áreas de trabalho",
-      "d": "Organizado de estudantes para estudantes",
-      "e": "Mostrar as tuas capacidades a potenciais empregadores",
-      "f": "Conhecer as prinicipais empresas da área"
+      "a": "Talk with graduating students",
+      "b": "Present your areas of work",
+      "c": "Event organized by students for students",
+      "d": "Promote your brand and technology",
+      "e": "Greater visibility among future professionals",
+      "f": "Promote summer internships and job opportunities"
     }
   },
   "offers-section": {
+    "title": "WHAT WE OFFER",
     "job-fair": {
-      "title": "Feira de Emprego",
-      "text": "Inclui um stand no espaço principal do nosso evento, com a oportunidade de contacto direto entre o mundo empresarial e os estudantes."
+      "title": "Job Fair",
+      "text": "Includes a stand in the main event area, providing direct contact between companies and students."
     },
     "cv-platform": {
-      "title": "Plataforma de CV's",
-      "text": "Acesso exclusivo aos CVs submetidos pelos estudantes durante a semana do evento."
+      "title": "CV Platform",
+      "text": "Exclusive access to CVs submitted by students during the week of the event."
     },
     "eletrolink": {
       "title": "EletroLink",
-      "text": "Acesso a espaço reservado para a realização de entrevistas/conversas com estudantes interessados, fazendo a gestão do vosso tempo durante o slot disponibilizado."
+      "text": "Reserved space for conducting interviews or discussions with interested students, allowing you to manage your time during the allocated slot."
     },
     "15-15": {
-      "title": "15/15",
-      "text": "Atividade de caracter informativo e de tranferência de conhecimento, com a duração de 30 minutos, onde a empresa tem a oportunidade de apresentar um projeto ou tecnologia sua."
+      "title": "15/15 Sessions",
+      "text": "A 30-minute informational and knowledge-sharing session where companies have the opportunity to present a project or technology."
     },
     "inside-talks": {
       "title": "Inside Talks",
-      "text": "A empresa poderá trazer um colaborador da área de Engenharia que dá a conhecer aos participantes a função desempenhada, desafios enfrentados e/ou projetos em que trabalha. Estarão várias empresas presentes na atividade e os participantes vão circulando pelas mesas redondas."
+      "text": "Companies can bring an engineering professional to share their role, challenges, and ongoing projects with participants. Multiple companies will be present, and participants will rotate through roundtable discussions."
     },
     "workshops": {
       "title": "Workshops",
-      "text": "Atividade com a duração aproximada de 1 hora e um número máximo de 30 participantes. Tem como objetivo a apresentação de um tema de carácter prático, com a qual a empresa se relacione. Aconselhamos e incentivamos o uso de estratégias para envolver os estudantes, tais como case studies ou a utilização de ferramentas (físicas ou de software)."
+      "text": "A 1-hour session with up to 30 participants, focused on presenting a practical topic related to the company's field. We encourage the use of interactive strategies, such as case studies or the use of physical or software tools."
     }
   },
   "partnership-levels": {
-    "text": "A participação da empresa no nosso evento garante a divulgação da mesma, em diferentes patamares, consoante o número de atividades adquiridas. O website oficial e as redes sociais das JEEC são atualizados recorrentemente com informação relativa ao evento, com especial foco nas semanas anteriores ao evento. O evento será ainda divulgado a todos os estudantes do Instituto Superior Técnico, através do website oficial da instituição e canais oficiais de comunicação da mesma.",
+    "title": "PARTNERSHIP LEVELS",
+    "text": "Participating in our event ensures your company's visibility across different levels, depending on the number of activities you engage in. The official JEEC website and social media channels are regularly updated with information about the event, with a particular emphasis on the weeks leading up to it. Additionally, the event will be promoted to all students at Instituto Superior Técnico through the institution's official website and communication channels.",
     "bronze": {
       "name": "BRONZE",
-      "requirement": "1 atividade",
+      "requirement": "1 activity",
       "benefits": {
-        "a": "Divulgação nas redes sociais",
-        "b": "Divulgação no website"
+        "a": "Promotion on social media",
+        "b": "Promotion on the website"
       }
     },
     "silver": {
       "name": "SILVER",
-      "requirement": "2 a 3 atividades",
+      "requirement": "2 or 3 activities",
       "benefits": {
-        "a": "Logotipo na lona*",
-        "b": "Logotipo nos cartazes*",
-        "c": "Divulgação Bronze"
+        "a": "Logo on the event banner*",
+        "b": "Logo on the event posters*",
+        "c": "Bronze-level promotion"
       }
     },
     "gold": {
       "name": "GOLD",
-      "requirement": "4 atividades",
+      "requirement": "4 activities",
       "benefits": {
-        "a": "Vídeo Exclusivo (no evento)",
-        "b": "Posts Exclusivos (redes sociais)",
-        "c": "Teaser (redes sociais)",
-        "d": "Divulgação Silver"
+        "a": "Exclusive video showcased at the event",
+        "b": "Exclusive posts on social media",
+        "c": "Teaser on social media",
+        "d": "Silver-level promotion"
       }
     }
   },
   "deadlines": {
+    "title": "DEADLINES",
     "first": {
-      "text": "1ª Fase de Pagamento",
-      "date": "Até 31 de Dezembro"
+      "text": "1st Payment Phase",
+      "date": "Until December 31st"
     },
     "second": {
-      "text": "2ª Fase de Pagamento",
-      "date": "Até 31 de Fevereiro"
+      "text": "2nd Payment Phase",
+      "date": "Until February 31st"
     },
     "third": {
-      "text": "3ª Fase de Pagamento",
-      "date": "Até 4 de Março"
+      "text": "3rd Payment Phase",
+      "date": "Until March 4th"
     }
   },
   "conditions": {
+    "title": "Terms and Conditions",
     "a": {
-      "title": "Reserva de Horários:",
-      "text": "a reserva dos dias e horários das atividades é feira por ordem de confirmação da participação no evento;"
+      "title": "Activity Scheduling:",
+      "text": "activity days and times are reserved on a first-come, first-served basis upon confirmation of participation;"
     },
     "b": {
-      "title": "Plataforma de CVs e Eletrolink:",
-      "text": "a participação nestas atividades requer a participação noutra atividade do evento;"
+      "title": "CV Platform and EletroLink:",
+      "text": "participation in these activities requires participation in at least one other activity;"
     },
     "c": {
-      "title": "Estacionamento:",
-      "text": "acesso a estacionamento perto do local do evento para uma viatura por empresa;"
+      "title": "Parking:",
+      "text": "parking is available near the event venue for one vehicle per company;"
     },
     "d": {
-      "title": "Almoço:",
-      "text": "é fornecido almoço a todas as empresas participantes na feira de emprego, até 3 colaboradores;"
+      "title": "Lunch:",
+      "text": "complimentary lunch provided to all companies participating in the job fair, for up to 3 representatives;"
     },
     "e": {
       "title": "Coffee Break:",
-      "text": "acesso a todos os coffee breaks do evento, durante os dias de presença no mesmo;"
+      "text": "access to all coffee breaks during the days of your participation in the event;"
     },
     "f": {
       "title": "Wi-fi:",
-      "text": "acesso a wifi durante os dias de presença no evento;"
+      "text": "access to Wi-Fi throughout the event days;"
     },
     "g": {
       "title": "Web-app:",
-      "text": "acesso à nossa Webapp durante o evento, para atribuição de pontos aos estudantes e fácil acesso a informação referente à vossa participação."
+      "text": "access to our Web-App during the event, allowing you to award points to students and easily access information related to your participation."
     }
   },
   "faqs": {
+    "title": "FAQs",
     "a": {
-      "question": "Quais são os preços para a nossa participação?",
-      "text": "Marquem uma reunião connosco enviando um e-mail para adicionar e-mail para que possamos apresentar-vos os preços."
+      "question": "What are the costs for participating?",
+      "text": "Please schedule a meeting with us by sending an email to jeecist.business@gmail.com, and we will provide you with detailed pricing information."
     },
     "b": {
-      "question": "Apenas estudantes de Engenharia Eletrotécnica participam no evento?",
+      "question": "Do only Electrical Engineering students participate in the event?",
       "text": {
-        "a": "Não!",
-        "b": "Apesar de o foco principal do evento ser, de facto, empresas interessantes para estudantes de Engenharia Eletrotécnica e de Computadores, o nosso evento acabar por atraído estudantes de outras áreas devido à abrangência das áreas de estudo do curso. Para além de estudantes de Engenharia Eletrotécnica e de Computadores, estudantes de Engenharia Informática, Engenharia Biomédica, Engenharia Mecânica, Engenharia Aeroespacial e muitas outras costumam marcar presença no nosso evento."
+        "a": "No!",
+        "b": "While the event primarily targets companies of interest for Electrical and Computer Engineering students, it also attracts students from various other disciplines due to the broad scope of the course. In addition to Electrical and Computer Engineering students, we often see participation from students in Computer Science, Biomedical Engineering, Mechanical Engineering, Aerospace Engineering, and many other fields."
       }
     },
     "c": {
-      "question": "O que é o Técnico Innovation Center?",
-      "text": "O Técnico Innovation Center (TIC) é um dos maiores espaços de estudo do país, sendo uma referência da inovação, com áreas de trabalho colaborativo, uma zona de exposições e uma área multiusos para acolhimento de eventos com mais de 300 pessoas, incluído o seu próprio espaço de restauração. Este edício situa-se na antiga Gare do Arco do Cego, em Lisboa, e é onde será realizado este evento."
+      "question": "What is the Técnico Innovation Center?",
+      "text": "The Técnico Innovation Center (TIC) is one of the largest study spaces in the country and a hub of innovation. It features collaborative work areas, an exhibition zone, and a multipurpose area capable of hosting events with over 300 attendees, including its own dining space. The center is located at the former Arco do Cego train station in Lisbon, where this event will take place."
     },
     "d": {
-      "question": "Quantas pessoas podemos levar?",
-      "text": "Cada empresa poderá ter presente no seu espaço até 3 colaboradores. Se necessário, poderão ter um sistema rotativo de colaboradores, mas apenas é garantido refeição para 3. Pedimos que nos enviem os nomes de todos os colaboradores que forem estar presentes no evento."
+      "question": "How many people can we bring?",
+      "text": "Each company can have up to 3 representatives present at their stand. If needed, a rotational system can be used for additional staff; however, meals are only guaranteed for 3 people. Please send us the names of all representatives who will be attending the event."
     },
     "e": {
-      "question": "Quais são os dados fiscais das JEEC?",
+      "question": "What are the Job Fair hours?",
+      "text": "The specific hours will be communicated closer to the event. Stay tuned for updates."
+
+    },
+    "f": {
+      "question": "What materials are provided for the Job Fair?",
+      "text":  "Detailed information about the materials provided will be shared with participating companies before the event."
+    },
+    "g": {
+      "question": "What space is available at the Job Fair?",
+      "text": "Each participating company will be allocated a designated space. Further details on the exact dimensions and layout will be provided upon confirmation."
+    },
+    "h": {
+      "question": "What are your billing details?",
       "text": {
-        "a": "Os dados de faturação das JEEC, cuja entidade fiscal é o NEEC, caso necessitem dos mesmos para a emissão da PO, são os seguintes:",
+        "a": "For invoicing purposes, JEEC's fiscal entity is the NEEC. The necessary details are as follows:",
         "list": {
           "a": {
-            "item": "Nome de Identidade Fiscal:",
+            "item": "Fiscal Identity Name:",
             "value": "Nucleo de Estudantes de Electrotecnia e Computadores do Instituto Superior Tecnico"
           },
           "b": {
-            "item": "Número de Identificação Fiscal:",
+            "item": "Tax Identification Number:",
             "value": "PT514625627"
           },
           "c": {
-            "item": "Morada:",
+            "item": "Address:",
             "value": "Instituto Superior Técnico (Campus Alameda) - Avenida Rovisco Pais 1, Pavilhão de Electricidade, Piso 4, Sala 4i.13, 1049-001 Lisboa, Portugal"
           },
           "d": {
@@ -179,7 +197,7 @@
             "value": "PT50 0010 0000 3443 5540 0010 3"
           },
           "e": {
-            "item": "Número de Conta:",
+            "item": "Account Number:",
             "value": "9-3443554-000-001"
           },
           "f": {
@@ -187,11 +205,11 @@
             "value": "BBPIPTPL"
           },
           "g": {
-            "item": "Banco:",
+            "item": "Bank Name:",
             "value": "BPI"
           }
         },
-        "b": "De acordo com o artigo 9º do CIVA, o NEEC encontra-se isento do IVA. Para mais informações relativamente ao processo de faturação, podem contactar tesouraria@neecist.org."
+        "b": "As per Article 9 of the CIVA, NEEC is exempt from VAT. For more information on the billing process, please contact tesouraria@neecist.org."
       }
     }
   }
