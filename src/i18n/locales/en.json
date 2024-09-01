@@ -93,59 +93,65 @@
         "c": "Teaser on social media",
         "d": "Silver-level promotion"
       }
-    }
+    },
+    "condition": "*Subject to confirmation of participation and submission of the logo by March 31st"
   },
   "deadlines": {
-    "title": "DEADLINES",
+    "title": "PAYMENT DEADLINES",
     "first": {
       "text": "1st Payment Phase",
-      "date": "Until December 31st"
+      "date": "Up to December 31st"
     },
     "second": {
       "text": "2nd Payment Phase",
-      "date": "Until February 31st"
+      "date": "Up to February 31st"
     },
     "third": {
       "text": "3rd Payment Phase",
-      "date": "Until March 4th"
+      "date": "Up to March 4th"
     }
   },
   "conditions": {
     "title": "Terms and Conditions",
-    "a": {
-      "title": "Activity Scheduling:",
-      "text": "activity days and times are reserved on a first-come, first-served basis upon confirmation of participation;"
-    },
-    "b": {
-      "title": "CV Platform and EletroLink:",
-      "text": "participation in these activities requires participation in at least one other activity;"
-    },
-    "c": {
-      "title": "Parking:",
-      "text": "parking is available near the event venue for one vehicle per company;"
-    },
-    "d": {
-      "title": "Lunch:",
-      "text": "complimentary lunch provided to all companies participating in the job fair, for up to 3 representatives;"
-    },
-    "e": {
-      "title": "Coffee Break:",
-      "text": "access to all coffee breaks during the days of your participation in the event;"
-    },
-    "f": {
-      "title": "Wi-fi:",
-      "text": "access to Wi-Fi throughout the event days;"
-    },
-    "g": {
-      "title": "Web-app:",
-      "text": "access to our Web-App during the event, allowing you to award points to students and easily access information related to your participation."
-    }
+    "condition-list": [
+      {
+        "title": "Activity Scheduling:",
+        "text": "activity days and times are reserved on a first-come, first-served basis upon confirmation of participation;"
+      },
+      {
+        "title": "CV Platform and EletroLink:",
+        "text": "participation in these activities requires participation in at least one other activity;"
+      },
+      {
+        "title": "Parking:",
+        "text": "parking is available near the event venue for one vehicle per company;"
+      },
+      {
+        "title": "Lunch:",
+        "text": "complimentary lunch provided to all companies participating in the job fair, for up to 3 representatives;"
+      },
+      {
+        "title": "Coffee Break:",
+        "text": "access to all coffee breaks during the days of your participation in the event;"
+      },
+      {
+        "title": "Wi-fi:",
+        "text": "access to Wi-Fi throughout the event days;"
+      },
+      {
+        "title": "Web-app:",
+        "text": "access to our Web-App during the event, allowing you to award points to students and easily access information related to your participation."
+      }
+    ]
   },
   "faqs": {
     "title": "FAQs",
     "a": {
       "question": "What are the costs for participating?",
-      "text": "Please schedule a meeting with us by sending an email to jeecist.business@gmail.com, and we will provide you with detailed pricing information."
+      "text": {
+       "a": "Please schedule a meeting with us by sending an email to",
+       "b": ", and we will provide you with detailed pricing information."
+      }
     },
     "b": {
       "question": "Do only Electrical Engineering students participate in the event?",
@@ -179,37 +185,37 @@
       "question": "What are your billing details?",
       "text": {
         "a": "For invoicing purposes, JEEC's fiscal entity is the NEEC. The necessary details are as follows:",
-        "list": {
-          "a": {
+        "list": [
+          {
             "item": "Fiscal Identity Name:",
             "value": "Nucleo de Estudantes de Electrotecnia e Computadores do Instituto Superior Tecnico"
           },
-          "b": {
+          {
             "item": "Tax Identification Number:",
             "value": "PT514625627"
           },
-          "c": {
+          {
             "item": "Address:",
             "value": "Instituto Superior Técnico (Campus Alameda) - Avenida Rovisco Pais 1, Pavilhão de Electricidade, Piso 4, Sala 4i.13, 1049-001 Lisboa, Portugal"
           },
-          "d": {
+          {
             "item": "IBAN:",
             "value": "PT50 0010 0000 3443 5540 0010 3"
           },
-          "e": {
+          {
             "item": "Account Number:",
             "value": "9-3443554-000-001"
           },
-          "f": {
+          {
             "item": "SWIFT-Code:",
             "value": "BBPIPTPL"
           },
-          "g": {
+          {
             "item": "Bank Name:",
             "value": "BPI"
           }
-        },
-        "b": "As per Article 9 of the CIVA, NEEC is exempt from VAT. For more information on the billing process, please contact tesouraria@neecist.org."
+        ],
+        "b": "As per Article 9 of the CIVA, NEEC is exempt from VAT. For more information on the billing process, please contact"
       }
     }
   }

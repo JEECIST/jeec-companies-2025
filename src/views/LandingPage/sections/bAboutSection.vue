@@ -34,6 +34,8 @@ section {
   padding: 0 10ch;
   padding-bottom: 50px;
   gap: 7ch;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 .content > img {
@@ -55,6 +57,37 @@ section {
 
 .content .text h2 {
   padding-bottom: 2rem;
+}
+
+@media screen and (max-width: 1050px) {
+  .content > img {
+    top: 0;
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .section-divider {
+    height: 60px;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: 0;
+    padding: 0 5ch;
+    padding-bottom: 50px;
+  }
+
+  .content > img {
+    top: -2.4rem;
+    padding-bottom: 0;
+    width: 100%;
+  }
+
+  .content .text {
+    text-align: center;
+    max-width: none;
+  }
 }
 </style>
 

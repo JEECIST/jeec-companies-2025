@@ -93,10 +93,11 @@
         "c": "Teaser nas redes sociais",
         "d": "Divulgação Silver"
       }
-    }
+    },
+    "condition": "*Condicionado pela confirmação de participação e envio do logotipo até ao dia 31 de março."
   },
   "deadlines": {
-    "title": "DEADLINES",
+    "title": "PRAZOS DE PAGAMENTO",
     "first": {
       "text": "1ª Fase de Pagamento",
       "date": "Até 31 de Dezembro"
@@ -112,40 +113,45 @@
   },
   "conditions": {
     "title": "Condições e Benefícios",
-    "a": {
-      "title": "Reserva de Horários:",
-      "text": "a reserva dos dias e horários das atividades é feira por ordem de confirmação da participação no evento;"
-    },
-    "b": {
-      "title": "Plataforma de CVs e Eletrolink:",
-      "text": "a participação nestas atividades requer a participação noutra atividade do evento;"
-    },
-    "c": {
-      "title": "Estacionamento:",
-      "text": "acesso a estacionamento perto do local do evento para uma viatura por empresa;"
-    },
-    "d": {
-      "title": "Almoço:",
-      "text": "é fornecido almoço a todas as empresas participantes na feira de emprego, até 3 colaboradores;"
-    },
-    "e": {
-      "title": "Coffee Break:",
-      "text": "acesso a todos os coffee breaks do evento, durante os dias de presença no mesmo;"
-    },
-    "f": {
-      "title": "Wi-fi:",
-      "text": "acesso a wifi durante os dias de presença no evento;"
-    },
-    "g": {
-      "title": "Web-app:",
-      "text": "acesso à nossa Webapp durante o evento, para atribuição de pontos aos estudantes e fácil acesso a informação referente à vossa participação."
-    }
+    "condition-list": [
+      {
+        "title": "Reserva de Horários:",
+        "text": "a reserva dos dias e horários das atividades é feira por ordem de confirmação da participação no evento;"
+      },
+      {
+        "title": "Plataforma de CVs e Eletrolink:",
+        "text": "a participação nestas atividades requer a participação noutra atividade do evento;"
+      },
+      {
+        "title": "Estacionamento:",
+        "text": "acesso a estacionamento perto do local do evento para uma viatura por empresa;"
+      },
+      {
+        "title": "Almoço:",
+        "text": "é fornecido almoço a todas as empresas participantes na feira de emprego, até 3 colaboradores;"
+      },
+      {
+        "title": "Coffee Break:",
+        "text": "acesso a todos os coffee breaks do evento, durante os dias de presença no mesmo;"
+      },
+      {
+        "title": "Wi-fi:",
+        "text": "acesso a wifi durante os dias de presença no evento;"
+      },
+      {
+        "title": "Web-app:",
+        "text": "acesso à nossa Webapp durante o evento, para atribuição de pontos aos estudantes e fácil acesso a informação referente à vossa participação."
+      }
+    ]
   },
   "faqs": {
     "title": "FAQs",
     "a": {
       "question": "Quais são os preços para a nossa participação?",
-      "text": "Marquem uma reunião connosco enviando um e-mail para jeecist.business@gmail.com para que possamos apresentar-vos os preços."
+      "text": {
+        "a": "Marquem uma reunião connosco enviando um e-mail para",
+        "b": " para que possamos apresentar-vos os preços."
+      }
     },
     "b": {
       "question": "Apenas estudantes de Engenharia Eletrotécnica participam no evento?",
@@ -166,37 +172,37 @@
       "question": "Quais são os dados fiscais das JEEC?",
       "text": {
         "a": "Os dados de faturação das JEEC, cuja entidade fiscal é o NEEC, caso necessitem dos mesmos para a emissão da PO, são os seguintes:",
-        "list": {
-          "a": {
+        "list": [
+          {
             "item": "Nome de Identidade Fiscal:",
             "value": "Nucleo de Estudantes de Electrotecnia e Computadores do Instituto Superior Tecnico"
           },
-          "b": {
+          {
             "item": "Número de Identificação Fiscal:",
             "value": "PT514625627"
           },
-          "c": {
+          {
             "item": "Morada:",
             "value": "Instituto Superior Técnico (Campus Alameda) - Avenida Rovisco Pais 1, Pavilhão de Electricidade, Piso 4, Sala 4i.13, 1049-001 Lisboa, Portugal"
           },
-          "d": {
+          {
             "item": "IBAN:",
             "value": "PT50 0010 0000 3443 5540 0010 3"
           },
-          "e": {
+          {
             "item": "Número de Conta:",
             "value": "9-3443554-000-001"
           },
-          "f": {
+          {
             "item": "SWIFT-Code:",
             "value": "BBPIPTPL"
           },
-          "g": {
+          {
             "item": "Banco:",
             "value": "BPI"
           }
-        },
-        "b": "De acordo com o artigo 9º do CIVA, o NEEC encontra-se isento do IVA. Para mais informações relativamente ao processo de faturação, podem contactar tesouraria@neecist.org."
+        ],
+        "b": "De acordo com o artigo 9º do CIVA, o NEEC encontra-se isento do IVA. Para mais informações relativamente ao processo de faturação, podem contactar"
       }
     }
   }

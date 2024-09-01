@@ -1,13 +1,13 @@
 <template>
-  <nav class="nav-bar" :style="{ top: scrollStore.navbarOffset + 'px' }">
-    <div class="contents">
+  <nav class="nav-bar" :class="{ 'fixed': scrollStore.navbarFixed }">
+    <div id="nav-scroll">
       <ul>
-        <router-link id="b":to="{ path: '/', hash: '#about' }"><li>{{ $t("nav-bar.about") }}</li></router-link>
-        <router-link id="d":to="{ path: '/', hash: '#offers' }"><li>{{ $t("nav-bar.offers") }}</li></router-link>
-        <router-link id="e":to="{ path: '/', hash: '#partnership' }"><li>{{ $t("nav-bar.partnership-levels") }}</li></router-link>
-        <router-link id="f":to="{ path: '/', hash: '#deadlines' }"><li>{{ $t("nav-bar.deadlines") }}</li></router-link>
-        <router-link id="g":to="{ path: '/', hash: '#conditions' }"><li>{{ $t("nav-bar.conditions") }}</li></router-link>
-        <router-link id="h":to="{ path: '/', hash: '#faqs' }"><li>{{ $t("nav-bar.faqs") }}</li></router-link>
+        <li><router-link id="b":to="{ path: '/', hash: '#about' }">{{ $t("nav-bar.about") }}</router-link></li>
+        <li><router-link id="d":to="{ path: '/', hash: '#offers' }">{{ $t("nav-bar.offers") }}</router-link></li>
+        <li><router-link id="e":to="{ path: '/', hash: '#partnership' }">{{ $t("nav-bar.partnership-levels") }}</router-link></li>
+        <li><router-link id="f":to="{ path: '/', hash: '#deadlines' }">{{ $t("nav-bar.deadlines") }}</router-link></li>
+        <li><router-link id="g":to="{ path: '/', hash: '#conditions' }">{{ $t("nav-bar.conditions") }}</router-link></li>
+        <li><router-link id="h":to="{ path: '/', hash: '#faqs' }">{{ $t("nav-bar.faqs") }}</router-link></li>
       </ul>
     </div>
   </nav>
@@ -18,65 +18,91 @@ import { onMounted, watch } from 'vue';
 import { useScrollStore } from '@/stores/scroll';
 const scrollStore = useScrollStore();
 
+
 onMounted(() => {
-  let active = false;
+  let active;
+  let currEl;
+  let currElRect;
+  const navScroll = document.getElementById("nav-scroll");
+  let navScrollRect;
+  
   watch(scrollStore.isSectionIntersecting, () => {
     active = false
-    for(let key in scrollStore.isSectionIntersecting)
-      if(scrollStore.isSectionIntersecting[key] === true && active === false) {
-        document.querySelector('#' + key).classList.add("active");
+    navScrollRect = navScroll.getBoundingClientRect();
+    console.log(navScroll.scrollLeft)
+
+    for(let key in scrollStore.isSectionIntersecting) {
+      currEl = document.querySelector('#' + key);
+      currElRect = currEl.getBoundingClientRect();
+
+      if (scrollStore.isSectionIntersecting[key] === true && active === false) {
+        currEl.classList.add("active");
+        navScroll.scrollLeft += currElRect.left - navScrollRect.width / 2 + currElRect.width / 2 - 30;
         active = true;
       } else {
-        document.querySelector('#' + key).classList.remove("active");
+        currEl.classList.remove("active");
       }
+    }
   })
 })
-
 </script>
 
 <style scoped>
 .nav-bar {
-  position: fixed;
-  left: 50%;
-  translate: -50% 0;
+  position: relative;
   z-index: 100;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.contents {
+  max-width: max-content;
+  width: calc(100% - 2ch);
+  margin: 0 auto;
   background-color: var(--c-bg-lighter);
   color: var(--c-ft-light);
-  padding: 0 3ch;
   border-radius: 50px;
+}
+
+.nav-bar.fixed {
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  translate: -50% 0;
+}
+
+#nav-scroll {
+  position: relative;
+  margin: 0 3ch;
   display: flex;
-  width: fit-content;
+  overflow-x: auto;
+}
+
+#nav-scroll::-webkit-scrollbar {
+  height: 0;
 }
 
 ul {
   display: flex;
-  flex-grow: 1;
   gap: 3ch;
+  flex-shrink: 0;
 }
 
-ul > a {
+ul li {
+  margin-left: 1.5ch;
+}
+
+li a {
   height: 3rem;
-  padding-left: 1.5ch;
-  color: var(--c-ft-light);
   text-decoration: none;
   display: flex;
   align-items: center;
   cursor: pointer;
   position: relative;
+  flex-shrink: 0;
 }
 
-ul > a::before {
+li a::before {
   content: "";
   display: inline;
   position: absolute;
   bottom: 0.7rem;
-  left: calc(50% + 0.75ch);
+  left: calc(50%);
   translate: -50% 0;
   height: 0.1rem;
   width: 0%;
@@ -84,8 +110,8 @@ ul > a::before {
   transition: width 0.1s ease-in;
 }
 
-ul > a:is(:hover, .active)::before {
-  width: calc(100% - 1.5ch);
+ul a:is(:hover, .active)::before {
+  width: calc(100%);
   transition: width 0.2s ease-out;
 }
 </style>

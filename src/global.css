@@ -18,6 +18,10 @@
   --c-acc-red-pink: #d23c81;
   --c-acc-violet: #7209b7;
 
+  --c-bronze: #9e523a;
+  --c-silver: #9c9b98;
+  --c-gold: #b59046;
+
   --font-family: 'Lexend Exa', sans-serif;
 
   --fs-h2: 2rem;
@@ -42,4 +46,15 @@ h2 {
 
 p {
   font-size: var(--fs-p);
+}
+
+button, a {
+  color: var(--c-ft-light);
+  font-family: var(--font-family);
+}
+
+@media screen and (max-width: 500px) {
+  :root {
+    font-size: 14px;
+  }
 }

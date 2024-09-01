@@ -10,6 +10,7 @@
     <fDeadlinesSection class="scrollable" id="f"></fDeadlinesSection>
     <gConditionsSection class="scrollable" id="g"></gConditionsSection>
     <hFaqsSection class="scrollable" id="h"></hFaqsSection>
+    <iFooter></iFooter>
   </main>
 </template>
 
@@ -25,6 +26,7 @@ import ePartnershipLevelsSection from './sections/ePartnershipLevelsSection.vue'
 import fDeadlinesSection from './sections/fDeadlinesSection.vue';
 import gConditionsSection from './sections/gConditionsSection.vue';
 import hFaqsSection from './sections/hFaqsSection.vue';
+import iFooter from './sections/iFooter.vue';
 
 const scrollStore = useScrollStore();
 
@@ -34,7 +36,7 @@ const callback = (entries) => {
   })
 }
 
-const observer = new IntersectionObserver(callback, {
+const sectionObserver = new IntersectionObserver(callback, {
   root: null,
   rootMargin: "-30% 0px",
   threshold: 0,
@@ -42,7 +44,7 @@ const observer = new IntersectionObserver(callback, {
 
 onMounted(() => {
   document.querySelectorAll(".scrollable").forEach((el) => {
-    observer.observe(el);
+    sectionObserver.observe(el);
     el.classList.remove("scrollable");
   })
 })

@@ -22,6 +22,7 @@ section {
   position: relative;
   color: var(--c-ft-light);
   padding-bottom: 100px;
+  text-align: center;
 }
 
 .section-divider {
@@ -36,14 +37,15 @@ section {
 section>h2 {
   margin: 0 auto;
   width: fit-content;
-  padding-top: 1rem;
+  padding: 0 1ch;
+  padding-top: 3rem;
 }
 
 section>p {
-  padding-top: 2rem;
-  max-width: 90ch;
-  text-align: center;
+  max-width: 95ch;
   margin: 0 auto;
+  padding: 0 5ch;
+  padding-top: 2rem;
 }
 
 .flex-wrapper {
@@ -55,13 +57,6 @@ section>p {
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-
-  /* display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: min-content min-content;
-  row-gap: 3rem;
-  justify-items: center; */
-
 }
 
 .flex-wrapper .card {
@@ -78,7 +73,23 @@ section>p {
   flex-grow: 1;
 }
 
-.flex-wrapper .card .p {
-  max-width: 10ch;
+@media screen and (max-width: 900px) {
+  .section-divider {
+    height: 60px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .section-divider {
+    height: 40px;
+  }
+
+  .flex-wrapper .card {
+    padding: 2rem 1ch;
+  }
+
+  .flex-wrapper .card p {
+    width: 12ch;
+  }
 }
 </style>

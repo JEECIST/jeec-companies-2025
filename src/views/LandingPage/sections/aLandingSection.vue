@@ -13,48 +13,47 @@
     </div>
     <p class="contact-us">
       {{ $t("landing-section.contacts-text") }}
-      <a href="mailto:email-temporario@jeec.ist"><u>jeecist.business@gmail.com</u></a>
+      <a href="mailto:email-temporario@jeec.ist" target="_blank"><u>jeecist.business@gmail.com</u></a>
     </p>
     <div class="buttons">
       <a href="">{{ $t("landing-section.buttons.magazine") }}</a>
       <a href="https://jeec.ist" target="_blank">{{ $t("landing-section.buttons.website") }}</a>
     </div>
-    <div ref="el" class="nav-bar-placeholder"></div>
-    <navBar :topOffset="offset"></navBar>
+    <div class="nav-bar-placeholder" :class="{ 'active': scrollStore.navbarFixed }">
+      <div id="nav-bar-trigger"></div>
+    </div>
+    <navBar></navBar>
   </section>
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import { useScrollStore } from '@/stores/scroll';
 import navBar from '../components/navBar.vue';
 
 const scrollStore = useScrollStore();
 
-const el = ref(null);
-const offset = ref();
-
-function onScroll() {
-  scrollStore.navbarOffset = Math.max(16, el.value.getBoundingClientRect().top)
+const navTrigger = (entries) => {
+  scrollStore.navbarFixed = !entries[0].isIntersecting;
 }
 
-onMounted(() => {
-  scrollStore.navbarOffset = el.value.getBoundingClientRect().top + 23; //to account for the 1.5rem position discrepancy
-  window.addEventListener("scroll", onScroll);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", onScroll);
+const navObserver = new IntersectionObserver(navTrigger, {
+  root: null,
+  rootMargin: "-15px 0px 0px 0px",
+  threshold: 0,
 })
 
+onMounted(() => {
+  navObserver.observe(document.querySelector("#nav-bar-trigger"))
+})
 
 </script>
 
 <style scoped>
 section {
   background-image: url(/src/assets/landing-bg.png);
+  background-position: center;
   padding-bottom: calc(80px + 5rem);
-  position: relative;
   height: 100%;
 }
 
@@ -111,9 +110,10 @@ section a, section p {
 }
 
 .contact-us {
+  padding: 0 5ch;
   padding-top: 4rem;
   margin: 0 auto;
-  max-width: 100ch;
+  max-width: 105ch;
   text-align: center;
 }
 
@@ -121,8 +121,9 @@ section a, section p {
   padding-top: 3.5rem;
   display: flex;
   justify-content: space-around;
-  margin: 0 20ch;
-  padding-bottom: 5rem
+  margin: 0 auto;
+  padding-bottom: 5rem;
+  max-width: 800px;
 }
 
 .buttons > a {
@@ -137,6 +138,32 @@ section a, section p {
 }
 
 .nav-bar-placeholder {
+  position: relative;
+  width: 100%;
+  height: 0rem;
+}
+
+.nav-bar-placeholder.active {
   height: 3rem;
+}
+
+#nav-bar-trigger {
+  pointer-events: none;
+  position: absolute;
+  bottom: 100%;
+  height: 100vh;
+  z-index: -99;
+}
+
+@media screen and (max-width: 900px) {
+  .hero-flex {
+    flex-direction: column;
+  }
+  .hero-flex > img {
+    width: 100%;
+  }
+  .hero-text > p:first-child {
+    max-width: 50ch;
+  }
 }
 </style>

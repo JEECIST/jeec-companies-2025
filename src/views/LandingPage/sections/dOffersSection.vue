@@ -107,7 +107,7 @@ section {
 
 .section-divider {
   --color: var(--c-acc-blue);
-  height: 100px;
+  height: 60px;
 }
 
 .sub-section {
@@ -115,6 +115,7 @@ section {
 }
 
 .content {
+  position: relative;
   background-color: var(--c-acc-blue);
   display: flex;
   justify-content: space-around;
@@ -122,6 +123,22 @@ section {
   padding: 4rem 10ch;
   gap: calc(5ch + 30px);
   z-index: 1;
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 100svw;
+  max-width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .sub-section:nth-child(odd) .content {
@@ -176,5 +193,56 @@ section {
   right: 30px;
   width: 100%;
   height: auto;
+}
+
+@media screen and (max-width: 1050px) {
+  .content.first {
+    padding-top: 10rem;
+  }
+
+  .content.first .offer {
+    align-self: center;
+    padding-bottom: 0
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .content.first h2 {
+    left: 50%;
+    translate: -50% 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 4rem 5ch;
+  }
+
+  .image, .content.first .image {
+    max-width: 30ch;
+    width: 100%;
+  }
+
+  .sub-section:nth-child(odd) .content {
+    flex-direction: column;
+    padding: 6rem 5ch 8rem 5ch;
+  }
+
+  .sub-section:nth-child(odd) .image svg {
+    transform: scaleX(-1);
+  }
+
+  .sub-section:nth-child(odd) .image img {
+    top: 30px;
+    left: 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .section-divider {
+    height: 40px;
+  }
 }
 </style>

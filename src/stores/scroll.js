@@ -11,7 +11,7 @@ export const useScrollStore = defineStore('scroll', () => {
     h: false,
   })
 
-  const navbarOffset = ref(0);
+  const navbarFixed = ref(false);
 
-  return { isSectionIntersecting, navbarOffset }
+  return { isSectionIntersecting, navbarFixed }
 })
