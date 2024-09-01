@@ -223,11 +223,16 @@ section {
   .image, .content.first .image {
     max-width: 30ch;
     width: 100%;
+    left: 15px;
   }
 
   .sub-section:nth-child(odd) .content {
     flex-direction: column;
     padding: 6rem 5ch 8rem 5ch;
+  }
+
+  .sub-section:nth-child(odd) .content .image {
+    left: -15px;
   }
 
   .sub-section:nth-child(odd) .image svg {

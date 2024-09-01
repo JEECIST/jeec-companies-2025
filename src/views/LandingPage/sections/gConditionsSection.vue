@@ -55,6 +55,7 @@ section ul li :is(h3, p){
 @media screen and (max-width: 750px) {
   section h2 {
     padding: 0 1ch;
+    padding-top: 1rem;
     text-align: center;
   }
   section ul {
@@ -65,6 +66,10 @@ section ul li :is(h3, p){
 @media screen and (max-width: 600px) {
   .section-divider {
     height: 40px;
+  }
+
+  section h2 {
+    padding-top: 2rem;
   }
 }
 </style>

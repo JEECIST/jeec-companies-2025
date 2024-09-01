@@ -2,12 +2,12 @@
   <nav class="nav-bar" :class="{ 'fixed': scrollStore.navbarFixed }">
     <div id="nav-scroll">
       <ul>
-        <li><router-link id="b":to="{ path: '/', hash: '#about' }">{{ $t("nav-bar.about") }}</router-link></li>
-        <li><router-link id="d":to="{ path: '/', hash: '#offers' }">{{ $t("nav-bar.offers") }}</router-link></li>
-        <li><router-link id="e":to="{ path: '/', hash: '#partnership' }">{{ $t("nav-bar.partnership-levels") }}</router-link></li>
-        <li><router-link id="f":to="{ path: '/', hash: '#deadlines' }">{{ $t("nav-bar.deadlines") }}</router-link></li>
-        <li><router-link id="g":to="{ path: '/', hash: '#conditions' }">{{ $t("nav-bar.conditions") }}</router-link></li>
-        <li><router-link id="h":to="{ path: '/', hash: '#faqs' }">{{ $t("nav-bar.faqs") }}</router-link></li>
+        <li><router-link id="b":to="{ path: '/', hash: '#about' }"><div class="scroll-point"></div>{{ $t("nav-bar.about") }}</router-link></li>
+        <li><router-link id="d":to="{ path: '/', hash: '#offers' }"><div class="scroll-point"></div>{{ $t("nav-bar.offers") }}</router-link></li>
+        <li><router-link id="e":to="{ path: '/', hash: '#partnership' }"><div class="scroll-point"></div>{{ $t("nav-bar.partnership-levels") }}</router-link></li>
+        <li><router-link id="f":to="{ path: '/', hash: '#deadlines' }"><div class="scroll-point"></div>{{ $t("nav-bar.deadlines") }}</router-link></li>
+        <li><router-link id="g":to="{ path: '/', hash: '#conditions' }"><div class="scroll-point"></div>{{ $t("nav-bar.conditions") }}</router-link></li>
+        <li><router-link id="h":to="{ path: '/', hash: '#faqs' }"><div class="scroll-point"></div>{{ $t("nav-bar.faqs") }}</router-link></li>
       </ul>
     </div>
   </nav>
@@ -22,22 +22,17 @@ const scrollStore = useScrollStore();
 onMounted(() => {
   let active;
   let currEl;
-  let currElRect;
   const navScroll = document.getElementById("nav-scroll");
-  let navScrollRect;
   
   watch(scrollStore.isSectionIntersecting, () => {
-    active = false
-    navScrollRect = navScroll.getBoundingClientRect();
-    console.log(navScroll.scrollLeft)
+    active = false;
 
     for(let key in scrollStore.isSectionIntersecting) {
       currEl = document.querySelector('#' + key);
-      currElRect = currEl.getBoundingClientRect();
 
       if (scrollStore.isSectionIntersecting[key] === true && active === false) {
         currEl.classList.add("active");
-        navScroll.scrollLeft += currElRect.left - navScrollRect.width / 2 + currElRect.width / 2 - 30;
+        navScroll.scrollLeft += currEl.children[0].getBoundingClientRect().left - (navScroll.offsetWidth / 2);
         active = true;
       } else {
         currEl.classList.remove("active");
@@ -110,8 +105,29 @@ li a::before {
   transition: width 0.1s ease-in;
 }
 
+li a .scroll-point {
+  content: "";
+  position: absolute;
+  left: calc(50% - 4.5ch);
+}
+
 ul a:is(:hover, .active)::before {
   width: calc(100%);
   transition: width 0.2s ease-out;
+}
+
+@media screen and (max-width: 390px) {
+  ul {
+    gap: 2ch;
+  }
+
+  li a {
+    left: -0.5ch;
+    margin-right: -0.5ch;
+  } 
+
+  li a .scroll-point {
+    left: calc(50% - 3ch);
+  }
 }
 </style>
