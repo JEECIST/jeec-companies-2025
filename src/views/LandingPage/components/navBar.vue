@@ -2,12 +2,12 @@
   <nav class="nav-bar" :class="{ 'fixed': scrollStore.navbarFixed }">
     <div id="nav-scroll">
       <ul>
-        <li><router-link id="b":to="{ path: '/', hash: '#about' }"><div class="scroll-point"></div>{{ $t("nav-bar.about") }}</router-link></li>
-        <li><router-link id="d":to="{ path: '/', hash: '#offers' }"><div class="scroll-point"></div>{{ $t("nav-bar.offers") }}</router-link></li>
-        <li><router-link id="e":to="{ path: '/', hash: '#partnership' }"><div class="scroll-point"></div>{{ $t("nav-bar.partnership-levels") }}</router-link></li>
-        <li><router-link id="f":to="{ path: '/', hash: '#deadlines' }"><div class="scroll-point"></div>{{ $t("nav-bar.deadlines") }}</router-link></li>
-        <li><router-link id="g":to="{ path: '/', hash: '#conditions' }"><div class="scroll-point"></div>{{ $t("nav-bar.conditions") }}</router-link></li>
-        <li><router-link id="h":to="{ path: '/', hash: '#faqs' }"><div class="scroll-point"></div>{{ $t("nav-bar.faqs") }}</router-link></li>
+        <li><router-link id="b":to="{ hash: '#about' }"><div class="scroll-point"></div>{{ $t("nav-bar.about") }}</router-link></li>
+        <li><router-link id="d":to="{ hash: '#offers' }"><div class="scroll-point"></div>{{ $t("nav-bar.offers") }}</router-link></li>
+        <li><router-link id="e":to="{ hash: '#partnership' }"><div class="scroll-point"></div>{{ $t("nav-bar.partnership-levels") }}</router-link></li>
+        <li><router-link id="f":to="{ hash: '#deadlines' }"><div class="scroll-point"></div>{{ $t("nav-bar.deadlines") }}</router-link></li>
+        <li><router-link id="g":to="{ hash: '#conditions' }"><div class="scroll-point"></div>{{ $t("nav-bar.conditions") }}</router-link></li>
+        <li><router-link id="h":to="{ hash: '#faqs' }"><div class="scroll-point"></div>{{ $t("nav-bar.faqs") }}</router-link></li>
       </ul>
     </div>
   </nav>
@@ -17,7 +17,6 @@
 import { onMounted, watch } from 'vue';
 import { useScrollStore } from '@/stores/scroll';
 const scrollStore = useScrollStore();
-
 
 onMounted(() => {
   let active;

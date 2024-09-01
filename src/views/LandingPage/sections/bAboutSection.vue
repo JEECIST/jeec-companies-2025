@@ -2,7 +2,7 @@
   <section>
     <sectionDivider class="section-divider"></sectionDivider>
     <div class="content">
-      <img src="/src/assets/team-photo.png" alt="JEEC Team Photo">
+      <img src="/src/assets/jeec-team.webp" alt="JEEC Team Photo">
       <div class="text">
         <h2 id="about">{{ $t("about-section.title") }}</h2>
         <p>{{ $t("about-section.text") }}</p>
@@ -44,8 +44,11 @@ section {
   padding-bottom: 3rem;
   top: -50px;
   height: auto;
+  aspect-ratio: 1.6;
   max-width: 40ch;
   flex: 1;
+  object-fit: cover;
+  object-position: center;
 }
 
 .content .text {
@@ -60,13 +63,6 @@ section {
 }
 
 @media screen and (max-width: 1050px) {
-  .content > img {
-    top: 0;
-    align-self: center;
-  }
-}
-
-@media screen and (max-width: 900px) {
   .section-divider {
     height: 60px;
   }
@@ -79,6 +75,7 @@ section {
   }
 
   .content > img {
+    align-self: center;
     top: -2.4rem;
     padding-bottom: 0;
     width: 100%;

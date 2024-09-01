@@ -149,27 +149,40 @@
     "a": {
       "question": "Quais são os preços para a nossa participação?",
       "text": {
-        "a": "Marquem uma reunião connosco enviando um e-mail para",
-        "b": " para que possamos apresentar-vos os preços."
+       "a": "Marquem uma reunião connosco enviando um e-mail para",
+       "b": "para que possamos apresentar-vos os preços."
       }
     },
     "b": {
       "question": "Apenas estudantes de Engenharia Eletrotécnica participam no evento?",
       "text": {
         "a": "Não!",
-        "b": "Apesar de o foco principal do evento ser, de facto, empresas interessantes para estudantes de Engenharia Eletrotécnica e de Computadores, o nosso evento acabar por atraído estudantes de outras áreas devido à abrangência das áreas de estudo do curso. Para além de estudantes de Engenharia Eletrotécnica e de Computadores, estudantes de Engenharia Informática, Engenharia Biomédica, Engenharia Mecânica, Engenharia Aeroespacial e muitas outras costumam marcar presença no nosso evento."
+        "b": "Apesar de o foco principal do evento ser, de facto, empresas interessantes para estudantes de Engenharia Eletrotecnica e de Computadores, o nosso evento acabar por atraído estudantes de outras áreas devido à abrangência das áreas de estudo do curso. Para além de estudantes de Engenharia Eletrotecnica e de Computadores, estudantes de Engenharia Informática, Engenharia Biomédica, Engenharia Mecânica, Engenharia Aeroespacial e muitas outras costumam marcar presença no nosso evento."
       }
     },
     "c": {
       "question": "O que é o Técnico Innovation Center?",
-      "text": "O Técnico Innovation Center (TIC) é um dos maiores espaços de estudo do país, sendo uma referência da inovação, com áreas de trabalho colaborativo, uma zona de exposições e uma área multiusos para acolhimento de eventos com mais de 300 pessoas, incluído o seu próprio espaço de restauração. Este edício situa-se na antiga Gare do Arco do Cego, em Lisboa, e é onde será realizado este evento."
+      "text": "O Técnico Innovation Center (TIC) é um dos maiores espaços de estudo do país, sendo uma referência da inovação, com áreas de trabalho colaborativo, uma zona de exposições e uma área multiusos para acolhimento de eventos com mais de 300 pessoas, incluído o seu próprio espaço de restauração. Este edifício situa-se na antiga Gare do Arco do Cego, em Lisboa, e é onde será realizado este evento."
     },
     "d": {
       "question": "Quantas pessoas podemos levar?",
-      "text": "Cada empresa poderá ter presente no seu espaço até 3 colaboradores. Se necessário, poderão ter um sistema rotativo de colaboradores, mas apenas é garantido refeição para 3. Pedimos que nos enviem os nomes de todos os colaboradores que forem estar presentes no evento."
+      "text": "Cada empresa poderá ter presente no seu espaço até 3 colaboradores. Se necessário, poderão ter um sistema rotativo de colaboradores mas apenas é garantido refeição para 3. Pedimos que nos enviem os nomes de todos os colaboradores que forem estar presentes no evento."
     },
     "e": {
-      "question": "Quais são os dados fiscais das JEEC?",
+      "question": "Qual é o horário da Feira de Emprego?",
+      "text": "As horas específicas serão comunicadas mais perto do evento. Fiquem atentos para atualizações."
+
+    },
+    "f": {
+      "question": "Qual são os materiais disponibilizados para a Feira de Emprego?",
+      "text":  "Informações detalhadas sobre os materiais fornecidos serão compartilhadas com as empresas participantes antes do evento."
+    },
+    "g": {
+      "question": "Qual é o espaço disponibilizado na Feira de Emprego?",
+      "text": "Cada empresa participante terá um espaço designado. Mais detalhes sobre as dimensões exatas e o layout serão fornecidos após a confirmação."
+    },
+    "h": {
+      "question": "Quais são os vossos dados fiscais?",
       "text": {
         "a": "Os dados de faturação das JEEC, cuja entidade fiscal é o NEEC, caso necessitem dos mesmos para a emissão da PO, são os seguintes:",
         "list": [
@@ -198,7 +211,7 @@
             "value": "BBPIPTPL"
           },
           {
-            "item": "Banco:",
+            "item": "Nome Banco:",
             "value": "BPI"
           }
         ],
