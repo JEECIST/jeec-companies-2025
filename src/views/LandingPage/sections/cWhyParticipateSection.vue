@@ -5,7 +5,8 @@
     <p>{{ $t("why-participate-section.text") }}</p>
     <div class="flex-wrapper">
       <div class="card" v-for="(text, key) in $tm('why-participate-section.cards')">
-        <img :src="'/src/assets/why-participate/' + key + '.svg'" :alt="key">
+        <!-- <img :src="'/src/assets/why-participate/' + key + '.svg'" :alt="key"> -->
+        <img :src="getImageUrl(key)" :alt="key">
         <p>{{ text }}</p>
       </div>
     </div>
@@ -14,6 +15,10 @@
 
 <script setup>
 import sectionDivider from '../components/sectionDivider.vue';
+
+const getImageUrl = (src) => {
+  return new URL(`../../../assets/why-participate/${src}.svg`, import.meta.url).href;
+}
 </script>
 
 <style scoped>

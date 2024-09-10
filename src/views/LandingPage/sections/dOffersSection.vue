@@ -134,8 +134,7 @@ section {
   top: 0;
   left: 50%;
   translate: -50% 0;
-  width: 100svw;
-  max-width: 100%;
+  width: 100lvw;
   height: 100%;
   z-index: -1;
   pointer-events: none;

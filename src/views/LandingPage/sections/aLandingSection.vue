@@ -13,7 +13,7 @@
     </div>
     <p class="contact-us">
       {{ $t("landing-section.contacts-text") }}
-      <a href="mailto:email-temporario@jeec.ist" target="_blank"><u>jeecist.business@gmail.com</u></a>
+      <a href="mailto:jeecist.business@gmail.com" target="_blank"><u>jeecist.business@gmail.com</u></a>
     </p>
     <div class="buttons">
       <a href="">{{ $t("landing-section.buttons.magazine") }}</a>
