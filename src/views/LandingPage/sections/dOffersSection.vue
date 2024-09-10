@@ -123,9 +123,9 @@ section {
   padding: 4rem 10ch;
   gap: calc(5ch + 30px);
   z-index: 1;
-  max-width: 1700px;
+  width: min(auto, 1700px);
+  max-width: 100%;
   margin: 0 auto;
-  overflow: hidden
 }
 
 .content::before {
@@ -135,7 +135,8 @@ section {
   top: 0;
   left: 50%;
   translate: -50% 0;
-  width: 100lvw;
+  width: 100vw;
+  max-width: inherit;
   height: 100%;
   z-index: -1;
   pointer-events: none;
