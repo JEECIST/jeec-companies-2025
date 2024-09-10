@@ -125,6 +125,7 @@ section {
   z-index: 1;
   max-width: 1700px;
   margin: 0 auto;
+  overflow: hidden
 }
 
 .content::before {
