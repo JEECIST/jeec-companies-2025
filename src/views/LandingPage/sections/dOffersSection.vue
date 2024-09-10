@@ -112,10 +112,11 @@ section {
 
 .sub-section {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .content {
-  position: relative;
   background-color: var(--c-acc-blue);
   display: flex;
   justify-content: space-around;
@@ -123,9 +124,8 @@ section {
   padding: 4rem 10ch;
   gap: calc(5ch + 30px);
   z-index: 1;
-  width: min(auto, 1700px);
+  width: min(100%, 1700px);
   max-width: 100%;
-  margin: 0 auto;
 }
 
 .content::before {
@@ -135,8 +135,7 @@ section {
   top: 0;
   left: 50%;
   translate: -50% 0;
-  width: 100vw;
-  max-width: inherit;
+  width: 100%;
   height: 100%;
   z-index: -1;
   pointer-events: none;
