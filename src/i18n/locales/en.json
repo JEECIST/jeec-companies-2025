@@ -3,14 +3,14 @@
   "nav-bar": {
     "about": "About",
     "offers": "Offers",
-    "partnership-levels": "Partnership Levels",
-    "deadlines": "Deadlines",
+    "partnership-levels": "Advertising",
+    "deadlines": "Billing",
     "conditions": "Conditions",
     "faqs": "FAQs"
   },
   "landing-section": {
     "hero-text": {
-      "a": "The 25th edition of the JEEC is approaching and we want you to join us at",
+      "a": "The 25th edition of JEEC is approaching and we want you to join us at",
       "b-bold": "Técnico Innovation Center",
       "c": "!"
     },
@@ -27,7 +27,7 @@
   },
   "why-participate-section": {
     "title": "WHY PARTICIPATE IN JEEC 25?",
-    "text": "Students participate in our event, organized by students for students, to connect with leading companies in the technology field and showcase their abilities to potential employers.",
+    "text": "Students participate in our event to connect with leading companies in the technology field and showcase their abilities to potential employers.",
     "cards": {
       "a": "Talk with graduating students",
       "b": "Present your areas of work",
@@ -65,8 +65,8 @@
     }
   },
   "partnership-levels": {
-    "title": "PARTNERSHIP LEVELS",
-    "text": "Participating in our event ensures your company's visibility across different levels, depending on the number of activities you engage in. The official JEEC website and social media channels are regularly updated with information about the event, with a particular emphasis on the weeks leading up to it. Additionally, the event will be promoted to all students at Instituto Superior Técnico through the institution's official website and communication channels.",
+    "title": "ADVERTISING TIERS",
+    "text": "Participating in our event ensures your company's visibility across different tiers, depending on the number of activities you engage in. The official JEEC website and social media channels are regularly updated with information about the event, with a particular emphasis on the weeks leading up to it. Additionally, the event will be promoted to all students at Instituto Superior Técnico through the institution's official website and communication channels.",
     "bronze": {
       "name": "BRONZE",
       "requirement": "1 activity",
@@ -97,7 +97,7 @@
     "condition": "*Subject to confirmation of participation and submission of the logo by March 31st"
   },
   "deadlines": {
-    "title": "PAYMENT DEADLINES",
+    "title": "BILLING STAGES",
     "first": {
       "text": "1st Payment Phase",
       "date": "Up to December 31st"
@@ -108,7 +108,7 @@
     },
     "third": {
       "text": "3rd Payment Phase",
-      "date": "Up to March 4th"
+      "date": "Up to March 2nd"
     }
   },
   "conditions": {
@@ -139,8 +139,8 @@
         "text": "access to Wi-Fi throughout the event days;"
       },
       {
-        "title": "Web-app:",
-        "text": "access to our Web-App during the event, allowing you to award points to students and easily access information related to your participation."
+        "title": "WebApp:",
+        "text": "access to our WebApp during the event, allowing you to award points to students and easily access information related to your participation."
       }
     ]
   },
@@ -157,7 +157,7 @@
       "question": "Do only Electrical Engineering students participate in the event?",
       "text": {
         "a": "No!",
-        "b": "While the event primarily targets companies of interest for Electrical and Computer Engineering students, it also attracts students from various other disciplines due to the broad scope of the course. In addition to Electrical and Computer Engineering students, we often see participation from students in Computer Science, Biomedical Engineering, Mechanical Engineering, Aerospace Engineering, and many other fields."
+        "b": "Although the main focus of the event is indeed companies that are of interest to students of Electrical and Computer Engineering, our event ends up attracting students from other areas with a strong technological component, due to the broad scope of the course's fields of study."
       }
     },
     "c": {

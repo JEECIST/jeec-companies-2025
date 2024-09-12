@@ -51,6 +51,7 @@ p {
 button, a {
   color: var(--c-ft-light);
   font-family: var(--font-family);
+  font-size: 1rem;
 }
 
 @media screen and (max-width: 500px) {

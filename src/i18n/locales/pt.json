@@ -3,14 +3,14 @@
   "nav-bar": {
     "about": "Sobre",
     "offers": "Ofertas",
-    "partnership-levels": "Níveis de Parceria",
-    "deadlines": "Prazos",
+    "partnership-levels": "Divulgação",
+    "deadlines": "Faturação",
     "conditions": "Condições",
     "faqs": "FAQs"
   },
   "landing-section": {
     "hero-text": {
-      "a": "A 25ª edição das JEEC está a chegar e queremos que se juntem a nós no",
+      "a": "A 25ª edição da JEEC está a chegar e queremos que se juntem a nós no",
       "b-bold": "Técnico Innovation Center",
       "c": "!"
     },
@@ -23,11 +23,11 @@
   },
   "about-section": {
     "title": "QUEM SOMOS?",
-    "text": "As JEEC (Jornadas de Engenharia Eletrotécnica e de Computadores) são um evento organizado por estudantes e para estudantes de diversos cursos do Instituto Superior Técnico, com maior foco nas áreas da Engenharia Eletrotécnica e de Computadores. O nosso principal objetivo é promover a aproximação do mundo académico com o mundo empresarial, proporcionando a toda a comunidade diversas atividades de forma gratuita."
+    "text": "A JEEC são um evento organizado por estudantes e para estudantes de diversos cursos do Instituto Superior Técnico, com maior foco nas áreas da Engenharia Eletrotécnica e de Computadores. O nosso principal objetivo é promover a aproximação do mundo académico com o mundo empresarial, proporcionando a toda a comunidade diversas atividades de forma gratuita."
   },
   "why-participate-section": {
-    "title": "PORQUÊ PARTICIPAR NAS JEEC 25?",
-    "text": "Os estudantes participam no nosso evento, que é organizado de estudantes para estudantes, de modo a estarem em contacto com empresas líderes na área da tecnologia e mostrarem a sua capacidades a potênciais empregadores. ",
+    "title": "PORQUÊ PARTICIPAR NA JEEC 25?",
+    "text": "Os estudantes participam no nosso evento de modo a estarem em contacto com empresas líderes na área da tecnologia e mostrarem a sua capacidades a potênciais empregadores. ",
     "cards": {
       "a": "Conversar com estudantes finalistas",
       "b": "Apresentar as vossas áreas de trabalho",
@@ -65,8 +65,8 @@
     }
   },
   "partnership-levels": {
-    "title": "NÍVEIS DE PARCERIA",
-    "text": "A participação da empresa no nosso evento garante a divulgação da mesma, em diferentes patamares, consoante o número de atividades adquiridas. O website oficial e as redes sociais das JEEC são atualizados recorrentemente com informação relativa ao evento, com especial foco nas semanas anteriores ao evento. O evento será ainda divulgado a todos os estudantes do Instituto Superior Técnico, através do website oficial da instituição e canais oficiais de comunicação da mesma.",
+    "title": "PATAMARES DE DIVULGAÇÃO",
+    "text": "A participação da empresa no nosso evento garante a divulgação da mesma, em diferentes patamares, consoante o número de atividades adquiridas. O website oficial e as redes sociais da JEEC são atualizados recorrentemente com informação relativa ao evento, com especial foco nas semanas anteriores ao evento. O evento será ainda divulgado a todos os estudantes do Instituto Superior Técnico, através do website oficial da instituição e canais oficiais de comunicação da mesma.",
     "bronze": {
       "name": "BRONZE",
       "requirement": "1 atividade",
@@ -97,7 +97,7 @@
     "condition": "*Condicionado pela confirmação de participação e envio do logotipo até ao dia 31 de março."
   },
   "deadlines": {
-    "title": "PRAZOS DE PAGAMENTO",
+    "title": "FASES DE FATURAÇÃO",
     "first": {
       "text": "1ª Fase de Pagamento",
       "date": "Até 31 de Dezembro"
@@ -108,7 +108,7 @@
     },
     "third": {
       "text": "3ª Fase de Pagamento",
-      "date": "Até 4 de Março"
+      "date": "Até 2 de Março"
     }
   },
   "conditions": {
@@ -139,8 +139,8 @@
         "text": "acesso a wifi durante os dias de presença no evento;"
       },
       {
-        "title": "Web-app:",
-        "text": "acesso à nossa Webapp durante o evento, para atribuição de pontos aos estudantes e fácil acesso a informação referente à vossa participação."
+        "title": "WebApp:",
+        "text": "acesso à nossa WebApp durante o evento, para atribuição de pontos aos estudantes e fácil acesso a informação referente à vossa participação."
       }
     ]
   },
@@ -157,7 +157,7 @@
       "question": "Apenas estudantes de Engenharia Eletrotécnica participam no evento?",
       "text": {
         "a": "Não!",
-        "b": "Apesar de o foco principal do evento ser, de facto, empresas interessantes para estudantes de Engenharia Eletrotecnica e de Computadores, o nosso evento acabar por atraído estudantes de outras áreas devido à abrangência das áreas de estudo do curso. Para além de estudantes de Engenharia Eletrotecnica e de Computadores, estudantes de Engenharia Informática, Engenharia Biomédica, Engenharia Mecânica, Engenharia Aeroespacial e muitas outras costumam marcar presença no nosso evento."
+        "b": "Apesar de o foco principal do evento ser, de facto, empresas interessantes para estudantes de Engenharia Eletrotecnica e de Computadores, o nosso evento acaba por atrair estudantes de outras áreas com forte componente tecnológica, devido à abrangência das áreas de estudo do curso."
       }
     },
     "c": {
@@ -182,9 +182,9 @@
       "text": "Cada empresa participante terá um espaço designado. Mais detalhes sobre as dimensões exatas e o layout serão fornecidos após a confirmação."
     },
     "h": {
-      "question": "Quais são os vossos dados fiscais?",
+      "question": "Quais são os dados fiscais da JEEC?",
       "text": {
-        "a": "Os dados de faturação das JEEC, cuja entidade fiscal é o NEEC, caso necessitem dos mesmos para a emissão da PO, são os seguintes:",
+        "a": "Os dados de faturação da JEEC, cuja entidade fiscal é o NEEC, caso necessitem dos mesmos para a emissão da PO, são os seguintes:",
         "list": [
           {
             "item": "Nome de Identidade Fiscal:",

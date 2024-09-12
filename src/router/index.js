@@ -18,10 +18,12 @@ const router = createRouter({
     }
   ],
   scrollBehavior (to, from, savedPosition) {
-    if (savedPosition)
-      return { top: savedPosition.top }
+    if (to.name === from.name)
+      return false
+    else if (savedPosition)
+      return savedPosition
     else if (to.hash) {
-      const scrollY = document.documentElement.clientHeight * 0.29;
+      const scrollY = Math.min(document.documentElement.clientHeight * 0.29, 110);
       return { el: to.hash, top: scrollY, behavior: "smooth" }
     }
     else
@@ -30,11 +32,26 @@ const router = createRouter({
 })
 
 function setLanguage (to) {
-  if(i18n.global.availableLocales.indexOf(to.params.lang) === -1)
-    return { path: "/" + i18n.global.locale.value }
+  if (to.params.lang !== "en" && to.params.lang !== "pt") {
 
-  i18n.global.locale.value = to.params.lang;
+    if (localStorage.getItem("locale") === null || (localStorage.getItem("locale") !== "en" && localStorage.getItem("locale") !== "pt"))
+      setNavigatorLocale();
+
+    i18n.global.locale.value = localStorage.getItem("locale")
+    return { path: "/" + localStorage.getItem("locale")}
+  }
+
+  localStorage.setItem("locale", to.params.lang)
+  i18n.global.locale.value = to.params.lang
   return
+}
+
+function setNavigatorLocale() {
+  const navLocale = (navigator.language || navigator.userLanguage).split("-")[0];
+  if (navLocale !== "pt" && navLocale !== "en")
+    localStorage.setItem("locale", "en");
+  else
+    localStorage.setItem("locale", navLocale);
 }
 
 export default router

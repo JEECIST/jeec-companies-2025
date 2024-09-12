@@ -49,7 +49,7 @@ footer {
 }
 
 .footer__socials a > img {
-  width: 4ch;
+  width: 3ch;
 } 
 
 .footer__email {
@@ -70,10 +70,14 @@ footer {
   text-decoration: underline;
 }
 
-@media screen and (max-width: 1007px){
+@media screen and (max-width: 1200px){
   footer {
     flex-direction: column;
     justify-content: center;
+  }
+
+  .footer__socials {
+    padding: 2rem 0 1rem 0;
   }
 
   .footer__left {
