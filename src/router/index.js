@@ -18,7 +18,7 @@ const router = createRouter({
     }
   ],
   scrollBehavior (to, from, savedPosition) {
-    if (to.name === from.name)
+    if (to.name === from.name && to.hash === from.hash)
       return false
     else if (savedPosition)
       return savedPosition

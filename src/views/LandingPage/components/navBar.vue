@@ -46,16 +46,17 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 function switchLocale() {
-  let scrollPos = window.scrollY;
   let locale = localStorage.getItem("locale");
   if (locale === "en")
     locale = "pt";
   else
     locale = "en";
 
+  const currHash = router.currentRoute.value.hash
+
   localStorage.setItem("locale", locale);
   i18n.global.locale.value = locale;
-  router.replace({ params: {"lang":locale} });
+  router.replace({ params: {"lang":locale}, hash: router.currentRoute.value.hash });
 }
 </script>
 
