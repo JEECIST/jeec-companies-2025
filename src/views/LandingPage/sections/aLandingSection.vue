@@ -16,7 +16,10 @@
       <a href="mailto:jeecist.business@gmail.com" target="_blank"><u>jeecist.business@gmail.com</u></a>
     </p>
     <div class="buttons">
-      <a href="">{{ $t("landing-section.buttons.magazine") }}</a>
+      
+      <a v-if="$i18n.locale === 'pt'" href="https://drive.google.com/file/d/1DyGrYKKhmzpkZehOTgqVi6c_OVSvX8x5/view?usp=sharing" target="_blank">{{ $t("landing-section.buttons.magazine") }}</a>
+      <a v-else-if="$i18n.locale === 'en'" href="https://drive.google.com/file/d/1AsL-JIEwHAKdDXfgh0pPmEQ4QEmL6cDv/view?usp=sharing" target="_blank">{{ $t("landing-section.buttons.magazine") }}</a>
+      <a v-else href="">{{ $t("landing-section.buttons.magazine") }}</a>
       <a href="https://jeec.ist" target="_blank">{{ $t("landing-section.buttons.website") }}</a>
     </div>
     <div class="nav-bar-placeholder" :class="{ 'active': scrollStore.navbarFixed }">
