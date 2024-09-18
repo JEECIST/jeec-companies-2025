@@ -16,8 +16,8 @@
       <a href="mailto:jeecist.business@gmail.com" target="_blank"><u>jeecist.business@gmail.com</u></a>
     </p>
     <div class="buttons">
-      <a v-if="$i18n.locale === 'pt'" href="/magazines/JEEC25_Revista_Apresentação.pdf" target="_blank">{{ $t("landing-section.buttons.magazine") }}</a>
-      <a v-else-if="$i18n.locale === 'en'" href="/magazines/JEEC25_Apresentation_Magazine.pdf" target="_blank">{{ $t("landing-section.buttons.magazine") }}</a>
+      <a v-if="$i18n.locale === 'pt'" href="/magazines/JEEC25_Revista.pdf" download>{{ $t("landing-section.buttons.magazine") }}</a>
+      <a v-else-if="$i18n.locale === 'en'" href="/magazines/JEEC25_Magazine.pdf" download>{{ $t("landing-section.buttons.magazine") }}</a>
       <a v-else href="">{{ $t("landing-section.buttons.magazine") }}</a>
       <a href="https://jeec.ist" target="_blank">{{ $t("landing-section.buttons.website") }}</a>
     </div>
