@@ -107,7 +107,7 @@ section a, section p {
 }
 
 .hero-date {
-  font-size: clamp(2rem, 4vw, 4rem);
+  font-size: clamp(2rem, 3vw, 4rem);
   font-weight: 900;
 }
 
