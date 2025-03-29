@@ -3,6 +3,7 @@ import i18n from '@/i18n'
 
 import LandingPage from '../views/LandingPage/LandingPage.vue'
 import HomeLogin from '../views/LandingPage/pages/home_login.vue'
+import Menu from '../views/LandingPage/pages/menu.vue'
 import Activities from '../views/LandingPage/pages/activities.vue'
 import Meals from '../views/LandingPage/pages/meals.vue'
 
@@ -13,6 +14,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: HomeLogin
+    },
+    {
+      path: '/menu',
+      name: 'menu',
+      component: Menu
     },
     {
       path: '/activities',

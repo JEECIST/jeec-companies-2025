@@ -1,110 +1,140 @@
 <template>
-    <div class="landing-container">
-      <header class="header">
-        <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
-        <div class="language-switch">
-          <span @click="setLang('en')">EN</span> |
-          <span @click="setLang('pt')">PT</span>
-        </div>
-        <div class="menu-icon">
-          &#9776;
-        </div>
-      </header>
+  <div class="login-container">
+   
+    <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
+
   
-      <main class="main-content">
-        <h1 class="company-name">PLACE HOLDER COMPANY NAME</h1>
+    <h1 class="title">PARTNERS LOGIN</h1>
+
   
-        <div class="options">
-          <div class="option" @click="goToActivities">
-            <img src="../../../assets/activities.svg" alt="Activities" class="icon" />
-            <p class="label">Activities</p>
-          </div>
-          <div class="option" @click="goToMeals">
-            <img src="../../../assets/meals.svg" alt="Meals" class="icon" />
-            <p class="label">Meals</p>
-          </div>
-        </div>
-      </main>
-    </div>
-  </template>
-  
-  <script setup>
-  import { useRouter } from 'vue-router'
-  import i18n from '@/i18n'
-  
-  const router = useRouter()
-  
-  const goToActivities = () => {
-    router.push('/activities')
-  }
-  
-  const goToMeals = () => {
-    router.push('/meals')
-  }
-  
-  const setLang = (lang) => {
-    i18n.global.locale.value = lang
-    localStorage.setItem('locale', lang)
-    // reload current route with new lang param if necessary
-  }
-  </script>
-  
+    <!--form @submit.prevent="handleLogin"-->
+      <form>
+      <div class="input-group">
+        <input 
+          type="text" 
+          v-model="username" 
+          placeholder="Enter Username" 
+          class="input-field"
+          required 
+        />
+      </div>
+
+      <div class="input-group password-group">
+        <input 
+          :type="showPassword ? 'text' : 'password'"
+          v-model="password" 
+          placeholder="Enter Password" 
+          class="input-field"
+          required 
+        />
+        <span class="eye-icon" @click="togglePassword">
+          <img src="../../../assets/eye.svg">
+        </span>
+      </div>
+
+   
+      <!-- <button type="submit" class="login-button"> -->
+        <router-link to="/menu">
+        <button class="login-button"> LOGIN</button>
+      </router-link>
+    </form>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const username = ref('');
+const password = ref('');
+const showPassword = ref(false);
+
+const togglePassword = () => {
+  showPassword.value = !showPassword.value;
+};
+
+</script>
+
 <style scoped>
-    .landing-container {
-        background-color: #1e1e1e;
-        color: white;
-        min-height: 100vh;
-        font-family: 'Poppins', sans-serif;
-        padding: 1rem;
-        text-align: center;
-    }
 
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 0.5rem;
-    }
+.login-container {
+  background-color: #1e1e1e;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
 
-    .logo {
-        height: 30px;
-    }
 
-    .language-switch {
-        font-size: 0.9rem;
-        cursor: pointer;
-    }
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
 
-    .menu-icon {
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
 
-    .company-name {
-        font-size: 1.5rem;
-        margin: 2rem 0;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  border-top: 2px solid #279EFF;
+  padding-top: 10px;
+}
 
-    .options {
-        display: flex;
-        justify-content: center;
-        gap: 3rem;
-        flex-wrap: wrap;
-    }
 
-    .icon {
-        width: 70px;
-        height: 70px;
-        margin-bottom: 0.5rem;
-        filter: brightness(0) saturate(100%) invert(45%) sepia(91%) saturate(1342%) hue-rotate(178deg) brightness(102%) contrast(104%);
-    }
+.input-group {
+  position: relative;
+  width: 300px;
+  margin-bottom: 15px;
+}
 
-    .label {
-        font-size: 1.1rem;
-        font-weight: 600;
-        border-top: 2px solid #279EFF;
-        padding-top: 0.3rem;
-    }
+.input-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #279EFF;
+  outline: none;
+  color: white;
+}
+
+.input-field::placeholder {
+  color: #aaa;
+}
+
+
+.password-group {
+  display: flex;
+  align-items: center;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #279EFF;
+}
+
+
+.login-button {
+  width: 320px;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: transparent;
+  border: 2px solid #279EFF;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-button:hover {
+  background: #279EFF;
+  color: black;
+}
 </style>

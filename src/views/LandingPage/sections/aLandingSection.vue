@@ -146,6 +146,7 @@ section a, section p {
 .loginbtn{
   background: transparent;
   border:none;
+  cursor: pointer;
 }
 .nav-bar-placeholder {
   position: relative;
