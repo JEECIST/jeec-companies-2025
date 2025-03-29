@@ -2,10 +2,17 @@ import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '@/i18n'
 
 import LandingPage from '../views/LandingPage/LandingPage.vue'
+import HomeLogin from '../views/LandingPage/pages/home_login.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: HomeLogin
+    },
     {
       path: '/:lang',
       name: 'landing',

@@ -16,9 +16,14 @@
       <a href="mailto:jeecist.business@gmail.com" target="_blank"><u>jeecist.business@gmail.com</u></a>
     </p>
     <div class="buttons">
+      
+     
       <a v-if="$i18n.locale === 'pt'" href="/magazines/JEEC25_Revista.pdf" download>{{ $t("landing-section.buttons.magazine") }}</a>
       <a v-else-if="$i18n.locale === 'en'" href="/magazines/JEEC25_Magazine.pdf" download>{{ $t("landing-section.buttons.magazine") }}</a>
       <a v-else href="">{{ $t("landing-section.buttons.magazine") }}</a>
+      <router-link to="/login">
+        <button class = "loginbtn"> LOGIN</button>
+      </router-link>
       <a href="https://jeec.ist" target="_blank">{{ $t("landing-section.buttons.website") }}</a>
     </div>
     <div class="nav-bar-placeholder" :class="{ 'active': scrollStore.navbarFixed }">
@@ -138,7 +143,10 @@ section a, section p {
   background-color: color-mix(in srgb, var(--c-acc-blue) 10%, transparent);
   backdrop-filter: blur(4px);
 }
-
+.loginbtn{
+  background: transparent;
+  border:none;
+}
 .nav-bar-placeholder {
   position: relative;
   width: 100%;
