@@ -1,60 +1,131 @@
 <template>
-    <div class="meals-container">
-      <h1 class="title">Meals</h1>
-  
-      <!-- Meals Table -->
-      <table class="meals-table">
-        <thead>
-          <tr>
-            <th>Meal</th>
-            <th>Day</th>
-            <th>Time</th>
-            <th>Location</th>
-            <th>Dish</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="meal in meals" :key="meal.id">
-            <td>{{ meal.type }}</td>
-            <td>{{ meal.date }}</td>
-            <td>{{ meal.time }}</td>
-            <td>{{ meal.location }}</td>
-            <td>{{ meal.dish }}</td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <!-- Add Meal Button -->
-      <button class="add-meal-btn" @click="showAddMealModal = true">
-        Add a Meal <span class="plus-icon">+</span>
-      </button>
-  
-      <!-- Add Meal Modal -->
-      <div v-if="showAddMealModal" class="modal">
-        <div class="modal-content">
-          <h2>NEW MEAL</h2>
-          <p>Choose your dish:</p>
+  <div class="landing-container">
+      <header class="header">
+        <router-link to="/login">
+            <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
+        </router-link>
+        
+        <div class="language-switch">
+          <span @click="setLang('en')">EN</span> |
+          <span @click="setLang('pt')">PT</span>
+        </div>
+        <div class="menu-icon">
+          &#9776;
+        </div>
+      </header>
+      <div class="meals-container">
+        <h1 class="title">Meals</h1>
+    
+        <!-- Meals Table -->
+        <table class="meals-table">
+          <thead>
+            <tr>
+              <th>Meal</th>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Location</th>
+              <th>Dish</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="meal in meals" :key="meal.date">
+              <td>{{ meal.type }}</td>
+              <td>{{ meal.date }}</td>
+              <td>{{ meal.time }}</td>
+              <td>{{ meal.location }}</td>
+              <td>{{ meal.dish }}</td>
+            </tr>
+          </tbody>
+        </table>
+    
+        <!-- Add Meal Button -->
+        <button class="add-meal-btn" @click="showAddMealModal = true">
+          Add a Meal <span class="plus-icon">+</span>
+        </button>
+    
+        <!-- Add Meal Modal -->
+        <div v-if="showAddMealModal" class="modal">
+          <div class="modal-content">
+            <h2>NEW MEAL</h2>
+            <p>Choose your dish:</p>
 
-            <!-- EVENTUALLY CHANGE THIS TO A CROSS TOP RIGHT CORNER -->
-          <button @click="showAddMealModal = false" class="close-btn">Close</button> 
-          
+              <!-- EVENTUALLY CHANGE THIS TO A CROSS TOP RIGHT CORNER -->
+            <button @click="showAddMealModal = false" class="close-btn">Close</button> 
+            
+          </div>
         </div>
       </div>
     </div>
+
   </template>
   
   <script setup>
   import { ref, onMounted } from "vue";
-  import axios from "axios";
-  
-  // State
+  import { useCompanyStore } from '@/stores/company'
+
   const meals = ref([]);
   const showAddMealModal = ref(false);
+  const companyStore = useCompanyStore()
+
+  onMounted(async () => {
+    await companyStore.fetchCompany()
+    if (Array.isArray(companyStore.companyData.days)) {
+      meals.value = companyStore.companyData.days.map(dateStr => {
+        const dateObj = new Date(dateStr)
+        const dayAbbrev = dateObj.toLocaleDateString('en-US', { weekday: 'short' }) 
+        const day = String(dateObj.getDate()).padStart(2, '0')
+        const month = String(dateObj.getMonth() + 1).padStart(2, '0') 
+        const formattedDate = `${dayAbbrev} - ${day}/${month}`
+
+        return {
+          date: formattedDate,
+          type: 'Lunch',
+          time: '12h00',
+          location: 'TIC',
+          dish: '—'
+        }
+      })
+    }
+  })
+    
 
   </script>
   
   <style scoped>
 
+
+.landing-container {
+        background-color: #1e1e1e;
+        color: white;
+        min-height: 100vh;
+        font-family: 'Poppins', sans-serif;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 0.5rem;
+    }
+
+    .logo {
+        height: 30px;
+    }
+
+    .language-switch {
+        font-size: 0.9rem;
+        cursor: pointer;
+    }
+
+    .menu-icon {
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+
+    
   .meals-container {
     background-color: #1e1e1e;
     color: white;
@@ -71,7 +142,7 @@
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #279EFF;
+    color: white;
     text-shadow: 0 0 10px #279EFF;
   }
   
