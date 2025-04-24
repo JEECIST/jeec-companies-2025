@@ -31,7 +31,7 @@
             v-for="meal in meals" 
             :key="meal.date" 
             @click="selectMeal(meal)"
-            :class="['meal-row', selectedMeal === meal ? 'selected' : '']"
+            :class= "['meal-row', selectedMeal === meal ? 'selected' : '']"
           >
             <td>{{ meal.type }}</td>
             <td>{{ meal.date }}</td>
@@ -44,32 +44,33 @@
 
       <!-- Add Meal Button -->
       <button class="add-meal-btn" @click="openAddMealModal">
-  Add a Meal <span class="plus-icon">+</span>
-</button>
-
-<!-- Add Meal Modal -->
+        Add a Meal <span class="plus-icon">+</span>
+      </button>
+    </div>
+    <!-- Add Meal Modal -->
     <div v-if="showAddMealModal" class="modal">
       <div class="modal-content">
         <h2>New Meal</h2>
-        <p>Choose your dish:</p>
-        
+        <p>Insert the quantity for each dish:</p>
+
         <div class="dish-options">
           <div v-for="dish in dishesForSelectedDay" :key="dish.id" class="dish-option">
-            <label class="checkbox-container">
-              <input 
-                type="checkbox" 
-                :value="dish.id" 
-                v-model="selectedDishIds"
-                :checked="selectedDishIds.includes(dish.id)"
-              >
-              <span class="checkmark"></span>
+            <label class="quantity-container">
               <span class="dish-name">{{ dish.name }}</span>
               <span class="dish-type">({{ dish.description }})</span>
+              <input
+                type="number"
+                min="0"
+                v-model.number="dishQuantities[dish.id]"
+                class="quantity-input"
+                placeholder="0"
+              />
             </label>
           </div>
         </div>
-          <button @click="showAddMealModal = false" class="close-btn">Close</button>
-        </div>
+
+        <button @click="submitMeal" class="add-meal-btn">Submit Meal</button>
+        <button @click="showAddMealModal = false" class="close-btn">Close</button>
       </div>
     </div>
   </div>
@@ -85,15 +86,18 @@ const meals = ref([])
 const showAddMealModal = ref(false)
 const dishesForSelectedDay = ref([])
 const selectedDishIds = ref([])
+const dishQuantities = ref({}) 
 
 const companyStore = useCompanyStore()
-
 const fetchDishes = async (eventDayId) => {
   try {
     const response = await axios.get(
-      import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/get_dish_ids',
+      import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/get_dishes_with_quantities',
       {
-        params: { event_day_id: eventDayId },
+        params: {
+          event_day_id: eventDayId,
+          company_id: companyStore.companyData.id
+        },
         auth: {
           username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
           password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
@@ -102,10 +106,31 @@ const fetchDishes = async (eventDayId) => {
     )
     return response.data.dishes
   } catch (error) {
-    console.error('Error fetching dishes for day', eventDayId, error)
+    console.error('Error fetching dishes with quantities:', error)
     return []
   }
 }
+
+
+const fetchDishQuantities = async (companyId) => {
+  try {
+    const response = await axios.get(
+      import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/get_dish_quantities',
+      {
+        params: { company_id: companyId },
+        auth: {
+          username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+          password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
+        }
+      }
+    )
+    return response.data.quantities
+  } catch (error) {
+    console.error('Error fetching dish quantities:', error)
+    return {}
+  }
+}
+
 const openAddMealModal = async () => {
   if (!selectedMeal.value) {
     window.alert('Please select a meal row first!')
@@ -115,8 +140,17 @@ const openAddMealModal = async () => {
   const dishes = await fetchDishes(selectedMeal.value.eventDayId)
   dishesForSelectedDay.value = dishes
   selectedDishIds.value = []
+
+  const quantities = await fetchDishQuantities(companyStore.companyData.id)
+
+  dishQuantities.value = {}
+  dishes.forEach(dish => {
+    dishQuantities.value[dish.id] = quantities[dish.id] ?? 0 // get existing or default to 0
+  })
+
   showAddMealModal.value = true
 }
+
 
 const selectMeal = (meal) => {
   selectedMeal.value = meal
@@ -143,8 +177,10 @@ onMounted(async () => {
         const formattedDate = `${dayAbbrev} - ${day}/${month}`
 
         const dishes = await fetchDishes(eventDayId)
-        const dishNames = dishes.map(d => d.name).join(', ') || '—'
-
+        const dishNames = dishes
+          .filter(d => d.quantity > 0)
+          .map(d => `${d.quantity} ${d.description}`)
+          .join(', ') || '—'
         return {
           date: formattedDate,
           type: 'Lunch',
@@ -159,6 +195,45 @@ onMounted(async () => {
     meals.value = fetchedMeals.filter(Boolean) // remove nulls
   }
 })
+
+
+const submitMeal = async () => {
+  const companyId = companyStore.companyData.id
+
+  const payloads = Object.entries(dishQuantities.value)
+    .filter(([_, quantity]) => quantity > 0)
+    .map(([dishId, quantity]) => ({
+      company_id: companyId,
+      dish_id: parseInt(dishId),
+      dish_quantity: quantity
+    }))
+
+  try {
+    await Promise.all(
+      payloads.map(payload =>
+        axios.post(
+          import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/create_update_meal',
+          payload,
+          {
+            auth: {
+              username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+              password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
+            }
+          }
+        )
+      )
+    )
+    window.alert("Meals submitted successfully!")
+    showAddMealModal.value = false
+  } catch (error) {
+    console.error("Error submitting meals:", error)
+    window.alert("Error submitting meals.")
+  }
+}
+
+
+
+
 
 </script>
 
