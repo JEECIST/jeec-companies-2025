@@ -51,7 +51,7 @@
     <div v-if="showAddMealModal" class="modal">
       <div class="modal-content">
         <h2>New Meal</h2>
-        <p>Insert the quantity for each dish:</p>
+        <p>Choose no more than 3 dishes:</p>
 
         <div class="dish-options">
           <div v-for="dish in dishesForSelectedDay" :key="dish.id" class="dish-option">
@@ -61,7 +61,9 @@
               <input
                 type="number"
                 min="0"
-                v-model.number="dishQuantities[dish.id]"
+                :max="dish.max || 3"
+                :value="dishQuantities[dish.id]"
+                @input="updateQuantity(dish.id, $event.target.value)"
                 class="quantity-input"
                 placeholder="0"
               />
@@ -69,7 +71,7 @@
           </div>
         </div>
 
-        <button @click="submitMeal" class="add-meal-btn">Submit Meal</button>
+        <button @click="submitMeal" class="add-meal-btn" :disabled="totalQuantity > 3">Submit</button>
         <button @click="showAddMealModal = false" class="close-btn">Close</button>
       </div>
     </div>
@@ -77,7 +79,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import { useCompanyStore } from '@/stores/company'
 import axios from 'axios'
 
@@ -87,7 +89,9 @@ const showAddMealModal = ref(false)
 const dishesForSelectedDay = ref([])
 const selectedDishIds = ref([])
 const dishQuantities = ref({}) 
-
+const totalQuantity = computed(() =>
+  Object.values(dishQuantities.value).reduce((sum, q) => sum + q, 0)
+);
 const companyStore = useCompanyStore()
 const fetchDishes = async (eventDayId) => {
   try {
@@ -139,6 +143,7 @@ const openAddMealModal = async () => {
 
   const dishes = await fetchDishes(selectedMeal.value.eventDayId)
   dishesForSelectedDay.value = dishes
+  
   selectedDishIds.value = []
 
   const quantities = await fetchDishQuantities(companyStore.companyData.id)
@@ -198,40 +203,89 @@ onMounted(async () => {
 
 
 const submitMeal = async () => {
-  const companyId = companyStore.companyData.id
+  if (totalQuantity.value > 3) {
+    window.alert("You can only choose a total of 3 dishes.");
+    return;
+  }
 
+  const companyId = companyStore.companyData.id;
   const payloads = Object.entries(dishQuantities.value)
-    .filter(([_, quantity]) => quantity > 0)
+    .filter(([_, quantity]) => quantity >= 0)
     .map(([dishId, quantity]) => ({
       company_id: companyId,
       dish_id: parseInt(dishId),
-      dish_quantity: quantity
-    }))
+      dish_quantity: quantity,
+    }));
 
   try {
     await Promise.all(
-      payloads.map(payload =>
+      
+      payloads.map((payload) =>
         axios.post(
           import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/create_update_meal',
           payload,
           {
             auth: {
               username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
-              password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
-            }
+              password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY,
+            },
           }
         )
       )
-    )
-    window.alert("Meals submitted successfully!")
-    showAddMealModal.value = false
+    );
+    window.alert("Meals submitted successfully!");
+    await fetchMeals();
+    showAddMealModal.value = false;
   } catch (error) {
-    console.error("Error submitting meals:", error)
-    window.alert("Error submitting meals.")
+    console.error("Error submitting meals:", error);
+    window.alert("Error submitting meals.");
   }
+};
+
+const fetchMeals = async () => {
+  try {
+    const fetchedMeals = await Promise.all(
+      companyStore.companyData.days.map(async (dateStr) => {
+        const dateObj = new Date(dateStr);
+        const weekday = dateObj.getDay();
+        const eventDayId = weekday === 0 ? null : weekday; 
+
+        if (eventDayId < 1 || eventDayId > 5) {
+          return null; // Skip if not Mon–Fri
+        }
+
+        const dayAbbrev = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+        const day = String(dateObj.getDate()).padStart(2, '0');
+        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const formattedDate = `${dayAbbrev} - ${day}/${month}`;
+
+        const dishes = await fetchDishes(eventDayId);
+        const dishNames = dishes
+          .filter(d => d.quantity > 0)
+          .map(d => `${d.quantity} ${d.description}`)
+          .join(', ') || '—';
+        return {
+          date: formattedDate,
+          type: 'Lunch',
+          time: '12h00',
+          location: 'TIC',
+          dish: dishNames,
+          eventDayId
+        };
+      })
+    );
+
+    meals.value = fetchedMeals.filter(Boolean); // Remove nulls
+  } catch (error) {
+    console.error("Error fetching meals:", error);
+  }
+};
+
+
+const updateQuantity = (dishId, value) => {
+  const number = parseInt(value, 10)
+  dishQuantities.value[dishId] = isNaN(number) || number < 0 ? 0 : number
 }
-
-
 
 
 
@@ -259,7 +313,7 @@ const submitMeal = async () => {
 }
 
 .language-switch {
-  font-size: 0.9rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
@@ -299,7 +353,7 @@ const submitMeal = async () => {
   border-bottom: 2px solid #279EFF;
 }
 
-.add-meal-btn {
+.add-meal-btn, .close-btn{
   padding: 10px 20px;
   font-size: 1rem;
   font-weight: bold;
@@ -316,42 +370,19 @@ const submitMeal = async () => {
   color: black;
 }
 
-.plus-icon {
-  font-size: 1.2rem;
-}
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+.add-meal-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.modal-content {
-  background: #222;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 500px;
-  width: 90%;
-  color: white;
+
+
+.plus-icon {
+  font-size: 1.2rem;
 }
 
 h2 {
   color: #279EFF;
-  margin-bottom: 15px;
-}
-
-.dish-options {
-  text-align: left;
-  margin-top: 20px;
-}
-
-.dish-option {
   margin-bottom: 15px;
 }
 
@@ -412,24 +443,8 @@ h2 {
   transform: rotate(45deg);
 }
 
-.dish-name {
-  margin-left: 10px;
-  font-weight: 500;
-}
 
-.dish-type {
-  margin-left: 5px;
-  color: #888;
-  font-size: 0.9em;
-}
 
-.close-btn {
-  background: transparent;
-  color: white;
-  padding: 10px;
-  margin-top: 10px;
-  cursor: pointer;
-}
 
 .meal-row {
   cursor: pointer;
@@ -444,4 +459,118 @@ h2 {
   background-color: #279EFF;
   color: black;
 }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Slightly more opaque overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px); /* Optional: Add a subtle blur to the background */
+}
+
+.modal-content {
+  background: #121212; /* Very dark, almost black */
+  padding: 25px;
+  border-radius: 6px; /* Clean, slightly rounded */
+  max-width: 400px;
+  width: 80%;
+  color: #f0f0f0; /* Very light grey text */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+}
+
+h2 {
+  font-size: 1.6em;
+  font-weight: bold; /* Very light, modern feel */
+  margin-bottom: 15px;
+  color: #ddd;
+}
+
+p {
+  color: #aaa;
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+.dish-options {
+  text-align: left;
+  margin-top: 15px;
+}
+
+.dish-option {
+  margin-bottom: 10px; /* Slightly reduced spacing */
+  display: flex;
+  align-items: center;
+}
+
+
+.dish-name {
+  padding-top: 0.95rem;
+  margin-left: 12%;
+  font-weight: 200;
+  /* Remove flex-grow if you want the name and type to shrink together */
+}
+
+.dish-type {
+  padding-top: 0.95rem;
+  margin-left: 5px;
+  color: #666;
+  font-size: 1em;
+}
+
+.quantity-input {
+  margin-left:auto;
+  margin-right: 16%;
+  width: 40px;
+  padding: 6px 0; /* Adjust vertical padding as needed */
+  border: none; /* Remove the default border */
+  border-bottom: 1px solid #666; /* Add a bottom border for the underslash effect */
+  border-radius: 0; /* Remove any border radius */
+  text-align: center;
+  background-color: transparent;
+  color: #f0f0f0;
+  font-size: 1em;
+  outline: none; /* Optionally remove the focus outline */
+  appearance: textfield;
+}
+
+button {
+  background-color: transparent;
+  color: #88bdff; /* Futuristic blue accent */
+  padding: 10px 15px;
+  border: 1px solid #88bdff; /* Matching accent border */
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-right: 10px;
+  font-size: 1em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+  background-color: rgba(136, 189, 255, 0.1); /* Subtle hover feedback */
+  color: #ccddff;
+}
+
+button:disabled {
+  color: #555;
+  border-color: #555;
+  cursor: not-allowed;
+}
+
+.quantity-container {
+  display: flex;
+  align-items: center; /* Keep vertical alignment */
+  width: 100%;
+}
+
+
+
+
+
+
 </style>
