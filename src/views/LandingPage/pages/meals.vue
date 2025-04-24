@@ -1,114 +1,148 @@
 <template>
   <div class="landing-container">
-      <header class="header">
-        <router-link to="/login">
-            <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
-        </router-link>
-        
-        <div class="language-switch">
-          <span @click="setLang('en')">EN</span> |
-          <span @click="setLang('pt')">PT</span>
-        </div>
-        <div class="menu-icon">
-          &#9776;
-        </div>
-      </header>
-      <div class="meals-container">
-        <h1 class="title">Meals</h1>
-    
-        <!-- Meals Table -->
-        <table class="meals-table">
-          <thead>
-            <tr>
-              <th>Meal</th>
-              <th>Day</th>
-              <th>Time</th>
-              <th>Location</th>
-              <th>Dish</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr 
-              v-for="meal in meals" 
-              :key="meal.date" 
-              @click="selectMeal(meal)"
-              :class="['meal-row', selectedMeal === meal ? 'selected' : '']"
-            >
-              <td>{{ meal.type }}</td>
-              <td>{{ meal.date }}</td>
-              <td>{{ meal.time }}</td>
-              <td>{{ meal.location }}</td>
-              <td>{{ meal.dish }}</td>
-            </tr>
-          </tbody>
-        </table>
-    
-        <!-- Add Meal Button -->
-        <button class="add-meal-btn" @click="showAddMealModal = true">
-          Add a Meal <span class="plus-icon">+</span>
-        </button>
-    
-        <!-- Add Meal Modal -->
-        <div v-if="showAddMealModal" class="modal">
-          <div class="modal-content">
-            <h2>NEW MEAL</h2>
-            <p>Choose your dish:</p>
+    <header class="header">
+      <router-link to="/login">
+        <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
+      </router-link>
+      
+      <div class="language-switch">
+        <span @click="setLang('en')">EN</span> |
+        <span @click="setLang('pt')">PT</span>
+      </div>
+      <div class="menu-icon">&#9776;</div>
+    </header>
 
-              <!-- EVENTUALLY CHANGE THIS TO A CROSS TOP RIGHT CORNER -->
-            <button @click="showAddMealModal = false" class="close-btn">Close</button> 
-            
+    <div class="meals-container">
+      <h1 class="title">Meals</h1>
+
+      <!-- Meals Table -->
+      <table class="meals-table">
+        <thead>
+          <tr>
+            <th>Meal</th>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Dish</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr 
+            v-for="meal in meals" 
+            :key="meal.date" 
+            @click="selectMeal(meal)"
+            :class="['meal-row', selectedMeal === meal ? 'selected' : '']"
+          >
+            <td>{{ meal.type }}</td>
+            <td>{{ meal.date }}</td>
+            <td>{{ meal.time }}</td>
+            <td>{{ meal.location }}</td>
+            <td>{{ meal.dish }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Add Meal Button -->
+      <button class="add-meal-btn" @click="openAddMealModal">
+  Add a Meal <span class="plus-icon">+</span>
+</button>
+
+<!-- Add Meal Modal -->
+    <div v-if="showAddMealModal" class="modal">
+      <div class="modal-content">
+        <h2>New Meal</h2>
+        <p>Choose your dish:</p>
+        
+        <div class="dish-options">
+          <div v-for="dish in dishesForSelectedDay" :key="dish.id" class="dish-option">
+            <label class="checkbox-container">
+              <input 
+                type="checkbox" 
+                :value="dish.id" 
+                v-model="selectedDishIds"
+                :checked="selectedDishIds.includes(dish.id)"
+              >
+              <span class="checkmark"></span>
+              <span class="dish-name">{{ dish.name }}</span>
+              <span class="dish-type">({{ dish.description }})</span>
+            </label>
           </div>
+        </div>
+          <button @click="showAddMealModal = false" class="close-btn">Close</button>
         </div>
       </div>
     </div>
+  </div>
+</template>
 
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from "vue";
-  import { useCompanyStore } from '@/stores/company'
-  import axios from 'axios'
+<script setup>
+import { ref, onMounted } from "vue";
+import { useCompanyStore } from '@/stores/company'
+import axios from 'axios'
 
-  const selectedMeal = ref(null)
-  
-  const meals = ref([]);
-  const showAddMealModal = ref(false);
-  const companyStore = useCompanyStore()
-  const fetchDishes = async (eventDayId) => {
-    try {
-      const response = await axios.get(
-        import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/get_dish_ids',
-        {
-          params: { event_day_id: eventDayId },
-          auth: {
-            username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
-            password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
-          }
+const selectedMeal = ref(null)
+const meals = ref([])
+const showAddMealModal = ref(false)
+const dishesForSelectedDay = ref([])
+const selectedDishIds = ref([])
+
+const companyStore = useCompanyStore()
+
+const fetchDishes = async (eventDayId) => {
+  try {
+    const response = await axios.get(
+      import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/get_dish_ids',
+      {
+        params: { event_day_id: eventDayId },
+        auth: {
+          username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+          password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
         }
-      )
-      return response.data.dishes
-    } catch (error) {
-      console.error('Error fetching dishes for day', eventDayId, error)
-      return []
-    }
+      }
+    )
+    return response.data.dishes
+  } catch (error) {
+    console.error('Error fetching dishes for day', eventDayId, error)
+    return []
+  }
+}
+const openAddMealModal = async () => {
+  if (!selectedMeal.value) {
+    window.alert('Please select a meal row first!')
+    return
   }
 
+  const dishes = await fetchDishes(selectedMeal.value.eventDayId)
+  dishesForSelectedDay.value = dishes
+  selectedDishIds.value = []
+  showAddMealModal.value = true
+}
 
-
-
-  onMounted(async () => {
+const selectMeal = (meal) => {
+  selectedMeal.value = meal
+  console.log('Selected meal:', meal)
+}
+onMounted(async () => {
   await companyStore.fetchCompany()
 
   if (Array.isArray(companyStore.companyData.days)) {
     const fetchedMeals = await Promise.all(
-      companyStore.companyData.days.map(async (dateStr, index) => {
+      companyStore.companyData.days.map(async (dateStr) => {
         const dateObj = new Date(dateStr)
+
+        const weekday = dateObj.getDay() // 0 (Sun) to 6 (Sat)
+        const eventDayId = weekday === 0 ? null : weekday // 1 (Mon) to 5 (Fri)
+
+        if (eventDayId < 1 || eventDayId > 5) {
+          return null // Skip if not Mon–Fri
+        }
+
         const dayAbbrev = dateObj.toLocaleDateString('en-US', { weekday: 'short' }) 
         const day = String(dateObj.getDate()).padStart(2, '0')
         const month = String(dateObj.getMonth() + 1).padStart(2, '0') 
         const formattedDate = `${dayAbbrev} - ${day}/${month}`
 
-        const dishes = await fetchDishes(index + 1) // event_day_id = 1 (Mon) to 5 (Fri)
+        const dishes = await fetchDishes(eventDayId)
         const dishNames = dishes.map(d => d.name).join(', ') || '—'
 
         return {
@@ -116,161 +150,223 @@
           type: 'Lunch',
           time: '12h00',
           location: 'TIC',
-          dish: dishNames
+          dish: dishNames,
+          eventDayId
         }
       })
     )
 
-    meals.value = fetchedMeals
+    meals.value = fetchedMeals.filter(Boolean) // remove nulls
   }
 })
-  const selectMeal = (meal) => {
-    selectedMeal.value = meal
-    console.log('Selected meal:', meal)
-  }
 
-  </script>
-  
-  <style scoped>
+</script>
 
-
+<style scoped>
 .landing-container {
-        background-color: #1e1e1e;
-        color: white;
-        min-height: 100vh;
-        font-family: 'Poppins', sans-serif;
-        padding: 1rem;
-        text-align: center;
-    }
+  background-color: #1e1e1e;
+  color: white;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  padding: 1rem;
+  text-align: center;
+}
 
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 0.5rem;
-    }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+}
 
-    .logo {
-        height: 30px;
-    }
+.logo {
+  height: 30px;
+}
 
-    .language-switch {
-        font-size: 0.9rem;
-        cursor: pointer;
-    }
+.language-switch {
+  font-size: 0.9rem;
+  cursor: pointer;
+}
 
-    .menu-icon {
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
+.menu-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 
+.meals-container {
+  background-color: #1e1e1e;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
 
-    
-  .meals-container {
-    background-color: #1e1e1e;
-    color: white;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    font-family: 'Poppins', sans-serif;
-  }
-  
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 0 0 10px #279EFF;
+}
 
-  .title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: white;
-    text-shadow: 0 0 10px #279EFF;
-  }
-  
- 
-  .meals-table {
-    width: 80%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .meals-table th, .meals-table td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 2px solid #279EFF;
-  }
-  
-  
-  .add-meal-btn {
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    background: transparent;
-    border: 2px solid #279EFF;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .add-meal-btn:hover {
-    background: #279EFF;
-    color: black;
-  }
-  
-  .plus-icon {
-    font-size: 1.2rem;
-  }
-  
-  
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background: #222;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    color: white;
-  }
-  
-  .modal-content input {
-    display: block;
-    margin: 10px auto;
-    padding: 8px;
-    width: 80%;
-    background: transparent;
-    border: 2px solid #279EFF;
-    color: white;
-  }
-  
-  .close-btn {
-    background:transparent;
-    color: white;
-   
-    padding: 10px;
-    margin-top: 10px;
-    cursor: pointer;
-  }
+.meals-table {
+  width: 80%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.meals-table th, .meals-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #279EFF;
+}
+
+.add-meal-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: transparent;
+  border: 2px solid #279EFF;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-meal-btn:hover {
+  background: #279EFF;
+  color: black;
+}
+
+.plus-icon {
+  font-size: 1.2rem;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #222;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  color: white;
+}
+
+h2 {
+  color: #279EFF;
+  margin-bottom: 15px;
+}
+
+.dish-options {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.dish-option {
+  margin-bottom: 15px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #333;
+  border: 2px solid #279EFF;
+  border-radius: 4px;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #3a3a3a;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #279EFF;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.dish-name {
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.dish-type {
+  margin-left: 5px;
+  color: #888;
+  font-size: 0.9em;
+}
+
+.close-btn {
+  background: transparent;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
 
 .meal-row {
   cursor: pointer;
   transition: background 0.2s;
 }
+
 .meal-row:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
 .meal-row.selected {
   background-color: #279EFF;
   color: black;
 }
-  </style>
-  
+</style>
