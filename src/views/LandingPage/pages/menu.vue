@@ -4,11 +4,7 @@
       <router-link to="/login">
           <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
       </router-link>
-      
-      <div class="language-switch">
-        <span @click="setLang('en')">EN</span> |
-        <span @click="setLang('pt')">PT</span>
-      </div>
+
       <div class="menu-icon">
         &#9776;
       </div>
@@ -35,7 +31,6 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import i18n from '@/i18n'
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useCompanyStore } from '@/stores/company'
@@ -57,11 +52,6 @@ const goToMeals = () => {
   router.push('/meals')
 }
 
-const setLang = (lang) => {
-  i18n.global.locale.value = lang
-  localStorage.setItem('locale', lang)
-  // reload current route with new lang param if necessary
-}
 
 
 
@@ -86,43 +76,40 @@ const setLang = (lang) => {
   }
 
   .logo {
-      height: 30px;
-  }
+      height: 50px;
 
-  .language-switch {
-      font-size: 0.9rem;
-      cursor: pointer;
   }
-
   .menu-icon {
-      font-size: 1.5rem;
+      font-size: 25px;
       cursor: pointer;
   }
 
   .company-name {
-      font-size: 1.5rem;
+      font-size: 2rem;
       margin: 2rem 0;
       font-weight: bold;
       letter-spacing: 1px;
   }
 
   .options {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding-top: 2rem; 
   }
 
+
   .icon {
-      width: 70px;
-      height: 70px;
+      width: 100px;
+      height: 100px;
       margin-bottom: 0.5rem;
       cursor: pointer;
       filter: brightness(0) saturate(100%) invert(45%) sepia(91%) saturate(1342%) hue-rotate(178deg) brightness(102%) contrast(104%);
   }
   
   .label {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: 600;
       border-top: 2px solid #279EFF;
       padding-top: 0.3rem;

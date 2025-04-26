@@ -4,11 +4,7 @@
       <router-link to="/login">
         <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
       </router-link>
-      
-      <div class="language-switch">
-        <span @click="setLang('en')">EN</span> |
-        <span @click="setLang('pt')">PT</span>
-      </div>
+    
       <div class="menu-icon">&#9776;</div>
     </header>
 
@@ -466,26 +462,26 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Slightly more opaque overlay */
+  background-color: rgba(0, 0, 0, 0.7); 
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(10px); /* Optional: Add a subtle blur to the background */
+  backdrop-filter: blur(10px); 
 }
 
 .modal-content {
-  background: #121212; /* Very dark, almost black */
+  background: #121212;
   padding: 25px;
-  border-radius: 6px; /* Clean, slightly rounded */
+  border-radius: 6px; 
   max-width: 400px;
   width: 80%;
-  color: #f0f0f0; /* Very light grey text */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+  color: #f0f0f0; 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 h2 {
   font-size: 1.6em;
-  font-weight: bold; /* Very light, modern feel */
+  font-weight: bold; 
   margin-bottom: 15px;
   color: #ddd;
 }
@@ -502,7 +498,7 @@ p {
 }
 
 .dish-option {
-  margin-bottom: 10px; /* Slightly reduced spacing */
+  margin-bottom: 10px; 
   display: flex;
   align-items: center;
 }
@@ -512,7 +508,7 @@ p {
   padding-top: 0.95rem;
   margin-left: 12%;
   font-weight: 200;
-  /* Remove flex-grow if you want the name and type to shrink together */
+  
 }
 
 .dish-type {
@@ -526,23 +522,23 @@ p {
   margin-left:auto;
   margin-right: 16%;
   width: 40px;
-  padding: 6px 0; /* Adjust vertical padding as needed */
-  border: none; /* Remove the default border */
-  border-bottom: 1px solid #666; /* Add a bottom border for the underslash effect */
-  border-radius: 0; /* Remove any border radius */
+  padding: 6px 0; 
+  border: none; 
+  border-bottom: 1px solid #666; 
+  border-radius: 0; 
   text-align: center;
   background-color: transparent;
   color: #f0f0f0;
   font-size: 1em;
-  outline: none; /* Optionally remove the focus outline */
+  outline: none; 
   appearance: textfield;
 }
 
 button {
   background-color: transparent;
-  color: #88bdff; /* Futuristic blue accent */
+  color: #88bdff;
   padding: 10px 15px;
-  border: 1px solid #88bdff; /* Matching accent border */
+  border: 1px solid #88bdff;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 20px;
@@ -552,7 +548,7 @@ button {
 }
 
 button:hover {
-  background-color: rgba(136, 189, 255, 0.1); /* Subtle hover feedback */
+  background-color: rgba(136, 189, 255, 0.1);
   color: #ccddff;
 }
 
@@ -564,7 +560,7 @@ button:disabled {
 
 .quantity-container {
   display: flex;
-  align-items: center; /* Keep vertical alignment */
+  align-items: center; 
   width: 100%;
 }
 

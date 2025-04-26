@@ -28,7 +28,8 @@
           required 
         />
         <span class="eye-icon" @click="togglePassword">
-          <img src="../../../assets/eye.svg">
+          <img :src="showPassword ? eyeOff : eye" alt="Toggle Password Visibility" class="eyeImage">
+          <!-- <img src="../../../assets/eye.svg"> -->
         </span>
       </div>
 
@@ -43,6 +44,8 @@
 
 <script setup>
 import { ref } from 'vue';
+import eye from '../../../assets/eye.svg';
+import eyeOff from '../../../assets/hide-eye.svg';
 
 const username = ref('');
 const password = ref('');
@@ -70,8 +73,9 @@ const togglePassword = () => {
 
 
 .logo {
-  width: 150px;
-  margin-bottom: 20px;
+  width: 12rem;
+  height: 7rem;
+ 
 }
 
 
@@ -80,7 +84,7 @@ const togglePassword = () => {
   font-weight: bold;
   margin-bottom: 20px;
   letter-spacing: 1px;
-  border-top: 2px solid #279EFF;
+  border-bottom: 2px solid #279EFF;
   padding-top: 10px;
 }
 
@@ -117,11 +121,15 @@ const togglePassword = () => {
   right: 10px;
   cursor: pointer;
   color: #279EFF;
+
+}
+.eyeImage{
+  width: 2rem; /* or any size you want */
+  height: 2rem;
 }
 
-
 .login-button {
-  width: 320px;
+  width: 300px;
   padding: 10px;
   font-size: 1rem;
   font-weight: bold;
