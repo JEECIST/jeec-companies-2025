@@ -1,7 +1,7 @@
 <template>
   <div class="landing-container">
     <header class="header">
-      <router-link to="/login">
+      <router-link to="/menu">
         <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
       </router-link>
     
@@ -305,7 +305,7 @@ const updateQuantity = (dishId, value) => {
 }
 
 .logo {
-  height: 30px;
+  height: 50px;
 }
 
 .language-switch {
@@ -314,10 +314,10 @@ const updateQuantity = (dishId, value) => {
 }
 
 .menu-icon {
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
+      font-size: 30px;
+      padding-bottom: 1rem;
+      cursor: pointer;
+  }
 .meals-container {
   background-color: #1e1e1e;
   color: white;

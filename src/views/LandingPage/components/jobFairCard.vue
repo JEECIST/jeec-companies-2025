@@ -10,8 +10,9 @@
             class="icon building-icon"
           />
         </div>
-        <p class="date">{{ date }}</p>
-        <p class="id">Id: {{ id }}</p>
+        <p class="date"><strong> {{ formattedDate }}</strong></p>
+        <p class="id" v-html="'ID: ' + formattedId"></p>
+
       </div>
 
       <button class="card-action" @click="handleScanClick">
@@ -33,7 +34,7 @@
   </template>
 
   <script setup>
-  import { defineProps, defineEmits } from 'vue';
+  import { defineProps, defineEmits, computed} from 'vue';
 
   const props = defineProps({
     title: {
@@ -56,6 +57,26 @@
     console.log('Scan QR action triggered');
     emit('scan-qr', props.id);
   };
+
+  const formattedDate = computed(() => {
+    const date = new Date(props.date);
+    console.log('newdate ',date)
+    if (isNaN(date)) return props.date; // if invalid date, show as-is
+
+    const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
+    const day = date.getDate();
+    const month = date.toLocaleDateString('en-US', { month: 'long' });
+
+    return `${weekday}, ${day} ${month}`;
+  });
+
+  const formattedId = computed(() => {
+    const str = String(props.id);
+    const maxLength = 20;
+    if (str.length <= maxLength) return str;
+    return str.slice(0, maxLength) + '<br>' + str.slice(maxLength);
+  });
+
   </script>
 
   <style scoped>
@@ -71,7 +92,7 @@
     border: 1px solid #279EFF;
     box-shadow: 0 0 8px rgba(39, 158, 255, 0.5);
     max-width: 400px;
-    min-height: 80px;
+    min-height: 120px;
     box-sizing: border-box;
   }
 
@@ -89,18 +110,30 @@
   }
 
   .title {
+    padding-left:2px;
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
     color: #ffffff;
   }
 
-  .date,
-  .id {
+  .date {
     font-size: 1rem;
     margin: 0;
+    margin-top: 0.2rem;
     margin-right: auto;
     color: white;
+    max-width: 150px;
+  }
+  .id {
+    font-size: 0.8rem;
+    margin-top: 1.2rem;
+    padding-top: 0.7rem;
+    margin-right: auto;
+    color: white;
+    max-width: 200px;
+    text-align: left;
+    word-break: break-word;
   }
 
   .icon {
@@ -155,8 +188,8 @@
   }
 
   .scanner-icon {
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 85px;
     border: none;
     border-radius: 4px;
     padding: 2px;

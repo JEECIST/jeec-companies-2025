@@ -1,7 +1,7 @@
 <template>
   <div class="landing-container">
     <header class="header">
-      <router-link to="/login">
+      <router-link to="/menu">
           <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
       </router-link>
 
@@ -80,10 +80,10 @@ const goToMeals = () => {
 
   }
   .menu-icon {
-      font-size: 25px;
+      font-size: 30px;
+      padding-bottom: 1rem;
       cursor: pointer;
   }
-
   .company-name {
       font-size: 2rem;
       margin: 2rem 0;

@@ -1,7 +1,7 @@
 <template>
   <div class="landing-container">
     <header class="header">
-      <router-link to="/login">
+      <router-link to="/menu">
         <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
       </router-link>
       
@@ -11,9 +11,16 @@
     <div class="meals-container">
         <h1 class="titleh1">Activities</h1>
         <div class="jobFairdiv">
-          <jobFairCard @scan-qr="activateReader" />
+          <template v-for="activity in activities" :key="activity.activity_ex_id">
+            <jobFairCard 
+              :date="activity.day" 
+              :id="activity.activity_ex_id" 
+              @scan-qr="activateReader"
+            />
+          </template>
         </div>
-        
+
+          
 
     </div>
     <div class="scanner" v-if="QR_enable">
@@ -41,14 +48,16 @@
 <script setup>
   import jobFairCard from '../components/jobFairCard.vue'; 
   import { QrcodeStream } from 'vue3-qrcode-reader';
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
+  import axios from 'axios'
+  import { useCompanyStore } from '@/stores/company'
 
-
+const activities = ref([]);
 const QR_enable = ref(false);
 const scanned_flag = ref(false);
 const error_flag = ref(false);
-
-
+const companyStore = useCompanyStore();
+const selectedActivity = ref(null);
 function activateReader() {
   console.log("Activating QR Reader");
   QR_enable.value = true;
@@ -69,20 +78,24 @@ function errorPopUp() {
 }
 
 
-  function onDecode(student_external_id) {
-    console.log("QR Code Content:", student_external_id);
-    // console.log("Activity:", selectedRow.value.external_id);
-    // let debug = "28a0b7f0-bb3a-4b91-b230-adce4e729eb8"; 
-    axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/company/jobfair_scan', {
+function onDecode(student_external_id) {
+  console.log("id: ",selectedActivity.value.activity_ex_id);
+  console.log("QR Code Content:", student_external_id);
+ 
+  // console.log("Activity:", selectedRow.value.external_id);
+  // let debug = "28a0b7f0-bb3a-4b91-b230-adce4e729eb8"; 
+  axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/company/jobfair_scan',
+    {
       student_external_id: student_external_id,  
-      activity_external_id: selectedRow.value.external_id},
-      {auth: {
-        username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
-        password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
-      }
-    })
+      activity_external_id: selectedActivity.value.activity_ex_id
+    },
+    {auth: {
+      username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+      password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
+    }
+  })
     .then(response => {
-      console.log(response.data);
+      console.log('what',response.data);
       if (response.data.errorQR == "") {
         scanned_flag.value = true;
         student_username.value = response.data.student_username;
@@ -107,6 +120,35 @@ function errorPopUp() {
     console.error("QR  Scanner Error:", error);
   }
 
+  function fetchData() {
+    const company_id = 3; // debug
+    console.log('Fetching activities...');
+    axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL+'/dashboard_vue/activitiesdashboard_vue',
+      { company_id: company_id },
+      { auth: {
+          username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME, 
+          password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
+        }
+      }
+    ).then(response => {
+      console.log('Response data:', response.data);
+      activities.value = response.data.activities;
+
+      // Log the day of each activity
+      activities.value.forEach(activity => { //useless array?
+        console.log('Activity day:', activity.day);
+        console.log(activity.activity_ex_id);
+      });
+      activities.value = response.data.activities;
+      selectedActivity.value = activities.value[0]; // there's only 1 jobfair per day per company?
+
+    });
+  }
+
+onMounted(fetchData);
+
+
+
 </script>
 <style>
 .landing-container {
@@ -117,21 +159,33 @@ function errorPopUp() {
   padding: 1rem;
   text-align: center;
 }
-.scanner {
-  max-width: 800px;
-  height: 100%;
+.scanner video {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-top: 60px; 
 }
+
+
 
 .closeQR-button {
   position: absolute;
+  margin-top: 0.7rem;
+  margin-left: 10rem;
   z-index: 1000;
-  margin-top: 10px;
-  margin-left: 10px;
   border: none;
   background: transparent;
-  width: 10px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
 
+.closeQR-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 .scanned-pop-up {
   display: flex;
@@ -172,7 +226,8 @@ function errorPopUp() {
 
   }
   .menu-icon {
-      font-size: 25px;
+      font-size: 30px;
+      padding-bottom: 1rem;
       cursor: pointer;
   }
 
