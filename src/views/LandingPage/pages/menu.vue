@@ -5,10 +5,19 @@
           <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
       </router-link>
 
-      <div class="menu-icon">
+      <div class="menu-icon" @click="toggleMenu">
         &#9776;
       </div>
     </header>
+    <div v-if="showMenu" class="popup-menu">
+      <ul>
+        
+        <li @click="router.push('/activities')"><img src="../../../assets/activities.svg"class="menuicon-activities">Activities</li>
+        <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li>
+        <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
+        <li @click="router.push('/login')"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
+      </ul>
+    </div>
 
     <main class="main-content">
       <div v-if="companyStore.companyData">
@@ -39,9 +48,15 @@ const companyStore = useCompanyStore()
     
 onMounted(async () => {
   await companyStore.fetchCompany()
-  console.log('Company:', companyStore.companyData)
+  // console.log('Company:', companyStore.companyData)
 })
-  
+
+const showMenu = ref(false)
+
+const toggleMenu = () => {
+  showMenu.value = !showMenu.value
+}
+
 const router = useRouter()
 
 const goToActivities = () => {
@@ -88,7 +103,14 @@ const goToMeals = () => {
       font-size: 2rem;
       margin: 2rem 0;
       font-weight: bold;
-      letter-spacing: 1px;
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(to right,
+          rgba(39, 158, 255, 0) 0%, 
+          rgba(39, 158, 255, 1) 20%,
+          rgba(39, 158, 255, 1) 80%,
+          rgba(39, 158, 255, 0) 100%
+        ) 1; 
+      border-image-slice: 1;
   }
 
   .options {
@@ -111,7 +133,61 @@ const goToMeals = () => {
   .label {
       font-size: 1.3rem;
       font-weight: 600;
-      border-top: 2px solid #279EFF;
+      
       padding-top: 0.3rem;
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(to right,
+          rgba(39, 158, 255, 0) 0%, 
+          rgba(39, 158, 255, 1) 20%,
+          rgba(39, 158, 255, 1) 80%,
+          rgba(39, 158, 255, 0) 100%
+        ) 1; 
+      border-image-slice: 1;
   }
+
+  .popup-menu {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: #333;
+  border-radius: 10px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+  z-index: 1000;
+  text-align: left;
+}
+
+.popup-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popup-menu li {
+  padding: 0.5rem 1rem;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.popup-menu li:hover {
+  background-color: #444;
+}
+
+.menuicon-activities, .menuicon-meals{
+  width: 1.5rem;
+  height: 1rem;
+  margin-right: 0.3rem;
+}
+.menuicon-lock{
+  width: 1.5rem;
+  height: 1.1rem;
+  margin-right: 0.3rem;
+}
+.menuicon-logout{
+  width: 1.5rem;
+  height: 0.9rem;
+  margin-right: 0.2rem;
+}
 </style>

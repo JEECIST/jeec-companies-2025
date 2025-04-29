@@ -5,8 +5,17 @@
         <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
       </router-link>
       
-      <div class="menu-icon">&#9776;</div>
+      <div class="menu-icon" @click="toggleMenu">&#9776;</div>
     </header>
+    <div v-if="showMenu" class="popup-menu">
+      <ul>
+        
+        <li @click="router.push('/activities')"><img src="../../../assets/activities.svg"class="menuicon-activities">Activities</li>
+        <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li>
+        <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
+        <li @click="router.push('/login')"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
+      </ul>
+    </div>
 
     <div class="meals-container">
         <h1 class="titleh1">Activities</h1>
@@ -46,12 +55,14 @@
 
 
 <script setup>
-  import jobFairCard from '../components/jobFairCard.vue'; 
-  import { QrcodeStream } from 'vue3-qrcode-reader';
-  import { onMounted, ref } from 'vue';
-  import axios from 'axios'
-  import { useCompanyStore } from '@/stores/company'
+import { useRouter } from 'vue-router'
+import jobFairCard from '../components/jobFairCard.vue'; 
+import { QrcodeStream } from 'vue3-qrcode-reader';
+import { onMounted, ref } from 'vue';
+import axios from 'axios'
+import { useCompanyStore } from '@/stores/company'
 
+const router = useRouter()
 const activities = ref([]);
 const QR_enable = ref(false);
 const scanned_flag = ref(false);
@@ -136,8 +147,8 @@ function onDecode(student_external_id) {
 
       // Log the day of each activity
       activities.value.forEach(activity => { //useless array?
-        console.log('Activity day:', activity.day);
-        console.log(activity.activity_ex_id);
+        // console.log('Activity day:', activity.day);
+        // console.log(activity.activity_ex_id);
       });
       activities.value = response.data.activities;
       selectedActivity.value = activities.value[0]; // there's only 1 jobfair per day per company?
@@ -147,6 +158,11 @@ function onDecode(student_external_id) {
 
 onMounted(fetchData);
 
+const showMenu = ref(false)
+
+const toggleMenu = () => {
+  showMenu.value = !showMenu.value
+}
 
 
 </script>
@@ -245,5 +261,52 @@ onMounted(fetchData);
   display: flex;
   justify-content: center;
   align-items: center; 
+}
+
+
+.popup-menu {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: #333;
+  border-radius: 10px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+  z-index: 1000;
+  text-align: left;
+}
+
+.popup-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popup-menu li {
+  padding: 0.5rem 1rem;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.popup-menu li:hover {
+  background-color: #444;
+}
+
+.menuicon-activities, .menuicon-meals{
+  width: 1.5rem;
+  height: 1rem;
+  margin-right: 0.3rem;
+}
+.menuicon-lock{
+  width: 1.5rem;
+  height: 1.1rem;
+  margin-right: 0.3rem;
+}
+.menuicon-logout{
+  width: 1.5rem;
+  height: 0.9rem;
+  margin-right: 0.1rem;
 }
 </style>

@@ -3,6 +3,7 @@ import i18n from '@/i18n'
 
 import LandingPage from '../views/LandingPage/LandingPage.vue'
 import HomeLogin from '../views/LandingPage/pages/home_login.vue'
+import ChangePw from '../views/LandingPage/pages/change_pw.vue'
 import Menu from '../views/LandingPage/pages/menu.vue'
 import Activities from '../views/LandingPage/pages/activities.vue'
 import Meals from '../views/LandingPage/pages/meals.vue'
@@ -10,6 +11,11 @@ import Meals from '../views/LandingPage/pages/meals.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // {
+    //   path: '/changePw',
+    //   name: 'changePw',
+    //   component: ChangePw
+    // },
     {
       path: '/login',
       name: 'login',
@@ -29,6 +35,11 @@ const router = createRouter({
       path: '/meals',
       name: 'meals',
       component: Meals
+    },
+    {
+      path: '/changePw',
+      name: 'changePw',
+      component: ChangePw
     },
     {
       path: '/:lang',

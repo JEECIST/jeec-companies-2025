@@ -84,8 +84,15 @@ const togglePassword = () => {
   font-weight: bold;
   margin-bottom: 20px;
   letter-spacing: 1px;
-  border-bottom: 2px solid #279EFF;
   padding-top: 10px;
+  border-bottom: 2px solid transparent;
+      border-image: linear-gradient(to right,
+          rgba(39, 158, 255, 0) 0%, 
+          rgba(39, 158, 255, 1) 20%,
+          rgba(39, 158, 255, 1) 80%,
+          rgba(39, 158, 255, 0) 100%
+        ) 1; 
+      border-image-slice: 1;
 }
 
 
