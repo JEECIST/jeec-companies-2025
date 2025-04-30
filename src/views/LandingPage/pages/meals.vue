@@ -25,8 +25,8 @@
             <th>Meal</th>
             <th>Day</th>
             <th>Time</th>
-            <th>Location</th>
-            <th>Dish</th>
+            <!-- <th>Location</th> -->
+            <th>Dishes</th>
           </tr>
         </thead>
         <tbody>
@@ -39,8 +39,8 @@
             <td>{{ meal.type }}</td>
             <td>{{ meal.date }}</td>
             <td>{{ meal.time }}</td>
-            <td>{{ meal.location }}</td>
-            <td>{{ meal.dish }}</td>
+            <!-- <td>{{ meal.location }}</td> -->
+            <td v-html="meal.dish"></td>
           </tr>
         </tbody>
       </table>
@@ -59,7 +59,7 @@
           <div v-for="dish in dishesForSelectedDay" :key="dish.id" class="dish-option">
             <label class="quantity-container">
               <span class="dish-name">{{ dish.name }}</span>
-              <span class="dish-type">({{ dish.description }})</span>
+              <!-- <span class="dish-type">({{ dish.description }})</span> -->
               <input
                 type="number"
                 min="0"
@@ -167,42 +167,43 @@ const selectMeal = (meal) => {
 }
 onMounted(async () => {
   await companyStore.fetchCompany()
+  await fetchMeals();
+  // if (Array.isArray(companyStore.companyData.days)) {
+  //   const fetchedMeals = await Promise.all(
+  //     companyStore.companyData.days.map(async (dateStr) => {
+  //       const dateObj = new Date(dateStr)
 
-  if (Array.isArray(companyStore.companyData.days)) {
-    const fetchedMeals = await Promise.all(
-      companyStore.companyData.days.map(async (dateStr) => {
-        const dateObj = new Date(dateStr)
+  //       const weekday = dateObj.getDay() // 0 (Sun) to 6 (Sat)
+  //       const eventDayId = weekday === 0 ? null : weekday // 1 (Mon) to 5 (Fri)
 
-        const weekday = dateObj.getDay() // 0 (Sun) to 6 (Sat)
-        const eventDayId = weekday === 0 ? null : weekday // 1 (Mon) to 5 (Fri)
+  //       if (eventDayId < 1 || eventDayId > 5) {
+  //         return null // Skip if not Mon–Fri
+  //       }
 
-        if (eventDayId < 1 || eventDayId > 5) {
-          return null // Skip if not Mon–Fri
-        }
+  //       const dayAbbrev = dateObj.toLocaleDateString('en-US', { weekday: 'short' }) 
+  //       const day = String(dateObj.getDate()).padStart(2, '0')
+  //       const month = String(dateObj.getMonth() + 1).padStart(2, '0') 
+  //       const formattedDate = `${dayAbbrev} - ${day}/${month}`
 
-        const dayAbbrev = dateObj.toLocaleDateString('en-US', { weekday: 'short' }) 
-        const day = String(dateObj.getDate()).padStart(2, '0')
-        const month = String(dateObj.getMonth() + 1).padStart(2, '0') 
-        const formattedDate = `${dayAbbrev} - ${day}/${month}`
+  //       const dishes = await fetchDishes(eventDayId)
+  //       const dishNames = dishes
+  //         .filter(d => d.quantity > 0)
+  //         .map(d => `${d.quantity} ${d.description}`)
+  //         .join(', ') || '—'
+  //       return {
+  //         date: formattedDate,
+  //         type: 'Lunch',
+  //         time: '12h00',
+  //         location: 'TIC',
+  //         dish: dishNames,
+  //         eventDayId
+  //       }
+  //     })
+  //   )
 
-        const dishes = await fetchDishes(eventDayId)
-        const dishNames = dishes
-          .filter(d => d.quantity > 0)
-          .map(d => `${d.quantity} ${d.description}`)
-          .join(', ') || '—'
-        return {
-          date: formattedDate,
-          type: 'Lunch',
-          time: '12h00',
-          location: 'TIC',
-          dish: dishNames,
-          eventDayId
-        }
-      })
-    )
-
-    meals.value = fetchedMeals.filter(Boolean) // remove nulls
-  }
+  //   meals.value = fetchedMeals.filter(Boolean) // remove nulls
+  // }
+  
 })
 
 
@@ -266,13 +267,14 @@ const fetchMeals = async () => {
         const dishes = await fetchDishes(eventDayId);
         const dishNames = dishes
           .filter(d => d.quantity > 0)
-          .map(d => `${d.quantity} ${d.description}`)
+          .map(d => `<span class="highlight">${d.quantity}</span> ${d.name}`)
           .join(', ') || '—';
+
         return {
           date: formattedDate,
           type: 'Lunch',
           time: '12h00',
-          location: 'TIC',
+          // location: 'TIC',
           dish: dishNames,
           eventDayId
         };
@@ -337,7 +339,7 @@ const toggleMenu = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
 }
 
 .title {
@@ -349,13 +351,14 @@ const toggleMenu = () => {
 }
 
 .meals-table {
-  width: 80%;
+  width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
 .meals-table th, .meals-table td {
   padding: 10px;
+ 
   text-align: center;
   border-bottom: 2px solid #279EFF;
 }
@@ -616,6 +619,11 @@ button:disabled {
   width: 1.5rem;
   height: 0.9rem;
   margin-right: 0.2rem;
+}
+
+::v-deep .highlight {
+  color: #279EFF;
+  font-weight: bold;
 }
 
 </style>
