@@ -225,6 +225,7 @@
     flex-direction: column;
     gap: 2rem;
     margin-top: 2rem;
+    align-items: center;
   }
   
   .input-group {
@@ -273,7 +274,7 @@
   }
   
   .submit-button {
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     font-size: 1rem;
     
     font-weight: bold;

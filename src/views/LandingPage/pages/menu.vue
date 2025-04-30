@@ -32,6 +32,10 @@
             <img src="../../../assets/meals.svg" alt="Meals" class="icon" />
             <p class="label">Meals</p>
           </div>
+          <div class="option" @click="downloadResumes">
+            <img src="../../../assets/download.svg" alt="Download" class="icon" />
+            <p class="label">Download CV</p>
+          </div>
         </div>
       </div>
     </main>
@@ -67,85 +71,103 @@ const goToMeals = () => {
   router.push('/meals')
 }
 
+const downloadResumes = async () => {
+  try {
+    const response = await axios.get(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/resumes/download_vue', {
+      responseType: 'blob',
+      auth: {
+        username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+        password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
+      }
+    })
 
-
-
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', 'curriculos_JEEC25.zip')
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('Failed to download resumes:', error)
+  }
+}
 
 </script>
 
 <style scoped>
-  .landing-container {
-      background-color: #1e1e1e;
-      color: white;
-      min-height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      padding: 1rem;
-      text-align: center;
-  }
+.landing-container {
+    background-color: #1e1e1e;
+    color: white;
+    min-height: 100vh;
+    padding: 1rem;
+    text-align: center;
+}
 
-  .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 0.5rem;
-  }
-
-  .logo {
-      height: 50px;
-
-  }
-  .menu-icon {
-      font-size: 30px;
-      padding-bottom: 1rem;
-      cursor: pointer;
-  }
-  .company-name {
-      font-size: 2rem;
-      margin: 2rem 0;
-      font-weight: bold;
-      border-bottom: 2px solid transparent;
-      border-image: linear-gradient(to right,
-          rgba(39, 158, 255, 0) 0%, 
-          rgba(39, 158, 255, 1) 20%,
-          rgba(39, 158, 255, 1) 80%,
-          rgba(39, 158, 255, 0) 100%
-        ) 1; 
-      border-image-slice: 1;
-  }
-
-  .options {
+.header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 3rem;
-    padding-top: 2rem; 
-  }
+    padding: 0 0.5rem;
+}
+
+.logo {
+    height: 50px;
+
+}
+.menu-icon {
+    font-size: 30px;
+    padding-bottom: 1rem;
+    cursor: pointer;
+}
+.company-name {
+    font-size: 2rem;
+    margin: 2rem 0;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(to right,
+        rgba(39, 158, 255, 0) 0%, 
+        rgba(39, 158, 255, 1) 20%,
+        rgba(39, 158, 255, 1) 80%,
+        rgba(39, 158, 255, 0) 100%
+      ) 1; 
+    border-image-slice: 1;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding-top: 2rem; 
+}
 
 
-  .icon {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 0.5rem;
-      cursor: pointer;
-      filter: brightness(0) saturate(100%) invert(45%) sepia(91%) saturate(1342%) hue-rotate(178deg) brightness(102%) contrast(104%);
-  }
-  
-  .label {
-      font-size: 1.3rem;
-      font-weight: 600;
-      
-      padding-top: 0.3rem;
-      border-bottom: 2px solid transparent;
-      border-image: linear-gradient(to right,
-          rgba(39, 158, 255, 0) 0%, 
-          rgba(39, 158, 255, 1) 20%,
-          rgba(39, 158, 255, 1) 80%,
-          rgba(39, 158, 255, 0) 100%
-        ) 1; 
-      border-image-slice: 1;
-  }
+.icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    filter: brightness(0) saturate(100%) invert(45%) sepia(91%) saturate(1342%) hue-rotate(178deg) brightness(102%) contrast(104%);
+}
 
-  .popup-menu {
+.label {
+    font-size: 1.3rem;
+    font-weight: 600;
+    
+    padding-top: 0.3rem;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(to right,
+        rgba(39, 158, 255, 0) 0%, 
+        rgba(39, 158, 255, 1) 20%,
+        rgba(39, 158, 255, 1) 80%,
+        rgba(39, 158, 255, 0) 100%
+      ) 1; 
+    border-image-slice: 1;
+}
+
+.popup-menu {
   position: absolute;
   top: 60px;
   right: 20px;

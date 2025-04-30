@@ -19,8 +19,6 @@
 
     <div class="meals-container">
       <h1 class="title">Meals</h1>
-
-      <!-- Meals Table -->
       <table class="meals-table">
         <thead>
           <tr>
@@ -47,12 +45,11 @@
         </tbody>
       </table>
 
-      <!-- Add Meal Button -->
       <button class="add-meal-btn" @click="openAddMealModal">
         Add a Meal <span class="plus-icon">+</span>
       </button>
     </div>
-    <!-- Add Meal Modal -->
+    
     <div v-if="showAddMealModal" class="modal">
       <div class="modal-content">
         <h2>New Meal</h2>
@@ -96,7 +93,7 @@ const dishesForSelectedDay = ref([])
 const selectedDishIds = ref([])
 const dishQuantities = ref({}) 
 const totalQuantity = computed(() =>
-  Object.values(dishQuantities.value).reduce((sum, q) => sum + q, 0)
+ Object.values(dishQuantities.value).reduce((sum, q) => sum + q, 0)
 );
 const companyStore = useCompanyStore()
 
@@ -308,7 +305,6 @@ const toggleMenu = () => {
   background-color: #1e1e1e;
   color: white;
   min-height: 100vh;
-  font-family: 'Poppins', sans-serif;
   padding: 1rem;
   text-align: center;
 }
@@ -342,7 +338,6 @@ const toggleMenu = () => {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  font-family: 'Poppins', sans-serif;
 }
 
 .title {
@@ -454,9 +449,6 @@ h2 {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
-
-
-
 
 .meal-row {
   cursor: pointer;
@@ -579,10 +571,6 @@ button:disabled {
   align-items: center; 
   width: 100%;
 }
-
-
-
-
 
 .popup-menu {
   position: absolute;

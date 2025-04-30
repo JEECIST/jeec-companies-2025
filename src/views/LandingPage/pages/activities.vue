@@ -16,41 +16,48 @@
         <li @click="router.push('/login')"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
       </ul>
     </div>
-
+    
     <div class="meals-container">
-        <h1 class="titleh1">Activities</h1>
-        <div class="jobFairdiv">
-          <template v-for="activity in activities" :key="activity.activity_ex_id">
-            <jobFairCard 
-              :date="activity.day" 
-              :id="activity.activity_ex_id" 
-              @scan-qr="activateReader"
-            />
-          </template>
-        </div>
-
-          
-
+      <h1 class="titleh1">Activities</h1>
     </div>
-    <div class="scanner" v-if="QR_enable">
+
+    <div v-if="!QR_enable" class="jobFairdiv">
+      <template v-for="activity in activities" :key="activity.activity_ex_id">
+        <jobFairCard 
+          :date="activity.day" 
+          :id="activity.activity_ex_id" 
+          @scan-qr="activateReader"
+        />
+      </template>
+    </div>
+    <div v-if="QR_enable" class="camDiv">
+      <div class="dim-overlay"></div>
+
+        <div class="scanner">
           <button @click="deactivateReader" class="closeQR-button">
             <img src="../../../assets/CloseQR.png">
           </button>
+
           <div v-if="scanned_flag" class="scanned-pop-up">
             <p>Successfully added points to {{ student_username }}</p>
             <button @click="scannedPopUp">
-              <img src="../../assets/check.svg">
+              <img src="../../../assets/check.svg">
             </button> 
           </div>
+
           <div v-if="error_flag" class="scanned-pop-up">
             <p>Failed to add points</p>
             <button @click="errorPopUp">
-              <img src="../../assets/check.svg">
+              <img src="../../../assets/check.svg">
             </button> 
           </div>
-          <QrcodeStream @decode="onDecode" @init="onInit" @error="onError"></QrcodeStream>
+
+          <QrcodeStream @decode="onDecode" @init="onInit" @error="onError" />
         </div>
+    </div>
   </div>
+
+  
 </template>
 
 
@@ -64,6 +71,7 @@ import { useCompanyStore } from '@/stores/company'
 
 const router = useRouter()
 const activities = ref([]);
+const student_username = ref('');
 const QR_enable = ref(false);
 const scanned_flag = ref(false);
 const error_flag = ref(false);
@@ -144,12 +152,10 @@ function onDecode(student_external_id) {
     ).then(response => {
       console.log('Response data:', response.data);
       activities.value = response.data.activities;
-
-      // Log the day of each activity
-      activities.value.forEach(activity => { //useless array?
-        // console.log('Activity day:', activity.day);
-        // console.log(activity.activity_ex_id);
-      });
+      // activities.value.forEach(activity => { //useless array?
+      //   // console.log('Activity day:', activity.day);
+      //   // console.log(activity.activity_ex_id);
+      // });
       activities.value = response.data.activities;
       selectedActivity.value = activities.value[0]; // there's only 1 jobfair per day per company?
 
@@ -157,15 +163,12 @@ function onDecode(student_external_id) {
   }
 
 onMounted(fetchData);
-
 const showMenu = ref(false)
-
 const toggleMenu = () => {
   showMenu.value = !showMenu.value
 }
-
-
 </script>
+
 <style>
 .landing-container {
   background-color: #1e1e1e;
@@ -180,15 +183,35 @@ const toggleMenu = () => {
   height: auto;
   border-radius: 10px;
   object-fit: cover;
-  margin-top: 60px; 
+  margin-top: 0; 
+}
+.camDiv {
+  display: flex;
+  justify-content: center;
+}
+.dim-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); 
+  z-index: 900;
+  backdrop-filter: blur(10px); 
+
 }
 
-
+.scanner {
+  position: relative;
+  z-index: 1000; 
+  width: 90%;
+  max-width: 500px;
+}
 
 .closeQR-button {
   position: absolute;
-  margin-top: 0.7rem;
-  margin-left: 10rem;
+  margin-top: 0.5rem;
+  margin-left: 9rem;
   z-index: 1000;
   border: none;
   background: transparent;
@@ -230,22 +253,22 @@ const toggleMenu = () => {
   background-color: var(--c-select);
 }
 
-  .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 0.5rem;
-  }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5rem;
+}
 
-  .logo {
-      height: 50px;
+.logo {
+    height: 50px;
 
-  }
-  .menu-icon {
-      font-size: 30px;
-      padding-bottom: 1rem;
-      cursor: pointer;
-  }
+}
+.menu-icon {
+    font-size: 30px;
+    padding-bottom: 1rem;
+    cursor: pointer;
+}
 
 
 
