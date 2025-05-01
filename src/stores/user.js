@@ -46,7 +46,7 @@ export const useUserStore = defineStore("user", {
           const password_decrypted = CryptoJS.DES.decrypt(password_received, import.meta.env.VITE_APP_API_KEY).toString(CryptoJS.enc.Utf8);
     
           if (password.normalize() === password_decrypted.normalize()) {
-            this.loginUser(username, company_id, company_name, company_external_id);
+            this.loginUser(username, company_id_received, company_name_received, company_external_id_received);
             console.log("Login success");
             return true;
           } else {
@@ -74,6 +74,7 @@ export const useUserStore = defineStore("user", {
     logoutUser(){
       this.$reset();
       this.loggedInState = false;
+      this.loggedIn = false;
       localStorage.removeItem("user");
     },
   },
