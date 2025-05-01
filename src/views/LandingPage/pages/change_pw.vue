@@ -20,7 +20,7 @@
       <main class="content">
         <h1 class="title">Change Password</h1>
   
-        <form @submit.prevent="handleChangePassword" class="password-form">
+        <form @submit.prevent="handleChangePassword" class="password-form" autocomplete="off">
           <div class="input-group">
             <div class="input-wrapper">
               <input
@@ -28,6 +28,7 @@
                 id="old-password"
                 v-model="oldPassword"
                 placeholder="Old Password"
+                autocomplete="new-password"
                 required
               />
               <span class="eye-icon" @click="toggleOldPasswordVisibility">
@@ -47,6 +48,7 @@
                 id="new-password"
                 v-model="newPassword"
                 placeholder="New Password"
+                autocomplete="new-password"
                 required
               />
               <span class="eye-icon" @click="toggleNewPasswordVisibility">
@@ -66,6 +68,7 @@
                 id="confirm-password"
                 v-model="confirmPassword"
                 placeholder="New Password Confirmation"
+                autocomplete="new-password"
                 required
               />
               <span class="eye-icon" @click="toggleConfirmPasswordVisibility">
@@ -78,18 +81,20 @@
             </div>
           </div>
   
-          <button type="submit" class="submit-button">Update Password</button>
+          <button @click="changePassword" type="submit" class="submit-button">Update Password</button>
         </form>
       </main>
     </div>
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { useRouter } from 'vue-router';
   import eyeIcon from '../../../assets/eye.svg';
   import eyeOffIcon from '../../../assets/hide-eye.svg';
   import { useUserStore } from "../../../stores/user";
+  import axios from "axios"
+  import CryptoJS from 'crypto-js';
 
   const userStore = useUserStore();
 
@@ -107,6 +112,7 @@
   const showOldPassword = ref(false);
   const showNewPassword = ref(false);
   const showConfirmPassword = ref(false);
+  const decrypted = ref('')
   
   const toggleMenu = () => {
     showMenu.value = !showMenu.value;
@@ -130,6 +136,64 @@
       return;
     }
   };
+
+  function getPassword(){
+    let username = userStore.getUsername
+    axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/getpassword',
+    {
+      username: username
+    },
+    {auth: {
+      username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+      password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
+    }
+  })
+    .then(response => {
+      let encrypted = response.data.password;
+      decrypted.value = CryptoJS.DES.decrypt(encrypted, import.meta.env.VITE_APP_API_KEY).toString(CryptoJS.enc.Utf8);
+    });
+  }
+
+  function changePassword(){
+    if(oldPassword.value != decrypted.value){
+      alert("Old password is incorrect")
+      return
+    }
+
+    if(newPassword.value == decrypted.value){
+      alert("New password can't be the same as the old password")
+      return
+    }
+
+    if(newPassword.value != confirmPassword.value){
+      alert("Confirmation password doesn't match new password")
+      return
+    }
+
+    let new_password_encrypted = CryptoJS.DES.encrypt(newPassword.value, import.meta.env.VITE_APP_API_KEY).toString();
+    let username = userStore.getUsername
+    axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/changepassword',
+    {
+      username: username,
+      new_password: new_password_encrypted
+    },
+    {auth: {
+      username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+      password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
+    }
+    })
+    .then(response => {
+        if(response.data != ''){
+          alert("Change password failed!")
+        }else{
+          alert("Password changed successfully!")
+          router.push("/menu")
+        }
+    });
+  }
+
+
+  onMounted(getPassword)
   </script>
   
   <style scoped>

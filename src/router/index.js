@@ -21,37 +21,55 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: HomeLogin,
-      meta: { protected: false}
+      meta: { 
+        protected: false,
+        title: "Partner Login"
+      }
     },
     {
       path: '/menu',
       name: 'menu',
       component: Menu,
-      meta: { protected: true}
+      meta: { 
+        protected: true,
+        title: "Menu"
+      }
     },
     {
       path: '/activities',
       name: 'activities',
       component: Activities,
-      meta: { protected: true}
+      meta: { 
+        protected: true,
+        title: "Activities"
+      }
     },
     {
       path: '/meals',
       name: 'meals',
       component: Meals,
-      meta: { protected: true}
+      meta: { 
+        protected: true,
+        title: "Meals"
+      }
     },
     {
       path: '/changePw',
       name: 'changePw',
       component: ChangePw,
-      meta: { protected: true}
+      meta: { 
+        protected: true,
+        title: "Change Password"
+      }
     },
     {
       path: '/:lang',
       name: 'landing',
       component: LandingPage,
-      meta: { protected: false },
+      meta: { 
+        protected: false,
+        title: "JEEC - Companies"
+      },
       beforeEnter: [ setLanguage ]
     },
     {
