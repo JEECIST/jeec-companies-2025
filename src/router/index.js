@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from "../stores/user";
 import i18n from '@/i18n'
 
 import LandingPage from '../views/LandingPage/LandingPage.vue'
@@ -50,6 +51,7 @@ const router = createRouter({
     {
       path: "/:pathMatch(.*)*",
       redirect: "/" + i18n.global.locale.value,
+      name: "default"
     }
   ],
   scrollBehavior (to, from, savedPosition) {
@@ -88,5 +90,39 @@ function setNavigatorLocale() {
   else
     localStorage.setItem("locale", navLocale);
 }
+
+router.beforeEach(async (to, from) => {
+  const userStore = useUserStore();
+
+  document.title = to.meta.title;
+
+  // If navigating to login, don’t run auth logic
+  if (to.name === "login" && to.name === "landing") {
+    return true;
+  }
+
+  if (userStore.loggedInState != true) {
+    userStore.loggedInState = true;
+
+    if (userStore.loggedIn !== true) {
+      router.push("/")
+    }
+  }
+
+  if (!userStore.loggedIn) {
+    userStore.logoutUser();
+    return { name: "default" };
+  }
+
+  const routeName = router.getRoutes().find(
+    rte => rte.path === '/login' + to.path.split('/')[1]
+  )?.name;
+
+  if (routeName) {
+    return { name: "menu" };
+  }
+
+  return true;
+});
 
 export default router
