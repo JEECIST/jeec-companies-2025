@@ -20,38 +20,43 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: HomeLogin
+      component: HomeLogin,
+      meta: { protected: false}
     },
     {
       path: '/menu',
       name: 'menu',
-      component: Menu
+      component: Menu,
+      meta: { protected: true}
     },
     {
       path: '/activities',
       name: 'activities',
-      component: Activities
+      component: Activities,
+      meta: { protected: true}
     },
     {
       path: '/meals',
       name: 'meals',
-      component: Meals
+      component: Meals,
+      meta: { protected: true}
     },
     {
       path: '/changePw',
       name: 'changePw',
-      component: ChangePw
+      component: ChangePw,
+      meta: { protected: true}
     },
     {
       path: '/:lang',
       name: 'landing',
       component: LandingPage,
+      meta: { protected: false },
       beforeEnter: [ setLanguage ]
     },
     {
       path: "/:pathMatch(.*)*",
       redirect: "/" + i18n.global.locale.value,
-      name: "default"
     }
   ],
   scrollBehavior (to, from, savedPosition) {
@@ -96,33 +101,26 @@ router.beforeEach(async (to, from) => {
 
   document.title = to.meta.title;
 
-  // If navigating to login, don’t run auth logic
-  if (to.name === "login" && to.name === "landing") {
-    return true;
-  }
-
-  if (userStore.loggedInState != true) {
-    userStore.loggedInState = true;
-
-    if (userStore.loggedIn !== true) {
-      router.push("/")
+  if (to.meta.protected) {
+    if (userStore.loggedInState != true) {
+      userStore.loggedInState = true;
+  
+      if (userStore.loggedIn !== true) {
+        router.push({ name: "login" });
+      }
     }
   }
 
-  if (!userStore.loggedIn) {
-    userStore.logoutUser();
-    return { name: "default" };
+  if (to.name === "login") {
+    if (userStore.loggedIn) {
+      router.push({ name: "menu" });
+    }
   }
 
-  const routeName = router.getRoutes().find(
-    rte => rte.path === '/login' + to.path.split('/')[1]
-  )?.name;
-
-  if (routeName) {
-    return { name: "menu" };
-  }
-
-  return true;
+  // if (!userStore.loggedIn) {
+  //   userStore.logoutUser();
+  //   return { name: "default" };
+  // }
 });
 
 export default router

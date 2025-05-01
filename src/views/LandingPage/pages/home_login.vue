@@ -47,6 +47,9 @@ import { ref } from 'vue';
 import eye from '../../../assets/eye.svg';
 import eyeOff from '../../../assets/hide-eye.svg';
 import { useUserStore } from "../../../stores/user";
+import { useRouter } from "vue-router"
+
+const router = useRouter();
 
 const username = ref('');
 const password = ref('');
