@@ -11,13 +11,13 @@
       <ul>
         
         <li @click="router.push('/activities')"><img src="../../../assets/activities.svg" class="menuicon-activities">Activities</li>
-        <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li>
+        <!-- <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li> -->
         <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
         <li @click="logout_company"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
       </ul>
     </div>
     
-    <div class="meals-container">
+    <div>
       <h1 class="titleh1">Activities</h1>
     </div>
 
@@ -70,8 +70,8 @@ import jobFairCard from '../components/jobFairCard.vue';
 import { QrcodeStream } from 'vue3-qrcode-reader';
 import { onMounted, ref } from 'vue';
 import axios from 'axios'
-import { useCompanyStore } from '@/stores/company'
-import { nextTick } from 'vue';
+import { useUserStore } from "@/stores/user";
+
 
 const router = useRouter()
 const activities = ref([]);
@@ -79,11 +79,13 @@ const student_username = ref('');
 const QR_enable = ref(false);
 const scanned_flag = ref(false);
 const error_flag = ref(false);
-const companyStore = useCompanyStore();
-const selectedActivity = ref(null);
-import { useUserStore } from "../../../stores/user";
+const userStore = useUserStore()
+    
 
-const userStore = useUserStore();
+const selectedActivity = ref(null);
+
+
+
 
 
 function logout_company() {
@@ -93,12 +95,10 @@ function logout_company() {
 
 
 function activateReader() {
-  console.log("Activating QR Reader");
   QR_enable.value = true;
 };
 
 function deactivateReader() {
-  console.log("Deactivating QR Reader");
   QR_enable.value = false;
 }
 
@@ -113,11 +113,6 @@ function errorPopUp() {
 
 
 function onDecode(student_external_id) {
-  console.log("id: ",selectedActivity.value.activity_ex_id);
-  console.log("QR Code Content:", student_external_id);
- 
-  // console.log("Activity:", selectedRow.value.external_id);
-  // let debug = "28a0b7f0-bb3a-4b91-b230-adce4e729eb8"; 
   axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/company/jobfair_scan',
     {
       student_external_id: student_external_id,  
@@ -129,7 +124,6 @@ function onDecode(student_external_id) {
     }
   })
     .then(response => {
-      console.log('what',response.data);
       if (response.data.errorQR == "") {
         scanned_flag.value = true;
         student_username.value = response.data.student_username;
@@ -155,8 +149,8 @@ function onDecode(student_external_id) {
   }
 
   function fetchData() {
-    const company_id = 3; // debug
-    console.log('Fetching activities...');
+    const company_id = userStore.getCompanyID;
+    
     axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL+'/dashboard_vue/activitiesdashboard_vue',
       { company_id: company_id },
       { auth: {
@@ -165,15 +159,9 @@ function onDecode(student_external_id) {
         }
       }
     ).then(response => {
-      console.log('Response data:', response.data);
       activities.value = response.data.activities;
-      // activities.value.forEach(activity => { //useless array?
-      //   // console.log('Activity day:', activity.day);
-      //   // console.log(activity.activity_ex_id);
-      // });
       activities.value = response.data.activities;
-      selectedActivity.value = activities.value[0]; // there's only 1 jobfair per day per company?
-
+      selectedActivity.value = activities.value[0]; 
     });
   }
 

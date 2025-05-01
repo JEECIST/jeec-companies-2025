@@ -13,26 +13,26 @@
       <ul>
         
         <li @click="router.push('/activities')"><img src="../../../assets/activities.svg" class="menuicon-activities">Activities</li>
-        <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li>
+        <!-- <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li> -->
         <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
         <li @click="logout_company"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
       </ul>
     </div>
 
     <main class="main-content">
-      <div v-if="companyStore.companyData">
-        <h1 class="company-name">{{companyStore.companyData.name}}</h1>
+      <div v-if="userStore.isLoggedIn">
+        <h1 class="company-name">{{userStore.company_name}}</h1>
   
         <div class="options">
           <div class="option" @click="goToActivities">
             <img src="../../../assets/activities.svg" alt="Activities" class="icon" />
             <p class="label">Activities</p>
           </div>
-          <div class="option" @click="goToMeals">
+          <!-- <div class="option" @click="goToMeals">
             <img src="../../../assets/meals.svg" alt="Meals" class="icon" />
             <p class="label">Meals</p>
-          </div>
-          <div v-if="companyStore.companyData.cvs_access" class="option" @click="downloadResumes">
+          </div> -->
+          <div v-if="userStore.cvs_access" class="option" @click="downloadResumes">
             <img src="../../../assets/download.svg" alt="Download" class="icon" />
             <p class="label">Download CV</p>
           </div>
@@ -44,10 +44,9 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import axios from 'axios'
-import { useCompanyStore } from '@/stores/company'
-import { useUserStore } from "../../../stores/user";
+import { useUserStore } from "@/stores/user";
 
 const userStore = useUserStore();
 
@@ -57,12 +56,6 @@ function logout_company() {
   router.push('/login');
 }
 
-const companyStore = useCompanyStore()
-    
-onMounted(async () => {
-  await companyStore.fetchCompany()
-  // console.log('Company:', companyStore.companyData)
-})
 
 const showMenu = ref(false)
 

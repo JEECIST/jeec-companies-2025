@@ -11,7 +11,7 @@
       <ul>
         
         <li @click="router.push('/activities')"><img src="../../../assets/activities.svg" class="menuicon-activities">Activities</li>
-        <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li>
+        <!-- <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li> -->
         <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
         <li @click="logout_company"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
       </ul>
@@ -129,11 +129,6 @@
       alert('New passwords do not match!');
       return;
     }
-    // console.log('Attempting to change password...');
-    // console.log('Old Password:', oldPassword.value);
-    // console.log('New Password:', newPassword.value);
-    
-    //fazer a logica aqui ig
   };
   </script>
   
@@ -174,7 +169,7 @@
     right: 20px;
     background-color: #333;
     border-radius: 10px;
-    padding: 1rem;
+    
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
     width: max-content;
@@ -324,10 +319,10 @@
           padding: 0 0.2rem;
       }
       .logo {
-          height: 40px;
+          height: 50px;
       }
       .menu-icon {
-          font-size: 26px;
+          font-size: 30px;
       }
       .title {
           font-size: 1.4rem;

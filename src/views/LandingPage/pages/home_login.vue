@@ -1,14 +1,18 @@
 <template>
+  <header class="header">
+    <router-link to="/en">
+      <img src="../../../assets/home-icon.svg" alt="Home Logo" class="home" />
+    </router-link>
+    
+    <div class="menu-icon" @click="toggleMenu">&#9776;</div>
+  </header>
   <div class="login-container">
    
     <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
 
   
     <h1 class="title">Partners Login</h1>
-
-  
-    <!--form @submit.prevent="handleLogin"-->
-      <form>
+    <form>
       <div class="input-group">
         <input 
           type="text" 
@@ -29,15 +33,15 @@
         />
         <span class="eye-icon" @click="togglePassword">
           <img :src="showPassword ? eyeOff : eye" alt="Toggle Password Visibility" class="eyeImage">
-          <!-- <img src="../../../assets/eye.svg"> -->
+          
         </span>
       </div>
 
-   
-      <!-- <button type="submit" class="login-button"> -->
-        <router-link to="/menu">
+      <router-link to="/menu">
         <button @click="login_company" class="login-button"> Login</button>
       </router-link>
+
+        
     </form>
   </div>
 </template>
@@ -46,7 +50,7 @@
 import { ref } from 'vue';
 import eye from '../../../assets/eye.svg';
 import eyeOff from '../../../assets/hide-eye.svg';
-import { useUserStore } from "../../../stores/user";
+import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router"
 
 const router = useRouter();
@@ -82,8 +86,9 @@ async function login_company(){
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
+  
 }
 
 
@@ -146,7 +151,7 @@ async function login_company(){
 
 }
 .eyeImage{
-  width: 2rem; /* or any size you want */
+  width: 2rem; 
   height: 2rem;
 }
 
@@ -161,8 +166,28 @@ async function login_company(){
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+  margin-top: 10px;
 }
 
+.back-button {
+  width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: transparent;
+  border: 2px solid #279EFF;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top:1rem;
+}
+
+.home{
+  padding-top: 10px;
+  padding-left: 5px;
+  height: 50px;
+}
 .login-button:hover {
   background: #279EFF;
   color: black;

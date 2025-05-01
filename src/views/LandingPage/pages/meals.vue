@@ -89,6 +89,8 @@
 import { useRouter } from 'vue-router'
 import { ref, onMounted, watch, computed } from "vue";
 import { useCompanyStore } from '@/stores/company'
+import { useUserStore } from "@/stores/user";
+
 import axios from 'axios'
 const message = ref('')
 const messageType = ref('')
@@ -106,7 +108,6 @@ const totalQuantity = computed(() =>
 );
 const companyStore = useCompanyStore()
 
-import { useUserStore } from "../../../stores/user";
 
 const userStore = useUserStore();
 
@@ -123,7 +124,7 @@ const fetchDishes = async (eventDayId) => {
       {
         params: {
           event_day_id: eventDayId,
-          company_id: companyStore.companyData.id
+          company_id: userStore.company_id
         },
         auth: {
           username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
@@ -169,7 +170,7 @@ const openAddMealModal = async () => {
   
   selectedDishIds.value = []
 
-  const quantities = await fetchDishQuantities(companyStore.companyData.id)
+  const quantities = await fetchDishQuantities(userStore.company_id)
 
   dishQuantities.value = {}
   dishes.forEach(dish => {
@@ -182,47 +183,9 @@ const openAddMealModal = async () => {
 
 const selectMeal = (meal) => {
   selectedMeal.value = meal
-  // console.log('Selected meal:', meal)
 }
 onMounted(async () => {
-  await companyStore.fetchCompany()
   await fetchMeals();
-  // if (Array.isArray(companyStore.companyData.days)) {
-  //   const fetchedMeals = await Promise.all(
-  //     companyStore.companyData.days.map(async (dateStr) => {
-  //       const dateObj = new Date(dateStr)
-
-  //       const weekday = dateObj.getDay() // 0 (Sun) to 6 (Sat)
-  //       const eventDayId = weekday === 0 ? null : weekday // 1 (Mon) to 5 (Fri)
-
-  //       if (eventDayId < 1 || eventDayId > 5) {
-  //         return null // Skip if not Mon–Fri
-  //       }
-
-  //       const dayAbbrev = dateObj.toLocaleDateString('en-US', { weekday: 'short' }) 
-  //       const day = String(dateObj.getDate()).padStart(2, '0')
-  //       const month = String(dateObj.getMonth() + 1).padStart(2, '0') 
-  //       const formattedDate = `${dayAbbrev} - ${day}/${month}`
-
-  //       const dishes = await fetchDishes(eventDayId)
-  //       const dishNames = dishes
-  //         .filter(d => d.quantity > 0)
-  //         .map(d => `${d.quantity} ${d.description}`)
-  //         .join(', ') || '—'
-  //       return {
-  //         date: formattedDate,
-  //         type: 'Lunch',
-  //         time: '12h00',
-  //         location: 'TIC',
-  //         dish: dishNames,
-  //         eventDayId
-  //       }
-  //     })
-  //   )
-
-  //   meals.value = fetchedMeals.filter(Boolean) // remove nulls
-  // }
-  
 })
 
 
@@ -234,7 +197,7 @@ const submitMeal = async () => {
     return;
   }
 
-  const companyId = companyStore.companyData.id;
+  const companyId = userStore.company_id;
   const payloads = Object.entries(dishQuantities.value)
     .filter(([_, quantity]) => quantity >= 0)
     .map(([dishId, quantity]) => ({
@@ -271,7 +234,7 @@ const submitMeal = async () => {
 const fetchMeals = async () => {
   try {
     const fetchedMeals = await Promise.all(
-      companyStore.companyData.days.map(async (dateStr) => {
+      userStore.companyData.days.map(async (dateStr) => {
         const dateObj = new Date(dateStr);
         const weekday = dateObj.getDay();
         const eventDayId = weekday === 0 ? null : weekday; 
