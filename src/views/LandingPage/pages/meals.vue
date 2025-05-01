@@ -48,6 +48,9 @@
       <button class="add-meal-btn" @click="openAddMealModal">
         Add a Meal <span class="plus-icon">+</span>
       </button>
+      <div v-if="showAlert" :class="['message-box', messageType]">
+        {{ message }}
+      </div>
     </div>
     
     <div v-if="showAddMealModal" class="modal">
@@ -72,11 +75,13 @@
             </label>
           </div>
         </div>
-
-        <button @click="submitMeal" class="add-meal-btn" :disabled="totalQuantity > 3">Submit</button>
         <button @click="showAddMealModal = false" class="close-btn">Close</button>
+        <button @click="submitMeal" class="add-meal-btn" :disabled="totalQuantity > 3">Submit</button>
+        
       </div>
     </div>
+ 
+
   </div>
 </template>
 
@@ -85,10 +90,14 @@ import { useRouter } from 'vue-router'
 import { ref, onMounted, watch, computed } from "vue";
 import { useCompanyStore } from '@/stores/company'
 import axios from 'axios'
-const router = useRouter()
-const selectedMeal = ref(null)
+const message = ref('')
+const messageType = ref('')
+const showAlert = ref(false)
 const meals = ref([])
 const showAddMealModal = ref(false)
+const showMenu = ref(false)
+const router = useRouter()
+const selectedMeal = ref(null)
 const dishesForSelectedDay = ref([])
 const selectedDishIds = ref([])
 const dishQuantities = ref({}) 
@@ -141,7 +150,7 @@ const fetchDishQuantities = async (companyId) => {
 
 const openAddMealModal = async () => {
   if (!selectedMeal.value) {
-    window.alert('Please select a meal row first!')
+    showAlertMessage('Please select a Day first.','error')
     return
   }
 
@@ -209,7 +218,9 @@ onMounted(async () => {
 
 const submitMeal = async () => {
   if (totalQuantity.value > 3) {
-    window.alert("You can only choose a total of 3 dishes.");
+    message.value = "You can only choose a total of 3 dishes.";
+    messageType.value = 'error';
+    showAlert.value = true;
     return;
   }
 
@@ -238,12 +249,12 @@ const submitMeal = async () => {
         )
       )
     );
-    window.alert("Meals submitted successfully!");
+    showAlertMessage('Meals submitted successfully!', 'success')
     await fetchMeals();
     showAddMealModal.value = false;
   } catch (error) {
     console.error("Error submitting meals:", error);
-    window.alert("Error submitting meals.");
+    showAlertMessage('Error submitting meals.', 'error')
   }
 };
 
@@ -293,13 +304,19 @@ const updateQuantity = (dishId, value) => {
   dishQuantities.value[dishId] = isNaN(number) || number < 0 ? 0 : number
 }
 
-
-const showMenu = ref(false)
-
 const toggleMenu = () => {
   showMenu.value = !showMenu.value
 }
 
+const showAlertMessage = (text, type, duration = 3000) => {
+  message.value = text
+  messageType.value = type
+  showAlert.value = true
+
+  setTimeout(() => {
+    showAlert.value = false
+  }, duration)
+}
 </script>
 
 <style scoped>
@@ -519,7 +536,7 @@ p {
   padding-top: 0.95rem;
   margin-left: 12%;
   font-weight: 200;
-  
+  max-width: 50%;
 }
 
 .dish-type {
@@ -622,8 +639,24 @@ button:disabled {
 }
 
 ::v-deep .highlight {
-  color: #279EFF;
+  color: #6310d1;
   font-weight: bold;
+}
+
+.message-box {
+  z-index: 100000;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 5px;
+  text-align: center;
+}
+.message-box.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+.message-box.error {
+  background-color: #f8d7da;
+  color: #721c24;
 }
 
 </style>

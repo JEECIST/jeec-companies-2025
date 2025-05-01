@@ -29,6 +29,9 @@
           @scan-qr="activateReader"
         />
       </template>
+      <div v-if="activities.length == 0" class="text-gray-500 text-center mt-4">
+        No activities available.
+      </div>
     </div>
     <div v-if="QR_enable" class="camDiv">
       <div class="dim-overlay"></div>
