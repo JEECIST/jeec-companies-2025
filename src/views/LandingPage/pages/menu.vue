@@ -32,7 +32,7 @@
             <img src="../../../assets/meals.svg" alt="Meals" class="icon" />
             <p class="label">Meals</p>
           </div>
-          <div class="option" @click="downloadResumes">
+          <div v-if="companyStore.companyData.cvs_access" class="option" @click="downloadResumes">
             <img src="../../../assets/download.svg" alt="Download" class="icon" />
             <p class="label">Download CV</p>
           </div>
