@@ -4,7 +4,7 @@
     <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
 
   
-    <h1 class="title">PARTNERS LOGIN</h1>
+    <h1 class="title">Partners Login</h1>
 
   
     <!--form @submit.prevent="handleLogin"-->
@@ -36,7 +36,7 @@
    
       <!-- <button type="submit" class="login-button"> -->
         <router-link to="/menu">
-        <button class="login-button"> LOGIN</button>
+        <button @click="login_company" class="login-button"> Login</button>
       </router-link>
     </form>
   </div>
@@ -46,13 +46,29 @@
 import { ref } from 'vue';
 import eye from '../../../assets/eye.svg';
 import eyeOff from '../../../assets/hide-eye.svg';
+import { useUserStore } from "../../../stores/user";
+import { useRouter } from "vue-router"
+
+const router = useRouter();
 
 const username = ref('');
 const password = ref('');
 const showPassword = ref(false);
+const userStore = useUserStore();
 
 const togglePassword = () => {
   showPassword.value = !showPassword.value;
+};
+
+async function login_company(){
+    let login_result = await userStore.getAccess(username.value, password.value);
+    
+    if(login_result){
+        router.push({path: "/menu"})
+    }
+    else{
+        router.push({path: "/login"})
+    }
 };
 
 </script>

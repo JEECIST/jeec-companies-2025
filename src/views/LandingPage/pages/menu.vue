@@ -12,10 +12,10 @@
     <div v-if="showMenu" class="popup-menu">
       <ul>
         
-        <li @click="router.push('/activities')"><img src="../../../assets/activities.svg"class="menuicon-activities">Activities</li>
+        <li @click="router.push('/activities')"><img src="../../../assets/activities.svg" class="menuicon-activities">Activities</li>
         <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li>
         <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
-        <li @click="router.push('/login')"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
+        <li @click="logout_company"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
       </ul>
     </div>
 
@@ -47,6 +47,15 @@ import { useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useCompanyStore } from '@/stores/company'
+import { useUserStore } from "../../../stores/user";
+
+const userStore = useUserStore();
+
+
+function logout_company() {
+  userStore.logoutUser(); // Reset the user state
+  router.push('/login');
+}
 
 const companyStore = useCompanyStore()
     

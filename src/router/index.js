@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from "../stores/user";
 import i18n from '@/i18n'
 
 import LandingPage from '../views/LandingPage/LandingPage.vue'
@@ -19,32 +20,38 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: HomeLogin
+      component: HomeLogin,
+      meta: { protected: false}
     },
     {
       path: '/menu',
       name: 'menu',
-      component: Menu
+      component: Menu,
+      meta: { protected: true}
     },
     {
       path: '/activities',
       name: 'activities',
-      component: Activities
+      component: Activities,
+      meta: { protected: true}
     },
     {
       path: '/meals',
       name: 'meals',
-      component: Meals
+      component: Meals,
+      meta: { protected: true}
     },
     {
       path: '/changePw',
       name: 'changePw',
-      component: ChangePw
+      component: ChangePw,
+      meta: { protected: true}
     },
     {
       path: '/:lang',
       name: 'landing',
       component: LandingPage,
+      meta: { protected: false },
       beforeEnter: [ setLanguage ]
     },
     {
@@ -88,5 +95,32 @@ function setNavigatorLocale() {
   else
     localStorage.setItem("locale", navLocale);
 }
+
+router.beforeEach(async (to, from) => {
+  const userStore = useUserStore();
+
+  document.title = to.meta.title;
+
+  if (to.meta.protected) {
+    if (userStore.loggedInState != true) {
+      userStore.loggedInState = true;
+  
+      if (userStore.loggedIn !== true) {
+        router.push({ name: "login" });
+      }
+    }
+  }
+
+  if (to.name === "login") {
+    if (userStore.loggedIn) {
+      router.push({ name: "menu" });
+    }
+  }
+
+  // if (!userStore.loggedIn) {
+  //   userStore.logoutUser();
+  //   return { name: "default" };
+  // }
+});
 
 export default router

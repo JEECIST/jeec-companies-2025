@@ -22,7 +22,7 @@
       <a v-else-if="$i18n.locale === 'en'" href="/magazines/JEEC25_Magazine.pdf" download>{{ $t("landing-section.buttons.magazine") }}</a>
       <a v-else href="">{{ $t("landing-section.buttons.magazine") }}</a>
       <router-link to="/login">
-        <button class = "loginbtn"> LOGIN</button>
+        <button class = "loginbtn"> Login</button>
       </router-link>
       <a href="https://jeec.ist" target="_blank">{{ $t("landing-section.buttons.website") }}</a>
     </div>
