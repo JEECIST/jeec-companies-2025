@@ -113,7 +113,7 @@ function errorPopUp() {
 
 
 function onDecode(student_external_id) {
-  axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/company/jobfair_scan',
+  axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/jobfair_scan',
     {
       student_external_id: student_external_id,  
       activity_external_id: selectedActivity.value.activity_ex_id
