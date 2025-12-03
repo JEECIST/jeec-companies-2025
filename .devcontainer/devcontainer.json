@@ -1,0 +1,14 @@
+{
+  "name": "Vue3 Dev Container",
+  "dockerFile": "Dockerfile",
+  "context": "..",
+  "appPort": ["5173:5173", "3000:3000"],
+
+  // Instala dependências após criar o container
+  "postCreateCommand": "npm install",
+
+  // ✅ Inicia automaticamente o servidor Vue ao abrir o container
+  "postStartCommand": "npm run dev",
+
+  "remoteUser": "node"
+}

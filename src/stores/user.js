@@ -32,6 +32,12 @@ export const useUserStore = defineStore("user", {
       console.log(password);
     },
     async getAccess(username, password) {
+
+      // APAGAR
+      this.loginUser("uuuuu", 1, "nnnn", 12345, true);
+      console.log("Login success");
+      return true;
+
       try {
         const response = await axios.post(
           import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/login_company',

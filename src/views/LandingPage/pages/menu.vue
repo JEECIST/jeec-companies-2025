@@ -1,23 +1,6 @@
 <template>
   <div class="landing-container">
-    <header class="header">
-      <router-link to="/menu">
-          <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
-      </router-link>
-
-      <div class="menu-icon" @click="toggleMenu">
-        &#9776;
-      </div>
-    </header>
-    <div v-if="showMenu" class="popup-menu">
-      <ul>
-        
-        <li @click="router.push('/activities')"><img src="../../../assets/activities.svg" class="menuicon-activities">Activities</li>
-        <!-- <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li> -->
-        <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
-        <li @click="logout_company"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
-      </ul>
-    </div>
+    <appHeader />
 
     <main class="main-content">
       <div v-if="userStore.isLoggedIn">
@@ -28,10 +11,14 @@
             <img src="../../../assets/activities.svg" alt="Activities" class="icon" />
             <p class="label">Activities</p>
           </div>
-          <!-- <div class="option" @click="goToMeals">
+          <div class="option" @click="goToMeals">
             <img src="../../../assets/meals.svg" alt="Meals" class="icon" />
             <p class="label">Meals</p>
-          </div> -->
+          </div>
+          <div class="option" @click="goToParking">
+            <img src="../../../assets/car.png" alt="Parking" class="icon" />
+            <p class="label">Parking</p>
+          </div>
           <div v-if="userStore.cvs_access" class="option" @click="downloadResumes">
             <img src="../../../assets/download.svg" alt="Download" class="icon" />
             <p class="label">Download CV</p>
@@ -47,6 +34,8 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import axios from 'axios'
 import { useUserStore } from "@/stores/user";
+
+import appHeader from '@/views/LandingPage/components/appHeader.vue'
 
 const userStore = useUserStore();
 
@@ -71,6 +60,10 @@ const goToActivities = () => {
 
 const goToMeals = () => {
   router.push('/meals')
+}
+
+const goToParking = () => {
+  router.push('/parking')
 }
 
 const downloadResumes = async () => {
