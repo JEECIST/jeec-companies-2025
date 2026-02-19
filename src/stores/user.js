@@ -32,6 +32,7 @@ export const useUserStore = defineStore("user", {
       console.log(password);
     },
     async getAccess(username, password) {
+
       try {
         const response = await axios.post(
           import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/login_company',
@@ -51,11 +52,11 @@ export const useUserStore = defineStore("user", {
     
           if (password.normalize() === password_decrypted.normalize()) {
             this.loginUser(username, company_id_received, company_name_received, company_external_id_received, cvs_access_received);
-            console.log("Login success");
+            
             return true;
           } else {
             this.logoutUser();
-            console.log("Login Failed");
+            
             return false;
           }
         }

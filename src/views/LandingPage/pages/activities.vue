@@ -1,21 +1,6 @@
 <template>
   <div class="landing-container">
-    <header class="header">
-      <router-link to="/menu">
-        <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
-      </router-link>
-      
-      <div class="menu-icon" @click="toggleMenu">&#9776;</div>
-    </header>
-    <div v-if="showMenu" class="popup-menu">
-      <ul>
-        
-        <li @click="router.push('/activities')"><img src="../../../assets/activities.svg" class="menuicon-activities">Activities</li>
-        <!-- <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li> -->
-        <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
-        <li @click="logout_company"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
-      </ul>
-    </div>
+    <appHeader />
     
     <div>
       <h1 class="titleh1">Activities</h1>
@@ -71,6 +56,8 @@ import { QrcodeStream } from 'vue3-qrcode-reader';
 import { onMounted, ref } from 'vue';
 import axios from 'axios'
 import { useUserStore } from "@/stores/user";
+
+import appHeader from '@/views/LandingPage/components/appHeader.vue'
 
 
 const router = useRouter()
