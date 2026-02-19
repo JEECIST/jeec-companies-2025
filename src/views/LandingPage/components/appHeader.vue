@@ -36,7 +36,7 @@ function toggleMenu() {
 function logout_company() {
   userStore.logoutUser(); // Reset the user state
   router.push('/login');
-  console.log("Logout sucess");
+  
 }
 </script>
 

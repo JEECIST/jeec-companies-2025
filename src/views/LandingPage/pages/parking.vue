@@ -70,8 +70,6 @@ async function fetchCars() {
 
     company_cars.value = response.data.company_cars;
 
-    console.log("Fetched cars for company ID:", company_id);
-    console.log("Company cars:", company_cars);
 
     new_plate.value = [];
 
@@ -88,7 +86,6 @@ async function fetchCars() {
 const plateRegex = /^[A-Z0-9]{2}-[A-Z0-9]{2}-[A-Z0-9]{2}$/;
 
 function validatePlate(plate) {
-  console.log("Validating plate:", plate);
 
   // força string, remove espaços à volta e normaliza para maiúsculas
   const raw = (plate === null || plate === undefined) ? "" : String(plate);
@@ -106,7 +103,6 @@ function validatePlate(plate) {
 
 async function addCar(car) {
 
-  console.log("Adding car for day:", car.day, "with plate:", new_plate.value[car.day]);
 
   var plate = new_plate.value[car.day];
 
@@ -242,14 +238,13 @@ onMounted(() => {
   font-family: sans-serif;
   border: 1px solid #279EFF;
   box-shadow: 0 0 8px rgba(39, 158, 255, 0.5);
-  max-width: 400px;
+  width: 100%;          
+  max-width: 400px;     
   min-height: 120px;
   box-sizing: border-box;
   gap: 2rem;
-  width: 400px;
   margin-bottom: 1rem;
 }
-
 .button_div {
   display: flex;
   flex-direction: column; /* organiza em coluna */
