@@ -79,13 +79,13 @@ const downloadResumes = async () => {
     const url = window.URL.createObjectURL(new Blob([response.data]))
     const link = document.createElement('a')
     link.href = url
-    link.setAttribute('download', 'curriculos_JEEC25.zip')
+    link.setAttribute('download', 'curriculos_JEEC26.zip')
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
     window.URL.revokeObjectURL(url)
   } catch (error) {
-    console.error('Failed to download resumes:', error)
+    alert("Failed to dowload CVs. Please contact JEEC staff!")
   }
 }
 
