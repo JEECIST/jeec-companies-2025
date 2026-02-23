@@ -23,6 +23,10 @@
             <img src="../../../assets/meals.svg" alt="Meals" class="icon" />
             <p class="label">Meals</p>
           </div> -->
+          <div class="option" @click="goToParking">
+            <img src="../../../assets/car.png" alt="Parking" class="icon" />
+            <p class="label">Parking</p>
+          </div>
           <div class="option" @click="router.push('/connections')">
             <img src="/src/assets/connections.png" alt="Connections" class="game-img">
             <p class="label">JEEConnections</p>
@@ -32,10 +36,10 @@
             <img src="/src/assets/wordle.png" alt="Wordle" class="game-img">
             <p class="label">JEECdle</p>
           </div>
-          <div v-if="userStore.cvs_access" class="option" @click="downloadResumes">
+          <div v-if="userStore.cvs_access" class="option last-item" @click="downloadResumes">
             <img src="../../../assets/download.svg" alt="Download" class="icon" />
             <p class="label">Download CV</p>
-          </div>  
+          </div>
         </div>
         
       </div>
@@ -61,6 +65,10 @@ const goToMeals = () => {
   router.push('/meals')
 }
 
+const goToParking = () => {
+  router.push('/parking')
+}
+
 const downloadResumes = async () => {
   try {
     const response = await axios.get(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/resumes/download_vue', {
@@ -74,13 +82,13 @@ const downloadResumes = async () => {
     const url = window.URL.createObjectURL(new Blob([response.data]))
     const link = document.createElement('a')
     link.href = url
-    link.setAttribute('download', 'curriculos_JEEC25.zip')
+    link.setAttribute('download', 'curriculos_JEEC26.zip')
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
     window.URL.revokeObjectURL(url)
   } catch (error) {
-    console.error('Failed to download resumes:', error)
+    alert("Failed to dowload CVs. Please contact JEEC staff!")
   }
 }
 
@@ -90,9 +98,10 @@ const downloadResumes = async () => {
 .landing-container {
     background-color: #1e1e1e;
     color: white;
-    min-height: 100vh;
+    min-height: 92.5vh;
     padding: 1rem;
     text-align: center;
+    overflow-y: scroll;
 }
 .company-name {
     font-size: 2rem;
@@ -171,8 +180,8 @@ const downloadResumes = async () => {
 }
 
 .game-img {
-  width: 25vw;
-  height: 25vw;
+  width: 23vw;
+  height: 23vw;
   max-width: 150px;
   max-height: 150px;
   margin-bottom: 0.5rem;
@@ -180,8 +189,8 @@ const downloadResumes = async () => {
 }
 
 .icon {
-    width: 25vw;
-    height: 25vw;
+    width: 23vw;
+    height: 23vw;
     max-width: 150px;
     max-height: 150px;
     margin-bottom: 0.5rem;
@@ -202,5 +211,9 @@ const downloadResumes = async () => {
         rgba(39, 158, 255, 0) 100%
       ) 1; 
     border-image-slice: 1;
+}
+
+.last-item {
+  grid-column: 1 / -1; 
 }
 </style>

@@ -33,6 +33,7 @@ export const useUserStore = defineStore("user", {
       console.log(password);
     },
     async getAccess(username, password) {
+
       try {
         const response = await axios.post(
           import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/login_company',
@@ -61,7 +62,7 @@ export const useUserStore = defineStore("user", {
             return true;
           } else {
             this.logoutUser();
-            console.log("Login Failed");
+            
             return false;
           }
         }

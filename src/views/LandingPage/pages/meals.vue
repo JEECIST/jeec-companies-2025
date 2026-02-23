@@ -1,22 +1,6 @@
 <template>
+  <AppHeader></AppHeader>
   <div class="landing-container">
-    <header class="header">
-      <router-link to="/menu">
-        <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
-      </router-link>
-    
-      <div class="menu-icon" @click="toggleMenu">&#9776;</div>
-    </header>
-    <div v-if="showMenu" class="popup-menu">
-      <ul>
-        
-        <li @click="router.push('/activities')"><img src="../../../assets/activities.svg" class="menuicon-activities">Activities</li>
-        <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li>
-        <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
-        <li @click="logout_company"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
-      </ul>
-    </div>
-
     <div class="meals-container">
       <h1 class="title">Meals</h1>
       <table class="meals-table">
@@ -90,6 +74,7 @@ import { useRouter } from 'vue-router'
 import { ref, onMounted, watch, computed } from "vue";
 import { useCompanyStore } from '@/stores/company'
 import { useUserStore } from "@/stores/user";
+import AppHeader from '@/views/LandingPage/components/AppHeader.vue'
 
 import axios from 'axios'
 const message = ref('')

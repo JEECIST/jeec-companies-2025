@@ -54,13 +54,13 @@ const props = defineProps({
 const emit = defineEmits(['scan-qr']);
 
 const handleScanClick = () => {
-  console.log('Scan QR action triggered');
+  
   emit('scan-qr', props.id);
 };
 
 const formattedDate = computed(() => {
   const date = new Date(props.date);
-  console.log('newdate ',date)
+  
   if (isNaN(date)) return props.date; // if invalid date, show as-is
 
   const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });

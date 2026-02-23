@@ -15,6 +15,8 @@
                         class="menuicon">Menu</li>
                 <li @click="router.push('/activities')"><img src="../../../assets/activities.svg"
                         class="menuicon">Activities</li>
+                <li @click="router.push('/parking')"><img src="../../../assets/car.png"
+                        class="menuicon">Parking</li>
                 <li @click="router.push('/connections')"><img :src="ConnectionsLogo"
                         class="menuicon">JEEConnections</li>
                 <li @click="router.push('/wordle')"><img :src="WordleLogo"
@@ -61,6 +63,7 @@ const router = useRouter()
     padding: 1rem;
     padding-bottom: 0;
     text-align: center;
+    height: 7.5vh;
 }
 
 .header {

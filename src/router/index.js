@@ -10,6 +10,7 @@ import Activities from '../views/LandingPage/pages/activities.vue'
 import Meals from '../views/LandingPage/pages/meals.vue'
 import Connections from '@/views/LandingPage/pages/connections.vue';
 import Wordle from '@/views/LandingPage/pages/wordle.vue';
+import Parking from '../views/LandingPage/pages/parking.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,15 @@ const router = createRouter({
       meta: { 
         protected: true,
         title: "Meals"
+      }
+    },
+    {
+      path: '/parking',
+      name: 'parking',
+      component: Parking,
+      meta: { 
+        protected: true,
+        title: "Parking"
       }
     },
     {
