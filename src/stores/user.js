@@ -13,7 +13,8 @@ export const useUserStore = defineStore("user", {
     company_id: "",
     company_name: "",
     company_external_id: "",
-    cvs_access: "",
+    company_image: null,
+    cvs_access: false,
     loggedIn: false,
     loggedInState: false,
   }),
@@ -44,13 +45,18 @@ export const useUserStore = defineStore("user", {
           }
         );
     
-        const { password: password_received, company_id: company_id_received, company_name: company_name_received, company_external_id: company_external_id_received, cvs_access: cvs_access_received} = response.data;
+        const { password: password_received,
+                company_id: company_id_received,
+                company_name: company_name_received,
+                company_external_id: company_external_id_received,
+                cvs_access: cvs_access_received, 
+                company_image: company_image} = response.data;
     
         if (password_received !== "") {
           const password_decrypted = CryptoJS.DES.decrypt(password_received, import.meta.env.VITE_APP_API_KEY).toString(CryptoJS.enc.Utf8);
     
           if (password.normalize() === password_decrypted.normalize()) {
-            this.loginUser(username, company_id_received, company_name_received, company_external_id_received, cvs_access_received);
+            this.loginUser(username, company_id_received, company_name_received, company_external_id_received, cvs_access_received, company_image);
             console.log("Login success");
             return true;
           } else {
@@ -68,13 +74,14 @@ export const useUserStore = defineStore("user", {
         return false;
       }
     },
-    loginUser(username, company_id, company_name, company_external_id, cvs_access){
+    loginUser(username, company_id, company_name, company_external_id, cvs_access, company_image){
       this.username = username;
       this.company_id = company_id;
       this.company_name = company_name;
       this.company_external_id = company_external_id;
       this.loggedIn = true;
       this.cvs_access = cvs_access;
+      this.company_image = company_image;
     },
     logoutUser(){
       this.$reset();

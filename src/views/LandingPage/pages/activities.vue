@@ -1,33 +1,15 @@
 <template>
+  <AppHeader></AppHeader>
+
   <div class="landing-container">
-    <header class="header">
-      <router-link to="/menu">
-        <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
-      </router-link>
-      
-      <div class="menu-icon" @click="toggleMenu">&#9776;</div>
-    </header>
-    <div v-if="showMenu" class="popup-menu">
-      <ul>
-        
-        <li @click="router.push('/activities')"><img src="../../../assets/activities.svg" class="menuicon-activities">Activities</li>
-        <!-- <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li> -->
-        <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
-        <li @click="logout_company"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
-      </ul>
-    </div>
-    
+
     <div>
       <h1 class="titleh1">Activities</h1>
     </div>
 
     <div v-if="!QR_enable" class="jobFairdiv">
       <template v-for="activity in activities" :key="activity.activity_ex_id">
-        <jobFairCard 
-          :date="activity.day" 
-          :id="activity.activity_ex_id" 
-          @scan-qr="activateReader"
-        />
+        <jobFairCard :date="activity.day" :id="activity.activity_ex_id" @scan-qr="activateReader" />
       </template>
       <div v-if="activities.length == 0" class="text-gray-500 text-center mt-4">
         No activities available.
@@ -36,41 +18,42 @@
     <div v-if="QR_enable" class="camDiv">
       <div class="dim-overlay"></div>
 
-        <div class="scanner">
-          <button @click="deactivateReader" class="closeQR-button">
-            <img src="../../../assets/CloseQR.png">
+      <div class="scanner">
+        <button @click="deactivateReader" class="closeQR-button">
+          <img src="../../../assets/CloseQR.png">
+        </button>
+
+        <div v-if="scanned_flag" class="scanned-pop-up">
+          <p>Successfully added points to {{ student_username }}</p>
+          <button @click="scannedPopUp">
+            <img src="../../../assets/check.svg">
           </button>
-
-          <div v-if="scanned_flag" class="scanned-pop-up">
-            <p>Successfully added points to {{ student_username }}</p>
-            <button @click="scannedPopUp">
-              <img src="../../../assets/check.svg">
-            </button> 
-          </div>
-
-          <div v-if="error_flag" class="scanned-pop-up">
-            <p>Failed to add points</p>
-            <button @click="errorPopUp">
-              <img src="../../../assets/check.svg">
-            </button> 
-          </div>
-
-          <QrcodeStream @decode="onDecode" @init="onInit" @error="onError" />
         </div>
+
+        <div v-if="error_flag" class="scanned-pop-up">
+          <p>Failed to add points</p>
+          <button @click="errorPopUp">
+            <img src="../../../assets/check.svg">
+          </button>
+        </div>
+
+        <QrcodeStream @decode="onDecode" @init="onInit" @error="onError" />
+      </div>
     </div>
   </div>
 
-  
+
 </template>
 
 
 <script setup>
 import { useRouter } from 'vue-router'
-import jobFairCard from '../components/jobFairCard.vue'; 
+import jobFairCard from '../components/jobFairCard.vue';
 import { QrcodeStream } from 'vue3-qrcode-reader';
 import { onMounted, ref } from 'vue';
 import axios from 'axios'
 import { useUserStore } from "@/stores/user";
+import AppHeader from '../components/AppHeader.vue';
 
 
 const router = useRouter()
@@ -80,7 +63,7 @@ const QR_enable = ref(false);
 const scanned_flag = ref(false);
 const error_flag = ref(false);
 const userStore = useUserStore()
-    
+
 
 const selectedActivity = ref(null);
 
@@ -115,19 +98,20 @@ function errorPopUp() {
 function onDecode(student_external_id) {
   axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/jobfair_scan',
     {
-      student_external_id: student_external_id,  
+      student_external_id: student_external_id,
       activity_external_id: selectedActivity.value.activity_ex_id
     },
-    {auth: {
-      username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
-      password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
-    }
-  })
+    {
+      auth: {
+        username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+        password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
+      }
+    })
     .then(response => {
       if (response.data.errorQR == "") {
         scanned_flag.value = true;
         student_username.value = response.data.student_username;
-      }else{
+      } else {
         error_flag.value = true;
       }
     })
@@ -135,35 +119,36 @@ function onDecode(student_external_id) {
       console.error("Error scanning QR Code:", error);
       error_flag.value = true;
     });
-  }
+}
 
 
-  function onInit(promise) {
-    promise.catch(error => {
-      console.error("Could not initialize the QR scanner:", error);
-    });
-  }
+function onInit(promise) {
+  promise.catch(error => {
+    console.error("Could not initialize the QR scanner:", error);
+  });
+}
 
-  function onError(error) {
-    console.error("QR  Scanner Error:", error);
-  }
+function onError(error) {
+  console.error("QR  Scanner Error:", error);
+}
 
-  function fetchData() {
-    const company_id = userStore.getCompanyID;
-    
-    axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL+'/dashboard_vue/activitiesdashboard_vue',
-      { company_id: company_id },
-      { auth: {
-          username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME, 
-          password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
-        }
+function fetchData() {
+  const company_id = userStore.getCompanyID;
+
+  axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/dashboard_vue/activitiesdashboard_vue',
+    { company_id: company_id },
+    {
+      auth: {
+        username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+        password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
       }
-    ).then(response => {
-      activities.value = response.data.activities;
-      activities.value = response.data.activities;
-      selectedActivity.value = activities.value[0]; 
-    });
-  }
+    }
+  ).then(response => {
+    activities.value = response.data.activities;
+    activities.value = response.data.activities;
+    selectedActivity.value = activities.value[0];
+  });
+}
 
 onMounted(fetchData);
 const showMenu = ref(false)
@@ -181,32 +166,35 @@ const toggleMenu = () => {
   padding: 1rem;
   text-align: center;
 }
+
 .scanner video {
   width: 100%;
   height: auto;
   border-radius: 10px;
   object-fit: cover;
-  margin-top: 0; 
+  margin-top: 0;
 }
+
 .camDiv {
   display: flex;
   justify-content: center;
 }
+
 .dim-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); 
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 900;
-  backdrop-filter: blur(10px); 
+  backdrop-filter: blur(10px);
 
 }
 
 .scanner {
   position: relative;
-  z-index: 1000; 
+  z-index: 1000;
   width: 90%;
   max-width: 500px;
 }
@@ -237,9 +225,9 @@ const toggleMenu = () => {
   position: absolute;
   z-index: 1000;
   margin-top: 30vh;
-  left: 0; 
-  right: 0; 
-  margin-inline: auto; 
+  left: 0;
+  right: 0;
+  margin-inline: auto;
   width: fit-content;
   background-color: var(--c-bg-light);
   border-radius: 10px;
@@ -248,7 +236,7 @@ const toggleMenu = () => {
   opacity: 80%;
 }
 
-.scanned-pop-up > button {
+.scanned-pop-up>button {
   border: none;
   border-radius: 10px;
   height: 2.5rem;
@@ -257,20 +245,21 @@ const toggleMenu = () => {
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
 }
 
 .logo {
-    height: 50px;
+  height: 50px;
 
 }
+
 .menu-icon {
-    font-size: 30px;
-    padding-bottom: 1rem;
-    cursor: pointer;
+  font-size: 30px;
+  padding-bottom: 1rem;
+  cursor: pointer;
 }
 
 
@@ -283,10 +272,10 @@ const toggleMenu = () => {
   text-shadow: 0 0 10px #279EFF;
 }
 
-.jobFairdiv{
+.jobFairdiv {
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 
@@ -298,7 +287,7 @@ const toggleMenu = () => {
   border-radius: 10px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   text-align: left;
 }
@@ -320,17 +309,20 @@ const toggleMenu = () => {
   background-color: #444;
 }
 
-.menuicon-activities, .menuicon-meals{
+.menuicon-activities,
+.menuicon-meals {
   width: 1.5rem;
   height: 1rem;
   margin-right: 0.3rem;
 }
-.menuicon-lock{
+
+.menuicon-lock {
   width: 1.5rem;
   height: 1.1rem;
   margin-right: 0.3rem;
 }
-.menuicon-logout{
+
+.menuicon-logout {
   width: 1.5rem;
   height: 0.9rem;
   margin-right: 0.1rem;

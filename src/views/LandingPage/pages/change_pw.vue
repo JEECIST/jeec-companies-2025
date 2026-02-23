@@ -1,21 +1,6 @@
 <template>
+    <AppHeader></AppHeader>
     <div class="change-password-container">
-        <header class="header">
-      <router-link to="/menu">
-        <img src="../../../assets/jeec-logo.svg" alt="JEEC Logo" class="logo" />
-      </router-link>
-      
-      <div class="menu-icon" @click="toggleMenu">&#9776;</div>
-    </header>
-    <div v-if="showMenu" class="popup-menu">
-      <ul>
-        
-        <li @click="router.push('/activities')"><img src="../../../assets/activities.svg" class="menuicon-activities">Activities</li>
-        <!-- <li @click="router.push('/meals')"><img src="../../../assets/meals.svg" class="menuicon-meals">Meals</li> -->
-        <li @click="router.push('/changePw')"><img src="../../../assets/lock-icon.svg" class="menuicon-lock">Change password</li>
-        <li @click="logout_company"><img src="../../../assets/logout-icon.svg" class="menuicon-logout">  Logout  </li>
-      </ul>
-    </div>
   
       <main class="content">
         <h1 class="title">Change Password</h1>
@@ -95,6 +80,7 @@
   import { useUserStore } from "../../../stores/user";
   import axios from "axios"
   import CryptoJS from 'crypto-js';
+  import AppHeader from '../components/AppHeader.vue';
 
   const userStore = useUserStore();
 

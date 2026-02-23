@@ -8,6 +8,8 @@ import ChangePw from '../views/LandingPage/pages/change_pw.vue'
 import Menu from '../views/LandingPage/pages/menu.vue'
 import Activities from '../views/LandingPage/pages/activities.vue'
 import Meals from '../views/LandingPage/pages/meals.vue'
+import Connections from '@/views/LandingPage/pages/connections.vue';
+import Wordle from '@/views/LandingPage/pages/wordle.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +64,24 @@ const router = createRouter({
         title: "Change Password"
       }
     },
+    {
+      path: '/connections',
+      name: 'Connections',
+      component: Connections,
+      meta: { 
+        protected: true,
+        title: "JEEConnections"
+      }
+    },
+    {
+      path: '/wordle',
+      name: 'Wordle',
+      component: Wordle,
+      meta: { 
+        protected: true,
+        title: "JEECdle"
+      }
+    }, 
     {
       path: '/:lang',
       name: 'landing',
