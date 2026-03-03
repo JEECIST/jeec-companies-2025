@@ -95,12 +95,11 @@ function errorPopUp() {
 
 async function onDecode(student_external_id) {
   error_flag.value = false;
-  scanned_flag.value = true;
-  student_name.value = student_external_id;
+  scanned_flag.value = false;
   const response = await axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/jobfair_scan',
     {
       student_external_id: student_external_id,
-      company_id: userStore.company_id
+      company_id: userStore.getCompanyID
     },
     {
       auth: {
