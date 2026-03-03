@@ -118,19 +118,31 @@ async function onDecode(student_external_id) {
 }
 
 
-async function onInit() {
+async function onInit(promise) {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    await promise; 
+
+    error_flag.value = false;
+    camera_error_flag.value = false;
 
   } catch (error) {
     camera_error_flag.value = true;
     error_flag.value = true;
+    
     if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
-      error_msg.value = "Denied camera access";
+      error_msg.value = "Denied camera access.";
     } else if (error.name === 'NotFoundError') {
-      error_msg.value = "No camera device found."
+      error_msg.value = "No camera device found.";
+    } else if (error.name === 'NotSupportedError') {
+      error_msg.value = "Secure context required (HTTPS, localhost).";
+    } else if (error.name === 'NotReadableError') {
+      error_msg.value = "Camera is already in use by another application.";
+    } else if (error.name === 'OverconstrainedError') {
+      error_msg.value = "Installed cameras are not suitable.";
+    } else if (error.name === 'StreamApiNotSupportedError') {
+      error_msg.value = "Stream API is not supported in this browser.";
     } else {
-      error_msg.value = "Unknown error occurred."
+      error_msg.value = `Unknown error: ${error.message}`;
     }
   }
 }
