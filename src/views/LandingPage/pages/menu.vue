@@ -16,8 +16,8 @@
   
         <div class="options">
           <div class="option" @click="router.push('/activities')">
-            <img src="../../../assets/activities.svg" alt="Activities" class="icon" />
-            <p class="label">Activities</p>
+            <img src="../../../assets/scan-qr-code.png" alt="Scan" class="icon" />
+            <p class="label">Scan QR</p>
           </div>
           <!-- <div class="option" @click="goToMeals">
             <img src="../../../assets/meals.svg" alt="Meals" class="icon" />

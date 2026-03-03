@@ -13,8 +13,8 @@
             <ul>
                 <li @click="router.push('/menu')"><img src="../../../assets/home.svg"
                         class="menuicon">Menu</li>
-                <li @click="router.push('/activities')"><img src="../../../assets/activities.svg"
-                        class="menuicon">Activities</li>
+                <li @click="router.push('/activities')"><img src="../../../assets/scan-qr-code.png"
+                        class="menuicon">Scan QR</li>
                 <li @click="router.push('/parking')"><img src="../../../assets/car.png"
                         class="menuicon">Parking</li>
                 <li @click="router.push('/connections')"><img :src="ConnectionsLogo"

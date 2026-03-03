@@ -2,42 +2,29 @@
   <AppHeader></AppHeader>
 
   <div class="landing-container">
-
-    <div>
-      <h1 class="titleh1">Activities</h1>
-    </div>
-
-    <div v-if="!QR_enable" class="jobFairdiv">
-      <template v-for="activity in activities" :key="activity.activity_ex_id">
-        <jobFairCard :date="activity.day" :id="activity.activity_ex_id" @scan-qr="activateReader" />
-      </template>
-      <div v-if="activities.length == 0" class="text-gray-500 text-center mt-4">
-        No activities available.
-      </div>
-    </div>
-    <div v-if="QR_enable" class="camDiv">
+    <div class="camDiv">
       <div class="dim-overlay"></div>
 
       <div class="scanner">
         <button @click="deactivateReader" class="closeQR-button">
           <img src="../../../assets/CloseQR.png">
         </button>
-
-        <div v-if="scanned_flag" class="scanned-pop-up">
-          <p>Successfully added points to {{ student_username }}</p>
-          <button @click="scannedPopUp">
-            <img src="../../../assets/check.svg">
-          </button>
-        </div>
-
-        <div v-if="error_flag" class="scanned-pop-up">
-          <p>Failed to add points</p>
-          <button @click="errorPopUp">
-            <img src="../../../assets/check.svg">
-          </button>
-        </div>
-
         <QrcodeStream @decode="onDecode" @init="onInit" @error="onError" />
+      </div>
+
+      <div v-if="scanned_flag" class="scanned-pop-up">
+        <p>Successfully added points to {{ student_name }}</p>
+        <button @click="scannedPopUp">
+          <img src="../../../assets/check.svg">
+        </button>
+      </div>
+
+      <div v-if="error_flag" class="error-pop-up">
+        <p v-if="!camera_error_flag">Failed to add points!</p>
+        <p>Error: {{ error_msg }}</p>
+        <button @click="errorPopUp">
+          X
+        </button>
       </div>
     </div>
   </div>
@@ -48,113 +35,131 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import jobFairCard from '../components/jobFairCard.vue';
 import { QrcodeStream } from 'vue3-qrcode-reader';
-import { onMounted, ref } from 'vue';
+import { defineEmits, ref } from 'vue';
 import axios from 'axios'
 import { useUserStore } from "@/stores/user";
 import AppHeader from '../components/AppHeader.vue';
 
+const emit = defineEmits(['home']);
 
 const router = useRouter()
-const activities = ref([]);
-const student_username = ref('');
-const QR_enable = ref(false);
+const student_name = ref('');
 const scanned_flag = ref(false);
 const error_flag = ref(false);
+const error_msg = ref("");
 const userStore = useUserStore()
-
-
-const selectedActivity = ref(null);
-
-
-
-
-
-function logout_company() {
-  userStore.logoutUser(); // Reset the user state
-  router.push('/login');
-}
-
-
-function activateReader() {
-  QR_enable.value = true;
-};
+const camera_error_flag = ref(false)
 
 function deactivateReader() {
-  QR_enable.value = false;
+  router.push('/menu');
 }
 
 function scannedPopUp() {
   scanned_flag.value = false;
-  student_username.value = "";
+  student_name.value = "";
 }
 
 function errorPopUp() {
+  camera_error_flag.value = false;
   error_flag.value = false;
+  error_msg.value = "";
 }
 
 
-function onDecode(student_external_id) {
-  axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/jobfair_scan',
+// function onDecode(student_external_id) {
+//   axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/jobfair_scan',
+//     {
+//       student_external_id: student_external_id,
+
+//     },
+//     {
+//       auth: {
+//         username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+//         password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
+//       }
+//     })
+//     .then(response => {
+//       if (response.data.errorQR == "") {
+//         scanned_flag.value = true;
+//         student_name.value = response.data.student_name;
+//       } else {
+//         error_flag.value = true;
+//       }
+//     })
+//     .catch(error => {
+//       console.error("Error scanning QR Code:", error);
+//       error_flag.value = true;
+//     });
+// }
+
+async function onDecode(student_external_id) {
+  error_flag.value = false;
+  scanned_flag.value = false;
+  const response = await axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/jobfair_scan',
     {
       student_external_id: student_external_id,
-      activity_external_id: selectedActivity.value.activity_ex_id
+      company_id: userStore.company_id
     },
     {
       auth: {
         username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
         password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
       }
-    })
-    .then(response => {
-      if (response.data.errorQR == "") {
-        scanned_flag.value = true;
-        student_username.value = response.data.student_username;
-      } else {
-        error_flag.value = true;
-      }
-    })
-    .catch(error => {
-      console.error("Error scanning QR Code:", error);
-      error_flag.value = true;
     });
+
+  if (response.data.errorQR !== "") {
+    error_flag.value = true;
+    error_msg.value = response.data.errorQR;
+  } else {
+    scanned_flag.value = true;
+    student_name.value = response.data.student_name
+  }
 }
 
 
-function onInit(promise) {
-  promise.catch(error => {
-    console.error("Could not initialize the QR scanner:", error);
-  });
+async function onInit() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+  } catch (error) {
+    camera_error_flag.value = true;
+    error_flag.value = true;
+    if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
+      error_msg.value = "Denied camera access";
+    } else if (error.name === 'NotFoundError') {
+      error_msg.value = "No camera device found."
+    } else {
+      error_msg.value = "Unknown error occurred."
+    }
+  }
 }
 
 function onError(error) {
-  console.error("QR  Scanner Error:", error);
+  error_flag.value = true;
+  error_msg.value = error;
 }
 
-function fetchData() {
-  const company_id = userStore.getCompanyID;
+// function fetchData() {
+//   const company_id = userStore.getCompanyID;
 
-  axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/dashboard_vue/activitiesdashboard_vue',
-    { company_id: company_id },
-    {
-      auth: {
-        username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
-        password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
-      }
-    }
-  ).then(response => {
-    activities.value = response.data.activities;
-    activities.value = response.data.activities;
-    selectedActivity.value = activities.value[0];
-  });
-}
+//   axios.post(import.meta.env.VITE_APP_JEEC_BRAIN_URL + '/dashboard_vue/activitiesdashboard_vue',
+//     { company_id: company_id },
+//     {
+//       auth: {
+//         username: import.meta.env.VITE_APP_JEEC_WEBSITE_USERNAME,
+//         password: import.meta.env.VITE_APP_JEEC_WEBSITE_KEY
+//       }
+//     }
+//   ).then(response => {
+//     activities.value = response.data.activities;
+//     activities.value = response.data.activities;
+//     selectedActivity.value = activities.value[0];
+//   });
+// }
 
-onMounted(fetchData);
-const showMenu = ref(false)
-const toggleMenu = () => {
-  showMenu.value = !showMenu.value
-}
+// onMounted(fetchData);
+
 </script>
 
 <style>
@@ -224,24 +229,55 @@ const toggleMenu = () => {
   align-items: center;
   position: absolute;
   z-index: 1000;
-  margin-top: 30vh;
+  margin-top: 60vh;
   left: 0;
   right: 0;
   margin-inline: auto;
-  width: fit-content;
-  background-color: var(--c-bg-light);
+  width: 60%;
   border-radius: 10px;
-  height: 10%;
-  width: 50%;
+  height: fit-content;
+  padding: 1rem;
   opacity: 80%;
+
+  background-color: #1a9cff9a;
 }
 
 .scanned-pop-up>button {
+  margin-top: 0.5rem;
   border: none;
   border-radius: 10px;
   height: 2.5rem;
   width: 2.5rem;
-  background-color: var(--c-select);
+  background-color: #0091ffc5;
+}
+
+.error-pop-up {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  z-index: 1000;
+  margin-top: 60vh;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: 60%;
+  border-radius: 10px;
+  height: fit-content;
+  padding: 1rem;
+  opacity: 80%;
+
+  background-color: rgba(255, 0, 0, 0.466);
+}
+
+.error-pop-up>button {
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  height: 2.5rem;
+  width: 2.5rem;
+  background-color: rgba(255, 0, 0, 0.596);
 }
 
 .header {

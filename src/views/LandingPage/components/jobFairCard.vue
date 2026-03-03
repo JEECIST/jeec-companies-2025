@@ -3,16 +3,13 @@
     <div class="card-info">
       <div class="info-title">
 
-        <h2 class="title">{{ title }}</h2>
+        <h2 class="title">Scan QR</h2>
         <img
           src="../../../assets/house.svg"
           alt="X"
           class="icon building-icon"
         />
       </div>
-      <p class="date"><strong> {{ formattedDate }}</strong></p>
-      <p class="id" v-html="'ID: ' + formattedId"></p>
-
     </div>
 
     <button class="card-action" @click="handleScanClick">
@@ -34,48 +31,13 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed} from 'vue';
-
-const props = defineProps({
-  title: {
-    type: String,
-    default: 'Job Fair',
-  },
-  date: {
-    type: String,
-    default: 'Monday, 5 May',
-  },
-  id: {
-    type: [String, Number],
-    default: '199999',
-  },
-});
+import { defineEmits, computed} from 'vue';
 
 const emit = defineEmits(['scan-qr']);
 
 const handleScanClick = () => {
-  
-  emit('scan-qr', props.id);
+  emit('scan-qr');
 };
-
-const formattedDate = computed(() => {
-  const date = new Date(props.date);
-  
-  if (isNaN(date)) return props.date; // if invalid date, show as-is
-
-  const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
-  const day = date.getDate();
-  const month = date.toLocaleDateString('en-US', { month: 'long' });
-
-  return `${weekday}, ${day} ${month}`;
-});
-
-const formattedId = computed(() => {
-  const str = String(props.id);
-  const maxLength = 20;
-  if (str.length <= maxLength) return str;
-  return str.slice(0, maxLength) + '<br>' + str.slice(maxLength);
-});
 
 </script>
 
