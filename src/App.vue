@@ -7,6 +7,7 @@
 <style>
 * {
   font-family: 'Lexend Exa', sans-serif;
+  font-weight: 600;
 }
 
 </style>

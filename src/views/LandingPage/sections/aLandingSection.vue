@@ -59,8 +59,8 @@ onMounted(() => {
 <style scoped>
 section {
   background-image: url(/src/assets/landing-bg.png);
-  background-position: center;
-  padding-bottom: calc(80px + 5rem);
+  background-position: center top;
+  padding-bottom: calc(80px + 10rem);
   height: 100%;
 }
 

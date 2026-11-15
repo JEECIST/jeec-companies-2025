@@ -10,12 +10,12 @@
   },
   "landing-section": {
     "hero-text": {
-      "a": "A 26ª edição da JEEC está a chegar e queremos que se juntem a nós no",
-      "b-bold": "Técnico Alameda",
+      "a": "A 27ª edição da JEEC está a chegar e queremos que se juntem a nós no",
+      "b-bold": "Técnico {'|'} Alameda",
       "c": "!"
     },
-    "hero-date": "2 a 4 de Março",
-    "contacts-text": "Para mais informações, podem contactar-nos através de",
+    "hero-date": "22 a 25 de Fevereiro",
+    "contacts-text": "Para mais informações, contactem-nos através de",
     "buttons": {
       "magazine": "Revista",
       "website": "Website"
@@ -23,18 +23,20 @@
   },
   "about-section": {
     "title": "QUEM SOMOS?",
-    "text": "A JEEC são um evento organizado por estudantes e para estudantes de diversos cursos do Instituto Superior Técnico, com maior foco nas áreas da Engenharia Eletrotécnica e de Computadores. O nosso principal objetivo é promover a aproximação do mundo académico com o mundo empresarial, proporcionando a toda a comunidade diversas atividades de forma gratuita."
+    "p1": "As JEEC são uma feira de emprego organizada por estudantes do Instituto Superior Técnico e com um foco na várias áreas da Engenharia Eletrotécnica e de Computadores, mantendo, ainda assim, um caráter transversal e multidisciplinar.",
+    "p2":"Ao longo de 27 anos, as JEEC cimentaram-se como uma das maiores conferências de tecnologia da Universidade de Lisboa.",
+    "p3":"A nossa missão é a aproximação do mundo académico ao mundo empresarial, criando pontes entre estudantes e empresas de referência. Através de um evento de entrada livre, as JEEC servem também como um palco para toda a comunidade ficar a par das novidades tecnológicas."
   },
   "why-participate-section": {
-    "title": "PORQUÊ PARTICIPAR NA JEEC 26?",
-    "text": "Os estudantes participam no nosso evento de modo a estarem em contacto com empresas líderes na área da tecnologia e mostrarem a sua capacidades a potênciais empregadores. ",
+    "title": "PORQUÊ PARTICIPAR NA JEEC 27?",
+    "text": "Participar na JEEC é uma oportunidade tanto para os estudantes como para as empresas. Ao fazer parte desta edição terás a possibilidade de:",
     "cards": {
       "a": "Conversar com estudantes finalistas",
-      "b": "Apresentar as vossas áreas de trabalho",
-      "c": "Evento organizado de estudantes para estudantes",
-      "d": "Divulgar a vossa marca e tecnologia",
-      "e": "Maior visibilidade perante futuros profissionais",
-      "f": "Promover estágios de verão e oportunidades de trabalho"
+      "b": "Promover a vossa empresa e oportunidades de trabalho",
+      "c": "Apresentar as vossas áreas de trabalho",
+      "d": "Demonstrar inovação através de workshops e apresentações",
+      "e": "Exposição nas redes sociais e espaços físicos das jornadas",
+      "f": "Partilha de desafios do mercado e perspetiva dos estudantes"
     }
   },
   "offers-section": {
@@ -47,21 +49,17 @@
       "title": "Plataforma de CV's",
       "text": "Acesso exclusivo aos CVs submetidos pelos estudantes durante a semana do evento."
     },
-    "eletrolink": {
-      "title": "EletroLink",
-      "text": "Acesso a espaço reservado para a realização de entrevistas/conversas com estudantes interessados, fazendo a gestão do vosso tempo durante o slot disponibilizado."
-    },
-    "15-15": {
-      "title": "Sessões 15/15",
-      "text": "Atividade de caracter informativo e de tranferência de conhecimento, com a duração de 30 minutos, onde a empresa tem a oportunidade de apresentar um projeto ou tecnologia sua."
-    },
-    "inside-talks": {
-      "title": "Inside Talks",
-      "text": "A empresa poderá trazer um colaborador da área de Engenharia que dá a conhecer aos participantes a função desempenhada, desafios enfrentados e/ou projetos em que trabalha. Estarão várias empresas presentes na atividade e os participantes vão circulando pelas mesas redondas."
-    },
     "workshops": {
       "title": "Workshops",
       "text": "Atividade com a duração aproximada de 1 hora e um número máximo de 30 participantes. Tem como objetivo a apresentação de um tema de carácter prático, com a qual a empresa se relacione. Aconselhamos e incentivamos o uso de estratégias para envolver os estudantes, tais como case studies ou a utilização de ferramentas (físicas ou de software)."
+    },
+    "round-tables": {
+      "title": "Round Tables",
+      "text": "Atividade de caracter informativo e de tranferência de conhecimento, com a duração de 30 minutos, onde a empresa tem a oportunidade de apresentar um projeto ou tecnologia sua."
+    },
+    "speakers": {
+      "title": "key notes Speakers e panels",
+      "text": "A empresa poderá trazer um colaborador da área de Engenharia que dá a conhecer aos participantes a função desempenhada, desafios enfrentados e/ou projetos em que trabalha. Estarão várias empresas presentes na atividade e os participantes vão circulando pelas mesas redondas."
     }
   },
   "partnership-levels": {
@@ -92,6 +90,17 @@
         "b": "Posts exclusivos nas redes sociais",
         "c": "Teaser nas redes sociais",
         "d": "Divulgação Silver"
+      }
+    },
+    "platinum": {
+      "name": "PLATINUM",
+      "requirement": "4 atividades*",
+      "benefits":{
+        "a": "Divulgação nas redes sociais",
+        "b": "Divulgação no website",
+        "c": "Logótipo nos cartazes e lona",
+        "d": "Destaques na webapp",
+        "e": "Atividade extra realizada no IST, fora da feira de emprego"
       }
     },
     "condition": "*Condicionado pela confirmação de participação e envio do logotipo até ao dia 31 de março."

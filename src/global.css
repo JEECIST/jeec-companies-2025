@@ -17,12 +17,16 @@
   --c-acc-pink: #d11ed1;
   --c-acc-red-pink: #d23c81;
   --c-acc-violet: #7209b7;
+  --c-acc-dark-blue :#1C3060;
 
   --c-bronze: #9e523a;
   --c-silver: #9c9b98;
   --c-gold: #b59046;
+  --c-platinum: #8BB2D8;
+
 
   --font-family: 'Lexend Exa', sans-serif;
+  --font-weight-semibold: 600;
 
   --fs-h2: 2rem;
   --fs-p: 1rem;

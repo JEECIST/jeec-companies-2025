@@ -1,93 +1,25 @@
 <template>
   <section>
     <sectionDivider class="section-divider"></sectionDivider>
-    <div class="sub-section" style="z-index: 2;">
-      <div class="content first">
+
+    <div
+      v-for="(item, i) in offers"
+      :key="item.key"
+      class="sub-section"
+      :class="`tone-${i + 1}`"
+      :style="{ zIndex: i + 1 }"
+    >
+      <sectionDivider v-if="i > 0" class="sub-divider" :flipped="i % 2 === 1"></sectionDivider>
+
+      <div class="content" :class="{ first: i === 0, reverse: i % 2 === 1 }">
         <div class="offer">
-          <h2 id="offers">{{ $t("offers-section.title") }}</h2>
-          <h3>{{ $t("offers-section.job-fair.title") }}</h3>
-          <p>{{ $t("offers-section.job-fair.text") }}</p>
+          <h2 v-if="i === 0" id="offers">{{ $t("offers-section.title") }}</h2>
+          <h3>{{ $t(`offers-section.${item.key}.title`) }}</h3>
+          <p>{{ $t(`offers-section.${item.key}.text`) }}</p>
         </div>
         <div class="image">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M 0 0 V 100 H 100 V 8 L 0 0 Z" style="fill: var(--c-acc-red-pink);"></path>
-          </svg>
-          <img src="/src/assets/offers/job-fair.png" alt="Job Fair">
-        </div>
-      </div>
-      <shadowDivider :bottom="true" :flipped="true"></shadowDivider>
-    </div>
-    <div class="sub-section" style="z-index: 1;">
-      <div class="content">
-        <div class="offer">
-          <h3>{{ $t("offers-section.cv-platform.title") }}</h3>
-          <p>{{ $t("offers-section.cv-platform.text") }}</p>
-        </div>
-        <div class="image">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M 0 0 V 100 H 100 V 8 L 0 0 Z" style="fill: var(--c-acc-pink);"></path>
-          </svg>
-          <img src="/src/assets/offers/cv-platform.png" alt="CV Platform">
-        </div>
-      </div>
-    </div>
-    <div class="sub-section" style="z-index: 2;">
-      <shadowDivider></shadowDivider>
-      <div class="content">
-        <div class="offer">
-          <h3>{{ $t("offers-section.eletrolink.title") }}</h3>
-          <p>{{ $t("offers-section.eletrolink.text") }}</p>
-        </div>
-        <div class="image">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M 0 0 V 100 H 100 V 8 L 0 0 Z" style="fill: var(--c-acc-purple-blue);"></path>
-          </svg>
-          <img src="/src/assets/offers/eletrolink.png" alt="Eletrolink">
-        </div>
-      </div>
-      <shadowDivider :bottom="true" :flipped="true"></shadowDivider>
-    </div>
-    <div class="sub-section" style="z-index: 1;">
-      <div class="content">
-        <div class="offer">
-          <h3>{{ $t("offers-section.15-15.title") }}</h3>
-          <p>{{ $t("offers-section.15-15.text") }}</p>
-        </div>
-        <div class="image">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M 0 0 V 100 H 100 V 8 L 0 0 Z" style="fill: var(--c-acc-red-pink);"></path>
-          </svg>
-          <img src="/src/assets/offers/15-15.png" alt="15-15 Sessions">
-        </div>
-      </div>
-    </div>
-    <div class="sub-section" style="z-index: 2;">
-      <shadowDivider></shadowDivider>
-      <div class="content">
-        <div class="offer">
-          <h3>{{ $t("offers-section.inside-talks.title") }}</h3>
-          <p>{{ $t("offers-section.inside-talks.text") }}</p>
-        </div>
-        <div class="image">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M 0 0 V 100 H 100 V 8 L 0 0 Z" style="fill: var(--c-acc-pink);"></path>
-          </svg>
-          <img src="/src/assets/offers/inside-talks.png" alt="Inside Talks">
-        </div>
-      </div>
-      <shadowDivider :bottom="true" :flipped="true"></shadowDivider>
-    </div>
-    <div class="sub-section" style="z-index: 1;">
-      <div class="content">
-        <div class="offer">
-          <h3>{{ $t("offers-section.workshops.title") }}</h3>
-          <p>{{ $t("offers-section.workshops.text") }}</p>
-        </div>
-        <div class="image">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M 0 0 V 100 H 100 V 8 L 0 0 Z" style="fill: var(--c-acc-violet);"></path>
-          </svg>
-          <img src="/src/assets/offers/workshops.png" alt="Workshops">
+          <img class="photo" :src="getImageUrl(item.img)" :alt="item.alt">
+          <img class="border" src="/src/assets/offers/border.svg" alt="" aria-hidden="true">
         </div>
       </div>
     </div>
@@ -96,19 +28,46 @@
 
 <script setup>
 import sectionDivider from '../components/sectionDivider.vue';
-import shadowDivider from '../components/shadowDivider.vue';
+
+const offers = [
+  { key: 'job-fair',      img: 'img-feira-emprego.png', alt: 'Job Fair' },
+  { key: 'cv-platform',   img: 'img-cv.png',            alt: 'CV Platform' },
+  { key: 'workshops',     img: 'img-workshops.png',     alt: 'Workshops' },
+  { key: 'round-tables',  img: 'img-round-table.png',   alt: 'Round Tables' },
+  { key: 'speakers',      img: 'img-key-notes.png',     alt: 'Key Note Speakers e Panels' },
+];
+
+const getImageUrl = (file) =>
+  new URL(`../../../assets/offers/${file}`, import.meta.url).href;
 </script>
 
 <style scoped>
 section {
+  --offers-1: #221D38;
+  --offers-2: #1C3060;
+  --offers-3: #3270D3;
+  --offers-4: #199CFF;
+  --offers-5: #5AC8FF;
+
   position: relative;
-  background-color: var(--c-acc-blue);
+  background-color: var(--offers-5);
 }
 
 .section-divider {
-  --color: var(--c-acc-blue);
+  --color: var(--offers-1);
   height: 60px;
 }
+
+.sub-divider {
+  --color: var(--bg);
+  height: 60px;
+}
+
+.tone-1 { --bg: var(--offers-1); --fg: var(--c-ft-light); }
+.tone-2 { --bg: var(--offers-2); --fg: var(--c-ft-light); }
+.tone-3 { --bg: var(--offers-3); --fg: var(--c-ft-dark); }
+.tone-4 { --bg: var(--offers-4); --fg: var(--c-ft-dark); }
+.tone-5 { --bg: var(--offers-5); --fg: var(--c-ft-dark); }
 
 .sub-section {
   position: relative;
@@ -117,7 +76,7 @@ section {
 }
 
 .content {
-  background-color: var(--c-acc-blue);
+  background-color: var(--bg);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -141,15 +100,10 @@ section {
   pointer-events: none;
 }
 
-.sub-section:nth-child(odd) .content {
+.content.reverse {
   flex-direction: row-reverse;
   text-align: end;
   padding: 6rem 10ch;
-}
-
-.offer {
-  max-width: 40ch;
-  flex: 1;
 }
 
 .content.first .offer {
@@ -166,6 +120,17 @@ section {
   max-width: 40ch;
 }
 
+.offer {
+  max-width: 40ch;
+  flex: 1;
+}
+
+.offer h2,
+.offer h3,
+.offer p {
+  color: var(--fg);
+}
+
 .offer h3 {
   padding-bottom: 1rem;
   font-weight: 800;
@@ -178,21 +143,25 @@ section {
   max-width: 35ch;
 }
 
-.image svg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.image img {
+.image .photo {
   display: block;
   position: relative;
   top: 30px;
   right: 30px;
   width: 100%;
   height: auto;
+}
+
+.image .border {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 1;
+  scale: 120%;
 }
 
 @media screen and (max-width: 1050px) {
@@ -202,7 +171,7 @@ section {
 
   .content.first .offer {
     align-self: center;
-    padding-bottom: 0
+    padding-bottom: 0;
   }
 }
 
@@ -220,33 +189,32 @@ section {
     padding: 4rem 5ch;
   }
 
-  .image, .content.first .image {
+  .image,
+  .content.first .image {
     max-width: 30ch;
     width: 100%;
     left: 15px;
   }
 
-  .sub-section:nth-child(odd) .content {
+  .content.reverse {
     flex-direction: column;
     padding: 6rem 5ch 8rem 5ch;
   }
 
-  .sub-section:nth-child(odd) .content .image {
+  .content.reverse .image {
     left: -15px;
   }
 
-  .sub-section:nth-child(odd) .image svg {
-    transform: scaleX(-1);
-  }
-
-  .sub-section:nth-child(odd) .image img {
+  .content.reverse .photo,
+  .content.reverse .border {
     top: 30px;
     left: 30px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .section-divider {
+  .section-divider,
+  .sub-divider {
     height: 40px;
   }
 }

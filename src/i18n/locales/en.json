@@ -10,11 +10,11 @@
   },
   "landing-section": {
     "hero-text": {
-      "a": "The 26th edition of JEEC is approaching and we want you to join us at",
-      "b-bold": "Técnico Alameda",
+      "a": "The 27th edition of JEEC is approaching and we want you to join us at",
+      "b-bold": "Técnico {'|'} Alameda",
       "c": "!"
     },
-    "hero-date": "March 2nd to 4th",
+    "hero-date": "February 22 to 25th",
     "contacts-text": "For further information, feel free to contact us at",
     "buttons": {
       "magazine": "Magazine",

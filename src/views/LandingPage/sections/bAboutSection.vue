@@ -1,11 +1,14 @@
 <template>
   <section>
     <sectionDivider class="section-divider"></sectionDivider>
+    <img class="circuit-traces" src="/src/assets/Traces.png" alt="" aria-hidden="true">
     <div class="content">
       <img src="/src/assets/jeec-team.webp" alt="JEEC Team Photo">
       <div class="text">
         <h2 id="about">{{ $t("about-section.title") }}</h2>
-        <p>{{ $t("about-section.text") }}</p>
+        <p>{{ $t("about-section.p1") }}</p>
+        <p>{{ $t("about-section.p2") }}</p>
+        <p>{{ $t("about-section.p3") }}</p>
       </div>
     </div>
   </section>
@@ -17,13 +20,26 @@ import sectionDivider from '../components/sectionDivider.vue';
 
 <style scoped>
 section {
-  background-color: var(--c-acc-purple-blue);
+  background-color: var(--c-acc-dark-blue);
   position: relative;
   color: var(--c-ft-light);
 }
 
+.text p + p {
+  margin-top: 1rem;
+}
+
+.circuit-traces {
+  position: absolute;
+  left: 0;
+  bottom: 5rem;
+  width: 15rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .section-divider {
-  --color: var(--c-acc-purple-blue);
+  --color: var(--c-acc-dark-blue);
   height: 100px;
 }
 
@@ -42,9 +58,8 @@ section {
   position: relative;
   align-self: flex-start;
   padding-bottom: 3rem;
-  top: -50px;
+  top: 0px;
   height: auto;
-  aspect-ratio: 1.6;
   max-width: 40ch;
   flex: 1;
   object-fit: cover;

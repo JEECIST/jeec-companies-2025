@@ -43,9 +43,7 @@ defineProps({
 }
 
 .divider.bottom {
-  bottom: 30px;
-  transform: translateY(100%);
-  filter: drop-shadow(0 0px 20px color-mix(in srgb, var(--c-bg) 40%, transparent));
+  filter: drop-shadow(0 0 20px color-mix(in srgb, var(--color, var(--c-bg)) 40%, transparent));
 }
 
 .divider svg {
@@ -56,7 +54,8 @@ defineProps({
 }
 
 .divider svg path {
- fill: var(--c-acc-blue);
+  fill: var(--color, var(--c-acc-blue));
 }
+
 </style>
 

@@ -1,6 +1,7 @@
 <template>
   <section>
     <sectionDivider class="section-divider" :flipped=true></sectionDivider>
+    <img class="circuit-traces" src="/src/assets/Traces.png" alt="" aria-hidden="true">
     <h2>{{ $t("why-participate-section.title") }}</h2>
     <p>{{ $t("why-participate-section.text") }}</p>
     <div class="flex-wrapper">
@@ -55,32 +56,42 @@ section>p {
 
 .flex-wrapper {
   padding: 4rem 2rem;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 3rem;
 }
 
 .flex-wrapper .card {
   display: flex;
   flex-direction: column;
-  max-width: 20ch;
   align-items: center;
   text-align: center;
-  gap: 2rem;
-  padding: 2rem 2ch;
+  gap: 1.5rem;
+  padding: 2rem 1.5ch;
   border: var(--c-acc-blue) solid 2px;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: color-mix(in srgb, var(--c-acc-blue) 10%, transparent);
-  flex-grow: 1;
+}
+
+.circuit-traces {
+  position: absolute;
+  right: 0;
+  top: 5rem;
+  width: 15rem;
+  transform: scaleX(-1);
+  pointer-events: none;
 }
 
 @media screen and (max-width: 900px) {
   .section-divider {
     height: 60px;
+  }
+
+  .flex-wrapper {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -95,6 +106,10 @@ section>p {
 
   .flex-wrapper .card p {
     width: 12ch;
+  }
+
+  .flex-wrapper {
+    grid-template-columns: 1fr;
   }
 }
 </style>
