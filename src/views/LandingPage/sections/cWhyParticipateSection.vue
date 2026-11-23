@@ -56,7 +56,7 @@ section>p {
 
 .flex-wrapper {
   padding: 4rem 2rem;
-  max-width: 1000px;
+  max-width: 800px;
   margin: 0 auto;
 
   display: grid;

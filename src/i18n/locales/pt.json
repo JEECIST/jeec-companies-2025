@@ -3,9 +3,9 @@
   "nav-bar": {
     "about": "Sobre",
     "offers": "Ofertas",
-    "partnership-levels": "Divulgação",
-    "deadlines": "Faturação",
-    "conditions": "Condições",
+    "partnership-levels": "Níveis de Parceria",
+    "deadlines": "Prazos",
+    "conditions": "Benefícios",
     "faqs": "FAQs"
   },
   "landing-section": {
@@ -63,11 +63,11 @@
     }
   },
   "partnership-levels": {
-    "title": "PATAMARES DE DIVULGAÇÃO",
+    "title": "NÍVEIS DE PARCERIA",
     "text": "A participação da empresa no nosso evento garante a divulgação da mesma, em diferentes patamares, consoante o número de atividades adquiridas. O website oficial e as redes sociais da JEEC são atualizados recorrentemente com informação relativa ao evento, com especial foco nas semanas anteriores ao evento. O evento será ainda divulgado a todos os estudantes do Instituto Superior Técnico, através do website oficial da instituição e canais oficiais de comunicação da mesma.",
     "bronze": {
       "name": "BRONZE",
-      "requirement": "1 atividade",
+      "requirement": "1 atividade*",
       "benefits": {
         "a": "Divulgação nas redes sociais",
         "b": "Divulgação no website"
@@ -75,21 +75,21 @@
     },
     "silver": {
       "name": "SILVER",
-      "requirement": "2 a 3 atividades",
+      "requirement": "2 atividades*",
       "benefits": {
-        "a": "Logotipo na lona*",
-        "b": "Logotipo nos cartazes*",
-        "c": "Divulgação Bronze"
+        "a": "Divulgação nas redes sociais",
+        "b": "Divulgação no website",
+        "c": "Logótipo nos cartazes "
       }
     },
     "gold": {
       "name": "GOLD",
-      "requirement": "4 atividades",
+      "requirement": "3 atividades*",
       "benefits": {
-        "a": "Vídeo exclusivo no evento",
-        "b": "Posts exclusivos nas redes sociais",
-        "c": "Teaser nas redes sociais",
-        "d": "Divulgação Silver"
+        "a": "Divulgação nas redes sociais",
+        "b": "Divulgação no website",
+        "c": "Logótipo nos cartazes e lona",
+        "d": "Destaques na webapp"
       }
     },
     "platinum": {
@@ -103,56 +103,32 @@
         "e": "Atividade extra realizada no IST, fora da feira de emprego"
       }
     },
-    "condition": "*Condicionado pela confirmação de participação e envio do logotipo até ao dia 31 de março."
-  },
+    "condition": "*São consideradas atividades as seguintes: Feira de emprego, Workshops, Round Table.\n**O envio dos logotipos deve ser feito até 1 mês antes do evento."},
   "deadlines": {
     "title": "FASES DE FATURAÇÃO",
     "first": {
       "text": "1ª Fase de Pagamento",
-      "date": "Até 31 de Dezembro"
+      "date": "Até 30 de novembro"
     },
     "second": {
       "text": "2ª Fase de Pagamento",
-      "date": "Até 31 de Fevereiro"
+      "date": "Até 22 de janeiro"
     },
     "third": {
       "text": "3ª Fase de Pagamento",
-      "date": "Até 2 de Março"
+      "date": "Até 17 fevereiro"
     }
   },
   "conditions": {
-    "title": "Condições e Benefícios",
-    "condition-list": [
-      {
-        "title": "Reserva de Horários:",
-        "text": "a reserva dos dias e horários das atividades é feira por ordem de confirmação da participação no evento;"
-      },
-      {
-        "title": "Plataforma de CVs e Eletrolink:",
-        "text": "a participação nestas atividades requer a participação noutra atividade do evento;"
-      },
-      {
-        "title": "Estacionamento:",
-        "text": "acesso a estacionamento perto do local do evento para uma viatura por empresa;"
-      },
-      {
-        "title": "Almoço:",
-        "text": "é fornecido almoço a todas as empresas participantes na feira de emprego, até 3 colaboradores;"
-      },
-      {
-        "title": "Coffee Break:",
-        "text": "acesso a todos os coffee breaks do evento, durante os dias de presença no mesmo;"
-      },
-      {
-        "title": "Wi-fi:",
-        "text": "acesso a wifi durante os dias de presença no evento;"
-      },
-      {
-        "title": "WebApp:",
-        "text": "acesso à nossa WebApp durante o evento, para atribuição de pontos aos estudantes e fácil acesso a informação referente à vossa participação."
-      }
-    ]
-  },
+  "title": "Condições",
+  "condition-list": [
+    "Os moldes de participação de cada empresa ou strat-up serão discutidos durante as reuniões com as mesmas, nas quais serão apresentadas várias propostas para a participação na 27ª edição das JEEC",
+    "Não é possível adquirir apenas a Plataforma de CVs",
+    "A organização das JEEC reserva-se ao direito de recusar uma combinação de atividades que possa implicar uma enor rotatividade de empresas/startups presentes no evento",
+    "Os pedidos de reservas de horas e dias são efetuados por ordem de confirmação. O pagamento deve ser efetuado até 15 de fevereiro. A participação no evento só será assegurada após a confirmação do pagamento. Caso existam impedimentos legais para cumprir este prazo, a empresa deverá informar a organização com antecedência",
+    "A organização das JEEC reserva-se ao direito de realocar a vaga a outra empresa no caso da primeira não cumprir os prazos estipulados"
+  ]
+},
   "faqs": {
     "title": "FAQs",
     "a": {

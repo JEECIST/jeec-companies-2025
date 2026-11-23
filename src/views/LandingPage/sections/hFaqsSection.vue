@@ -2,8 +2,9 @@
   <section>
     <h2 id="faqs">{{ $t("faqs.title") }}</h2>
     <ul>
-      <li>
-        <button @click="toggleSelf" class="question-button">
+
+      <li :class="{ active: isOpen('a') }">
+        <button class="question-button" :aria-expanded="isOpen('a')" @click="toggle('a')">
           <div class="toggle-visual">
             <div class="line"></div>
             <div class="line"></div>
@@ -13,12 +14,13 @@
         <div class="dropdown">
           <p>
             {{ $t("faqs.a.text.a") }}
-            <a href="mailto:email-temporario@jeec.ist"><u>jeecist.business@gmail.com</u></a>{{ $t("faqs.a.text.b") }}
+            <a href="mailto:jeecist.business@gmail.com"><u>jeecist.business@gmail.com</u></a>{{ $t("faqs.a.text.b") }}
           </p>
         </div>
       </li>
-      <li>
-        <button @click="toggleSelf" class="question-button">
+
+      <li :class="{ active: isOpen('b') }">
+        <button class="question-button" :aria-expanded="isOpen('b')" @click="toggle('b')">
           <div class="toggle-visual">
             <div class="line"></div>
             <div class="line"></div>
@@ -29,63 +31,23 @@
           <p>{{ $t("faqs.b.text.a") }}</p>
           <p>{{ $t("faqs.b.text.b") }}</p>
         </div>
-      </li><li>
-        <button @click="toggleSelf" class="question-button">
+      </li>
+
+      <li v-for="id in simple" :key="id" :class="{ active: isOpen(id) }">
+        <button class="question-button" :aria-expanded="isOpen(id)" @click="toggle(id)">
           <div class="toggle-visual">
             <div class="line"></div>
             <div class="line"></div>
           </div>
-          <p>{{ $t("faqs.c.question") }}</p>
+          <p>{{ $t(`faqs.${id}.question`) }}</p>
         </button>
         <div class="dropdown">
-          <p>{{ $t("faqs.c.text") }}</p>
+          <p>{{ $t(`faqs.${id}.text`) }}</p>
         </div>
-      </li><li>
-        <button @click="toggleSelf" class="question-button">
-          <div class="toggle-visual">
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
-          <p>{{ $t("faqs.d.question") }}</p>
-        </button>
-        <div class="dropdown">
-          <p>{{ $t("faqs.d.text") }}</p>
-        </div>
-      </li><li>
-        <button @click="toggleSelf" class="question-button">
-          <div class="toggle-visual">
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
-          <p>{{ $t("faqs.e.question") }}</p>
-        </button>
-        <div class="dropdown">
-          <p>{{ $t("faqs.e.text") }}</p>
-        </div>
-      </li><li>
-        <button @click="toggleSelf" class="question-button">
-          <div class="toggle-visual">
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
-          <p>{{ $t("faqs.f.question") }}</p>
-        </button>
-        <div class="dropdown">
-          <p>{{ $t("faqs.f.text") }}</p>
-        </div>
-      </li><li>
-        <button @click="toggleSelf" class="question-button">
-          <div class="toggle-visual">
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
-          <p>{{ $t("faqs.g.question") }}</p>
-        </button>
-        <div class="dropdown">
-          <p>{{ $t("faqs.g.text") }}</p>
-        </div>
-      </li><li>
-        <button @click="toggleSelf" class="question-button">
+      </li>
+
+      <li :class="{ active: isOpen('h') }">
+        <button class="question-button" :aria-expanded="isOpen('h')" @click="toggle('h')">
           <div class="toggle-visual">
             <div class="line"></div>
             <div class="line"></div>
@@ -93,14 +55,17 @@
           <p>{{ $t("faqs.h.question") }}</p>
         </button>
         <div class="dropdown">
-          <p style="padding-bottom: 0.5rem;">{{ $t("faqs.h.text.a") }}</p>
-          <ul>
-            <li style="padding-top: 0.5rem; margin-left: 3ch;" v-for="item in $tm('faqs.h.text.list')">
-              <p style="display: inline;"><b>{{ $rt(item.item) }}</b></p>
-              <p style="display: inline;">&nbsp;{{ $rt(item.value) }}</p>
+          <p class="intro">{{ $t("faqs.h.text.a") }}</p>
+          <ul class="detail-list">
+            <li v-for="(item, i) in $tm('faqs.h.text.list')" :key="i">
+              <p class="inline"><b>{{ $rt(item.item) }}</b></p>
+              <p class="inline">&nbsp;{{ $rt(item.value) }}</p>
             </li>
           </ul>
-          <p style="padding-top: 1rem;">{{ $t("faqs.h.text.b") }} <a href="mailto:tesouraria@neecist.org">tesouraria@neecist.org</a></p>
+          <p class="outro">
+            {{ $t("faqs.h.text.b") }}
+            <a href="mailto:tesouraria@neecist.org">tesouraria@neecist.org</a>
+          </p>
         </div>
       </li>
     </ul>
@@ -108,43 +73,53 @@
 </template>
 
 <script setup>
-function toggleSelf(e) {
-  e.currentTarget.parentElement.classList.toggle("active");
-}
+import { ref } from 'vue';
+
+const simple = ['c', 'd', 'e', 'f', 'g'];
+const open = ref([]);
+
+const isOpen = (id) => open.value.includes(id);
+
+const toggle = (id) => {
+  open.value = isOpen(id)
+    ? open.value.filter((x) => x !== id)
+    : [...open.value, id];
+};
 </script>
 
 <style scoped>
 section {
-  padding-top: 6rem;
+  padding: 6rem 10ch;
   color: var(--c-ft-light);
-  padding-bottom: 6rem;
+}
+
+section h2,
+section > ul {
+  width: min(100%, 1100px);
+  margin: 0 auto;
 }
 
 section h2 {
-  padding: 0 3ch;
+  padding: 0;
 }
 
 section > ul {
-  margin: 0 auto;
-  padding: 3rem 8ch;
+  padding: 3rem 0 0;
   list-style-type: none;
-  max-width: 1600px
 }
 
 section > ul > li {
   display: grid;
   grid-template-rows: min-content 0fr;
-  transition: all 0.5s ease-in;
+  transition: grid-template-rows 0.5s ease-in-out;
 }
 
 section > ul > li.active {
   grid-template-rows: min-content 1fr;
-  transition: all 0.5 ease-out;
 }
 
 .question-button {
   border: none;
-  background: none;
   cursor: pointer;
   background-color: var(--c-bg);
   border-bottom: 2px solid var(--c-acc-blue);
@@ -154,6 +129,12 @@ section > ul > li.active {
   align-items: center;
   padding: 1rem 3ch;
   gap: 3ch;
+  color: inherit;
+}
+
+.question-button:focus-visible {
+  outline: 2px solid var(--c-acc-blue);
+  outline-offset: 2px;
 }
 
 .toggle-visual {
@@ -163,6 +144,11 @@ section > ul > li.active {
   background-color: var(--c-acc-blue);
   border-radius: 2rem;
   flex-shrink: 0;
+  transition: filter 0.2s;
+}
+
+.question-button:hover .toggle-visual {
+  filter: brightness(1.15);
 }
 
 .toggle-visual .line {
@@ -175,32 +161,30 @@ section > ul > li.active {
   width: 70%;
   height: 3px;
   border-radius: 5px;
+  transition: transform 0.5s ease-in-out;
 }
 
 .toggle-visual .line:first-child {
   transform: rotate(0deg);
-  transition: all 0.5s ease-in-out;
-}
-
-li.active .toggle-visual .line:first-child {
-  transform: rotate(360deg);
-  transition: all 0.5s ease-in-out;
 }
 
 .toggle-visual .line:last-child {
   transform: rotate(-270deg);
-  transition: all 0.5s ease-in-out;
+}
+
+li.active .toggle-visual .line:first-child {
+  transform: rotate(360deg);
 }
 
 li.active .toggle-visual .line:last-child {
   transform: rotate(0deg);
-  transition: all 0.5s ease-in-out;
 }
 
 .dropdown {
+  min-height: 0;
   overflow: hidden;
   padding: 0 2ch 0 5ch;
-  transition: all 0.5s ease-in-out;
+  transition: padding 0.5s ease-in-out;
   border-bottom: 2px solid var(--c-acc-blue);
   position: relative;
   top: -2px;
@@ -209,16 +193,40 @@ li.active .toggle-visual .line:last-child {
 li.active .dropdown {
   padding: 2rem 2ch 2rem 5ch;
   top: 0;
-  transition: all 0.5s ease-in-out;
+}
+
+.dropdown .intro {
+  padding-bottom: 0.5rem;
+}
+
+.dropdown .outro {
+  padding-top: 1rem;
+}
+
+.dropdown .inline {
+  display: inline;
+}
+
+.detail-list {
+  list-style-type: none;
+}
+
+.detail-list li {
+  padding-top: 0.5rem;
+  margin-left: 3ch;
 }
 
 @media screen and (max-width: 750px) {
+  section {
+    padding: 4rem 3ch;
+  }
+
   section > h2 {
     text-align: center;
   }
 
   section > ul {
-    padding: 3rem 3ch;
+    padding-top: 2rem;
   }
 }
 </style>

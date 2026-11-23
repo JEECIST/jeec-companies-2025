@@ -46,39 +46,54 @@ section {
 .traces.right { right: 0; bottom: 4rem; transform: scaleX(-1); }
 
 .tiers-wrapper {
-  align-items: start;
-  padding: 0 5ch;
-  padding-top: 3rem;
+  --unit: 2.75rem;
+  --slope: 14px;
+  gap: 1.2rem 2rem;
+
+  padding: 3rem 5ch 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  grid-template-rows: repeat(10, var(--unit));
   max-width: 900px;
   margin: 0 auto;
 }
 
-.platinum .benefits {
-  background: var(--c-platinum);
-  clip-path: polygon(0 1%, 100% 0, 100% 97%, 0 100%);
-}
-
-.gold .benefits {
-  background: var(--c-gold);
-  clip-path: polygon(0 0, 100% 1%, 100% 100%, 0 96%);
-}
-
-.bronze .benefits {
-  background: var(--c-bronze);
-  clip-path: polygon(0 2%, 100% 5%, 100% 100%, 0 100%);
-}
-
-.silver .benefits {
-  background: var(--c-silver);
-  clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
-}
+.platinum { grid-column: 1; grid-row: 1 / span 6; }
+.bronze   { grid-column: 1; grid-row: 7 / span 4; }
+.gold     { grid-column: 2; grid-row: 1 / span 5; }
+.silver   { grid-column: 2; grid-row: 6 / span 5; }
 
 .tier {
-  flex: 1;
+  display: flex;
 }
+
+.benefits {
+  flex: 1;
+  box-sizing: border-box;
+  color: #1a1a1a;
+  font-weight: 800;
+  padding: 2rem 3ch;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.platinum .benefits,
+.gold .benefits {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - var(--slope)));
+}
+
+.bronze .benefits,
+.silver .benefits {
+  clip-path: polygon(0 0, 100% var(--slope), 100% 100%, 0 100%);
+}
+
+.platinum .benefits { background: var(--c-platinum); }
+.gold     .benefits { background: var(--c-gold); }
+.bronze   .benefits { background: var(--c-bronze); }
+.silver   .benefits { background: var(--c-silver); }
 
 .tier h3 {
   font-size: 2.5rem;
@@ -91,21 +106,12 @@ section {
   padding-bottom: 1rem;
 }
 
-.benefits {
-  color: var(--c-bg);
-  font-weight: 800;
-  position: relative;
-  padding: 2rem 3ch;
-  text-align: center;
-}
-
 .benefits ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  min-height: 0;
 }
 
 .benefits ul li p::before {
@@ -113,7 +119,8 @@ section {
 }
 
 .benefits ul li p {
-  font-size: 0.85rem;
+  padding-left: 0.8em;
+  text-indent: -0.8em;
 }
 
 .benefits ul li + li {
@@ -153,12 +160,19 @@ section {
 
 .condition {
   padding-top: 2rem;
+  white-space: pre-line;
 }
 
 @media screen and (max-width: 930px) {
   .tiers-wrapper {
     grid-template-columns: 1fr;
+    grid-template-rows: none;
     max-width: 420px;
+  }
+
+  .platinum, .gold, .bronze, .silver {
+    grid-column: auto;
+    grid-row: auto;
   }
 }
 

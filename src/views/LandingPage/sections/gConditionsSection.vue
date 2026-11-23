@@ -1,11 +1,9 @@
 <template>
   <section>
-    <sectionDivider class="section-divider" :flipped="true"></sectionDivider>
     <h2 id="conditions">{{ $t("conditions.title") }}</h2>
     <ul>
-      <li v-for="item in $tm('conditions.condition-list')">
-        <h3>{{ $rt(item.title) }}</h3>
-        <p>&nbsp;{{ $rt(item.text) }}</p>
+      <li v-for="(item, i) in $tm('conditions.condition-list')" :key="i">
+        {{ $rt(item) }}
       </li>
     </ul>
   </section>
@@ -16,34 +14,42 @@ import sectionDivider from '../components/sectionDivider.vue';
 </script>
 
 <style scoped>
-section {
-  position: relative;
-  background-color: var(--c-acc-purple-blue);
-  color: var(--c-ft-light);
-  padding-top: 1rem;
-  padding-bottom: 3rem;
-}
 
 .section-divider {
-  --color: var(--c-acc-purple-blue);
+  --color: var(--c-acc-medium-light-purple);
   height: 100px;
 }
 
+section {
+  position: relative;
+  background-color: var(--c-acc-medium-light-purple);
+  color: var(--c-ft-light);
+  padding: 1rem 10ch 3rem;
+}
+
+section h2,
+section ul {
+  width: min(100%, 1100px);
+  margin: 0 auto;
+}
+
 section h2 {
-  padding: 0 3ch;
+  padding: 0;
 }
 
 section ul {
-  padding: 3rem 10ch;
+  padding: 3rem 0;
+  list-style: none;
 }
 
-section ul li:not(:first-child) {
-  padding-top: 1rem;
+section ul li {
+  max-width: 90ch;
+  padding-left: 1em;
+  text-indent: -1em;
 }
 
-section ul li :is(h3, p){
-  font-size: 1rem;
-  display: inline;
+section ul li::before {
+  content: "• ";
 }
 
 @media screen and (max-width: 900px) {
@@ -53,13 +59,17 @@ section ul li :is(h3, p){
 }
 
 @media screen and (max-width: 750px) {
+  section {
+    padding: 1rem 5ch 3rem;
+  }
+
   section h2 {
-    padding: 0 1ch;
     padding-top: 1rem;
     text-align: center;
   }
+
   section ul {
-    padding: 3rem 5ch;
+    padding: 2rem 0;
   }
 }
 

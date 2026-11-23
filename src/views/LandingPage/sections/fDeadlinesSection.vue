@@ -24,7 +24,7 @@ import sectionDivider from '../components/sectionDivider.vue';
 <style scoped>
 section {
   position: relative;
-  background-color: var(--c-acc-violet);
+  background-color: var(--c-acc-medium-bright-purple);
   color: var(--c-ft-light);
   text-align: center;
   padding: 3rem 5ch 10rem 5ch;
@@ -32,7 +32,7 @@ section {
 
 .section-divider {
   height: 100px;
-  --color: var(--c-acc-violet);
+  --color: var(--c-acc-medium-bright-purple);
 }
 
 .deadline h3 {
