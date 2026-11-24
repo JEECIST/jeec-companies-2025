@@ -3,9 +3,9 @@
   "nav-bar": {
     "about": "About",
     "offers": "Offers",
-    "partnership-levels": "Advertising",
-    "deadlines": "Billing",
-    "conditions": "Conditions",
+    "partnership-levels": "Partnership Levels",
+    "deadlines": "Deadlines",
+    "conditions": "Benefits",
     "faqs": "FAQs"
   },
   "landing-section": {
@@ -23,18 +23,20 @@
   },
   "about-section": {
     "title": "ABOUT US",
-    "text": "The JEEC is an event organized by students, for students, from various courses at Instituto Superior Técnico, with a primary focus on Electrical and Computer Engineering. Our main objective is to fill the gap between the academic and business worlds, offering a range of activities to the entire community free of charge."
+    "p1": "JEEC is a job fair organized by students of Instituto Superior Técnico, with a focus on the various fields of Electrical and Computer Engineering, while maintaining a transversal and multidisciplinary character.",
+    "p2": "Over the course of 27 years, JEEC has established itself as one of the largest technology conferences at the University of Lisbon.",
+    "p3": "Our mission is to bring the academic world closer to the business world, building bridges between students and leading companies. Through a free-admission event, JEEC also serves as a stage for the entire community to keep up with the latest technological developments."
   },
   "why-participate-section": {
-    "title": "WHY PARTICIPATE IN JEEC 26?",
-    "text": "Students participate in our event to connect with leading companies in the technology field and showcase their abilities to potential employers.",
+    "title": "WHY PARTICIPATE IN JEEC 27?",
+    "text": "Participating in JEEC is an opportunity for both students and companies. By taking part in this edition, you will have the chance to:",
     "cards": {
       "a": "Talk with graduating students",
-      "b": "Present your areas of work",
-      "c": "Event organized by students for students",
-      "d": "Promote your brand and technology",
-      "e": "Greater visibility among future professionals",
-      "f": "Promote summer internships and job opportunities"
+      "b": "Promote your company and job opportunities",
+      "c": "Present your areas of work",
+      "d": "Showcase innovation through workshops and presentations",
+      "e": "Exposure on social media and at the event's physical spaces",
+      "f": "Share market challenges and the students' perspective"
     }
   },
   "offers-section": {
@@ -47,29 +49,25 @@
       "title": "CV Platform",
       "text": "Exclusive access to CVs submitted by students during the week of the event."
     },
-    "eletrolink": {
-      "title": "EletroLink",
-      "text": "Reserved space for conducting interviews or discussions with interested students, allowing you to manage your time during the allocated slot."
-    },
-    "15-15": {
-      "title": "15/15 Sessions",
-      "text": "A 30-minute informational and knowledge-sharing session where companies have the opportunity to present a project or technology."
-    },
-    "inside-talks": {
-      "title": "Inside Talks",
-      "text": "Companies can bring an engineering professional to share their role, challenges, and ongoing projects with participants. Multiple companies will be present, and participants will rotate through roundtable discussions."
-    },
     "workshops": {
       "title": "Workshops",
       "text": "A 1-hour session with up to 30 participants, focused on presenting a practical topic related to the company's field. We encourage the use of interactive strategies, such as case studies or the use of physical or software tools."
+    },
+    "round-tables": {
+      "title": "Round Tables",
+      "text": "A 30-minute informational and knowledge-sharing session where companies have the opportunity to present a project or technology."
+    },
+    "speakers": {
+      "title": "Key Note Speakers and Panels",
+      "text": "Companies can bring an engineering professional to share their role, challenges, and ongoing projects with participants. Multiple companies will be present, and participants will rotate through roundtable discussions."
     }
   },
   "partnership-levels": {
-    "title": "ADVERTISING TIERS",
+    "title": "PARTNERSHIP LEVELS",
     "text": "Participating in our event ensures your company's visibility across different tiers, depending on the number of activities you engage in. The official JEEC website and social media channels are regularly updated with information about the event, with a particular emphasis on the weeks leading up to it. Additionally, the event will be promoted to all students at Instituto Superior Técnico through the institution's official website and communication channels.",
     "bronze": {
       "name": "BRONZE",
-      "requirement": "1 activity",
+      "requirement": "1 activity*",
       "benefits": {
         "a": "Promotion on social media",
         "b": "Promotion on the website"
@@ -77,71 +75,59 @@
     },
     "silver": {
       "name": "SILVER",
-      "requirement": "2 or 3 activities",
+      "requirement": "2 activities*",
       "benefits": {
-        "a": "Logo on the event banner*",
-        "b": "Logo on the event posters*",
-        "c": "Bronze-level promotion"
+        "a": "Promotion on social media",
+        "b": "Promotion on the website",
+        "c": "Logo on the posters"
       }
     },
     "gold": {
       "name": "GOLD",
-      "requirement": "4 activities",
+      "requirement": "3 activities*",
       "benefits": {
-        "a": "Exclusive video showcased at the event",
-        "b": "Exclusive posts on social media",
-        "c": "Teaser on social media",
-        "d": "Silver-level promotion"
+        "a": "Promotion on social media",
+        "b": "Promotion on the website",
+        "c": "Logo on the posters and banner",
+        "d": "Highlights on the webapp"
       }
     },
-    "condition": "*Subject to confirmation of participation and submission of the logo by March 31st"
+    "platinum": {
+      "name": "PLATINUM",
+      "requirement": "4 activities*",
+      "benefits": {
+        "a": "Promotion on social media",
+        "b": "Promotion on the website",
+        "c": "Logo on the posters and banner",
+        "d": "Highlights on the webapp",
+        "e": "Extra activity held at IST, outside the job fair"
+      }
+    },
+    "condition": "*The following are considered activities: Job Fair, Workshops, Round Tables.\n**Logos must be submitted at least 1 month before the event."
   },
   "deadlines": {
     "title": "BILLING STAGES",
     "first": {
       "text": "1st Payment Phase",
-      "date": "Up to December 31st"
+      "date": "Up to November 30th"
     },
     "second": {
       "text": "2nd Payment Phase",
-      "date": "Up to February 31st"
+      "date": "Up to January 22nd"
     },
     "third": {
       "text": "3rd Payment Phase",
-      "date": "Up to March 2nd"
+      "date": "Up to February 17th"
     }
   },
   "conditions": {
-    "title": "Terms and Conditions",
+    "title": "Conditions",
     "condition-list": [
-      {
-        "title": "Activity Scheduling:",
-        "text": "activity days and times are reserved on a first-come, first-served basis upon confirmation of participation;"
-      },
-      {
-        "title": "CV Platform and EletroLink:",
-        "text": "participation in these activities requires participation in at least one other activity;"
-      },
-      {
-        "title": "Parking:",
-        "text": "parking is available near the event venue for one vehicle per company;"
-      },
-      {
-        "title": "Lunch:",
-        "text": "complimentary lunch provided to all companies participating in the job fair, for up to 3 representatives;"
-      },
-      {
-        "title": "Coffee Break:",
-        "text": "access to all coffee breaks during the days of your participation in the event;"
-      },
-      {
-        "title": "Wi-fi:",
-        "text": "access to Wi-Fi throughout the event days;"
-      },
-      {
-        "title": "WebApp:",
-        "text": "access to our WebApp during the event, allowing you to award points to students and easily access information related to your participation."
-      }
+      "The terms of participation for each company or startup will be discussed during meetings with them, in which several proposals for participation in the 27th edition of JEEC will be presented",
+      "It is not possible to purchase the CV Platform on its own",
+      "The JEEC organization reserves the right to refuse a combination of activities that may result in a lower turnover of companies/startups present at the event",
+      "Requests for time slots and days are handled in order of confirmation. Payment must be made by February 15th. Participation in the event is only guaranteed after payment has been confirmed. If there are legal impediments to meeting this deadline, the company must inform the organization in advance",
+      "The JEEC organization reserves the right to reassign the spot to another company if the first one fails to meet the stipulated deadlines"
     ]
   },
   "faqs": {
@@ -149,8 +135,8 @@
     "a": {
       "question": "What are the costs for participating?",
       "text": {
-       "a": "Please schedule a meeting with us by sending an email to",
-       "b": ", and we will provide you with detailed pricing information."
+        "a": "Please schedule a meeting with us by sending an email to",
+        "b": ", and we will provide you with detailed pricing information."
       }
     },
     "b": {
@@ -171,11 +157,10 @@
     "e": {
       "question": "What are the Job Fair hours?",
       "text": "The specific hours will be communicated closer to the event. Stay tuned for updates."
-
     },
     "f": {
       "question": "What materials are provided for the Job Fair?",
-      "text":  "Detailed information about the materials provided will be shared with participating companies before the event."
+      "text": "Detailed information about the materials provided will be shared with participating companies before the event."
     },
     "g": {
       "question": "What space is available at the Job Fair?",
@@ -184,7 +169,7 @@
     "h": {
       "question": "What are your billing details?",
       "text": {
-        "a": "For invoicing purposes, JEEC's fiscal entity is the NEEC. The necessary details are as follows:",
+        "a": "JEEC's billing details, whose fiscal entity is the NEEC, in case you need them to issue the PO, are as follows:",
         "list": [
           {
             "item": "Fiscal Identity Name:",
